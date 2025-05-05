@@ -35,9 +35,9 @@ export const pollBatchResults = async (tokens) => {
     );
 
     const results = data.submissions;
-    const isAllDone = results.every((res) => {
-      res.status.id !== 1 && res.status.id !== 2;
-    });
+    const isAllDone = results.every(
+      (res) => res.status.id !== 1 && res.status.id !== 2
+    );
     if (isAllDone) return results;
     await sleep(1000);
   }
