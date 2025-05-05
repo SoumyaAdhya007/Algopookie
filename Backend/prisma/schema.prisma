@@ -14,9 +14,9 @@ enum UserRole {
 }
 
 enum Difficulty{
-  Easy
-  Medium
-  Hard
+  EASY
+  MEDIUM
+  HARD
 }
 
 model  User {
@@ -44,7 +44,7 @@ model Problem {
   editorials String?
   testcases Json 
   codeSnippets Json
-  referenceSolution Json
+  referenceSolutions Json
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   //Relationship
