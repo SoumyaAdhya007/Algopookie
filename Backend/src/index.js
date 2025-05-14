@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 
 import AuthRoutes from "./routes/auth.routes.js";
 import ProblemRoutes from "./routes/problem.routes.js";
+import ExecutionRoute from "./routes/executeCode.routes.js";
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/problems", ProblemRoutes);
+app.use("/api/v1/execute-code", ExecutionRoute);
+// app.use("/api/v1/execute-code", ProblemRoutes);
 app.listen(process.env.PORT, () => {
   console.log("Server is running on 8080");
 });
