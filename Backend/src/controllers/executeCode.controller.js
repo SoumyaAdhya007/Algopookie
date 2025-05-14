@@ -51,7 +51,7 @@ export const executeCode = async (req, res) => {
       };
     });
 
-    const submission = await db.Submission.create({
+    const submission = await db.submission.create({
       data: {
         userId,
         problemId,
