@@ -15,6 +15,6 @@ AuthRoutes.post("/login", login);
 
 AuthRoutes.post("/logout",authMiddleware, logout);
 
-AuthRoutes.post("/check",authMiddleware, check);
+AuthRoutes.get("/check",authMiddleware, check);
 
 export default AuthRoutes;
