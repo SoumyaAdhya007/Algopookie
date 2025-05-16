@@ -6,6 +6,7 @@ import AuthRoutes from "./routes/auth.routes.js";
 import ProblemRoutes from "./routes/problem.routes.js";
 import ExecutionRoute from "./routes/executeCode.routes.js";
 import SubmissionRoutes from "./routes/submission.routes.js";
+import PlaylistRoutes from "./routes/playlist.routes.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use("/api/v1/auth", AuthRoutes);
 app.use("/api/v1/problems", ProblemRoutes);
 app.use("/api/v1/execute-code", ExecutionRoute);
 app.use("/api/v1/submission", SubmissionRoutes);
+app.use("/api/v1/playlist", PlaylistRoutes);
 app.listen(process.env.PORT, () => {
   console.log("Server is running on 8080");
 });
