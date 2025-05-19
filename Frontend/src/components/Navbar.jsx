@@ -17,7 +17,7 @@ const Navbar = () => {
             className="h-20 w-35 text-primary border-none px-2 py-2"
           />
           <span className="text-lg md:text-2xl font-bold tracking-tight text-white hidden md:block">
-            Leetlab
+            AlgoPooike
           </span>
         </Link>
 

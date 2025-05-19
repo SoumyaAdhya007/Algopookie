@@ -6,7 +6,7 @@ import { Loader } from "lucide-react";
 import HomePage from "./page/HomePage";
 import LoginPage from "./page/LoginPage";
 import SignUpPage from "./page/SignUpPage";
-import Layout from "./layout/Layout";
+import Layout from "./components/Layout";
 import { useAuthStore } from "./store/useAuthStore";
 
 const App = () => {
@@ -30,17 +30,17 @@ const App = () => {
         <Route path="/" element={<Layout />} />
         <Route
           path="/"
-          element={authUser ? <HomePage /> : <Navigate to={"/login"} />}
+          element={authUser ? <HomePage /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/login"
-          element={!authUser ? <LoginPage /> : <Navigate to={"/"} />}
+          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
         />
 
         <Route
           path="/signup"
-          element={!authUser ? <SignUpPage /> : <Navigate to={"/"} />}
+          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
         />
       </Routes>
     </div>
