@@ -1,7 +1,12 @@
 import React from "react";
+import CreateProblemForm from "../components/CreateProblemForm";
 
 const AddProblem = () => {
-  return <div>Create Problem</div>;
+  return (
+    <div>
+      <CreateProblemForm />
+    </div>
+  );
 };
 
 export default AddProblem;
