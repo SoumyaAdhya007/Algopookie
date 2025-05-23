@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { axiosInstance } from "../libs/axios";
-import { tost } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 export const useProblemStore = create((set) => ({
   problems: [],
@@ -9,14 +9,14 @@ export const useProblemStore = create((set) => ({
   isProblemsLoading: false,
   isProblemLoading: false,
 
-  getAllProblem: async () => {
+  getAllProblems: async () => {
     try {
       set({ isProblemLoading: true });
       const res = await axiosInstance.get("/problems/get-all-problems");
       set({ problems: res.data.problems });
     } catch (error) {
       console.log("Error getting all problems", error);
-      tost.error("Error in getting problems");
+      toast.error("Error in getting problems");
     } finally {
       set({ isProblemsLoading: false });
     }
@@ -26,21 +26,21 @@ export const useProblemStore = create((set) => ({
       set({ isProblemLoading: true });
       const res = await axiosInstance.get(`/problems/get-problem/${id}`);
       set({ problem: res.data.problem });
-      tost.success(res.data.message);
+      toast.success(res.data.message);
     } catch (error) {
       console.log("Error getting all problems", error);
-      tost.error("Error in getting problems");
+      toast.error("Error in getting problems");
     } finally {
       set({ isProblemLoading: false });
     }
   },
-  getSolvedProblemByUser: async () => {
+  getSolvedProblemsByUser: async () => {
     try {
       const res = await axiosInstance.get("/problems/get-solved-problems");
       set({ solvedProblems: res.data.problems });
     } catch (error) {
       console.log("Error getting solved problems", error);
-      tost.error("Error getting solved problems");
+      toast.error("Error getting solved problems");
     }
   },
 }));
