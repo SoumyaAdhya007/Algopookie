@@ -32,7 +32,7 @@ export const useSubmissionStore = create((set, get) => ({
 
       set({ submission: res.data.submissions });
     } catch (error) {
-      console.log("Error getting submissions for problem", error);
+      console.error("Error getting submissions for problem", error);
 
       toast.error("Error getting submissions for problem");
     } finally {
@@ -48,7 +48,7 @@ export const useSubmissionStore = create((set, get) => ({
 
       set({ submissionCount: res.data.count });
     } catch (error) {
-      console.log("Error getting submission count for problem", error);
+      console.error("Error getting submission count for problem", error);
       toast.error("Error getting submission count for problem");
     }
   },

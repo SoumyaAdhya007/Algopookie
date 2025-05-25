@@ -17,7 +17,7 @@ const SignUpSchema = z.object({
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { signup, isSigninUp } = useAuthStore();
-  
+
   const {
     register,
     handleSubmit,
@@ -29,7 +29,6 @@ const SignUpPage = () => {
   const onSubmit = async (data) => {
     try {
       await signup(data);
-      console.log("Signup Data", data);
     } catch (error) {
       console.error("SignUp failed:", error);
     }

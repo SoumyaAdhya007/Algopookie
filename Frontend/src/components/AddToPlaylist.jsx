@@ -6,7 +6,6 @@ const AddToPlaylistModal = ({ isOpen, onClose, problemId }) => {
   const { playlists, getAllPlaylists, addProblemToPlaylist, isLoading } =
     usePlaylistStore();
   const [selectedPlaylist, setSelectedPlaylist] = useState("");
-  console.log("Playlist details", playlists, problemId);
   useEffect(() => {
     if (isOpen) {
       getAllPlaylists();

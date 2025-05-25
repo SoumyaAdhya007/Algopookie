@@ -69,7 +69,6 @@ const ProblemPage = () => {
     }
   }, [activeTab, id]);
 
-  console.log("submission", submissions);
 
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
