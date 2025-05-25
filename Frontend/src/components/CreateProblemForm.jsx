@@ -570,7 +570,6 @@ const CreateProblemForm = () => {
       setIsLoading(true);
       const res = await axiosInstance.post("/problems/create-problem", value);
 
-      console.log(res.data);
       toast.success(res.data.message);
       navigation("/");
     } catch (error) {
