@@ -9,7 +9,7 @@ import PlaylistProfile from "../components/PlaylistProfile";
 const Profile = () => {
   const { authUser } = useAuthStore();
 
-  const useProfile = (name) => {
+  const useProfile = (name = "Profile") => {
     const words = name.trim().split(" ");
     const initials =
       words.length > 1 ? words[0][0] + words[words.length - 1][0] : words[0][0];

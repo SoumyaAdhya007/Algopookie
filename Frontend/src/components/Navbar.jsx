@@ -33,7 +33,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar flex flex-row "
             >
               <div className="w-10 h-10 pt-2 bg-primary rounded-full flex items-center justify-center font-bold">
-                <p>{useProfile(authUser.name)}</p>
+                <p>{useProfile(authUser ? authUser.name : "Profile")}</p>
               </div>
             </label>
             <ul
