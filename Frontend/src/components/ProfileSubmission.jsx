@@ -23,9 +23,9 @@ const ProfileSubmission = () => {
 
   const getStatusClass = (status) => {
     switch (status) {
-      case "ACCEPTED":
+      case "Accepted":
         return "bg-success text-success-content";
-      case "WRONG_ANSWER":
+      case "Wrong Answer":
         return "bg-error text-error-content";
       case "Time Limit Exceeded":
         return "bg-warning text-warning-content";
