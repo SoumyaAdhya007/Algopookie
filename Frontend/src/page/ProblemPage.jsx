@@ -42,7 +42,13 @@ const ProblemPage = () => {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [testcases, setTestCases] = useState([]);
 
-  const { executeCode, submission, isExecuting } = useExecutionStore();
+  const {
+    executeCode,
+    submitCode,
+    submission,
+    isCodeExecuting,
+    isCodeSubmitting,
+  } = useExecutionStore();
 
   useEffect(() => {
     getProblemById(id);
@@ -69,13 +75,11 @@ const ProblemPage = () => {
     }
   }, [activeTab, id]);
 
-
   const handleLanguageChange = (e) => {
     const lang = e.target.value;
     setSelectedLanguage(lang);
     setCode(problem.codeSnippets?.[lang] || "");
   };
-
   const handleRunCode = (e) => {
     e.preventDefault();
     try {
@@ -85,6 +89,17 @@ const ProblemPage = () => {
       executeCode(code, language_id, stdin, expected_outputs, id);
     } catch (error) {
       console.log("Error executing code", error);
+    }
+  };
+  const handleSubmitCode = (e) => {
+    e.preventDefault();
+    try {
+      const language_id = getLanguageId(selectedLanguage);
+      const stdin = problem.testcases.map((tc) => tc.input);
+      const expected_outputs = problem.testcases.map((tc) => tc.output);
+      submitCode(code, language_id, stdin, expected_outputs, id);
+    } catch (error) {
+      console.log("Error submitting code", error);
     }
   };
 
@@ -327,15 +342,21 @@ const ProblemPage = () => {
                 <div className="flex justify-between items-center">
                   <button
                     className={`btn btn-primary gap-2 ${
-                      isExecuting ? "loading" : ""
+                      isCodeExecuting ? "loading" : ""
                     }`}
                     onClick={handleRunCode}
-                    disabled={isExecuting}
+                    disabled={isCodeExecuting || isCodeSubmitting}
                   >
-                    {!isExecuting && <Play className="w-4 h-4" />}
+                    {!isCodeExecuting && <Play className="w-4 h-4" />}
                     Run Code
                   </button>
-                  <button className="btn btn-success gap-2">
+                  <button
+                    className={`btn btn-success gap-2 ${
+                      isCodeSubmitting ? "loading" : ""
+                    }}`}
+                    onClick={handleSubmitCode}
+                    disabled={isCodeExecuting || isCodeSubmitting}
+                  >
                     Submit Solution
                   </button>
                 </div>

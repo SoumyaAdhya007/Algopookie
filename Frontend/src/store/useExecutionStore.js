@@ -3,7 +3,8 @@ import { axiosInstance } from "../libs/axios";
 import toast from "react-hot-toast";
 
 export const useExecutionStore = create((set) => ({
-  isExecuting: false,
+  isCodeExecuting: false,
+  isCodeSubmitting: false,
   submission: null,
 
   executeCode: async (
@@ -14,7 +15,7 @@ export const useExecutionStore = create((set) => ({
     problemId
   ) => {
     try {
-      set({ isExecuting: true });
+      set({ isCodeExecuting: true });
       const res = await axiosInstance.post("/execute-code/", {
         source_code,
         language_id,
@@ -30,7 +31,35 @@ export const useExecutionStore = create((set) => ({
       console.error("Error executing code", error);
       toast.error("Error executing code");
     } finally {
-      set({ isExecuting: false });
+      set({ isCodeExecuting: false });
+    }
+  },
+
+  submitCode: async (
+    source_code,
+    language_id,
+    stdin,
+    expected_outputs,
+    problemId
+  ) => {
+    try {
+      set({ isCodeSubmitting: true });
+      const res = await axiosInstance.post("/execute-code/submit", {
+        source_code,
+        language_id,
+        stdin,
+        expected_outputs,
+        problemId,
+      });
+
+      set({ submission: res.data.submission });
+
+      toast.success(res.data.message);
+    } catch (error) {
+      console.error("Error submitting code", error);
+      toast.error("Error submitting code");
+    } finally {
+      set({ isCodeSubmitting: false });
     }
   },
 }));

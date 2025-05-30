@@ -87,8 +87,8 @@ const SubmissionResults = ({ submission }) => {
                 </tr>
               </thead>
               <tbody>
-                {submission.testCases.map((testCase) => (
-                  <tr key={testCase.id}>
+                {submission.testCases.map((testCase, i) => (
+                  <tr key={i}>
                     <td>
                       {testCase.passed ? (
                         <div className="flex items-center gap-2 text-success">
