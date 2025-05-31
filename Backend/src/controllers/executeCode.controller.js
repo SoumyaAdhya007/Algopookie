@@ -4,20 +4,17 @@ import {
   pollBatchResults,
   submissionBatch,
 } from "../libs/judge0.libs.js";
+import { userIdSchema } from "../validators/auth.validators.js";
+import {
+  executeCodeSchema,
+  submitCodeSchema,
+} from "../validators/executeCode.validators.js";
+import { formatZodError } from "../validators/formatZodError.js";
 
 export const executeCode = async (req, res) => {
-  const { source_code, language_id, stdin, expected_outputs } = req.body;
   try {
-    if (
-      !Array.isArray(stdin) ||
-      stdin.length === 0 ||
-      !Array.isArray(expected_outputs) ||
-      expected_outputs.length !== stdin.length
-    ) {
-      return res.status(400).json({
-        error: "Invalid or missing test cases",
-      });
-    }
+    const { source_code, language_id, stdin, expected_outputs } =
+      executeCodeSchema.parse(req.body);
 
     const submissions = stdin.map((input) => ({
       source_code,
@@ -78,12 +75,18 @@ export const executeCode = async (req, res) => {
         : null,
       testCases: testCaseResults,
     };
+
     res.status(200).json({
       success: true,
       message: "Code executed! Successfully",
       submission: submissionWithTestCase,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while executing source code", error);
     res.status(500).json({
       error: "Error while executing source code",
@@ -92,20 +95,10 @@ export const executeCode = async (req, res) => {
 };
 
 export const submitCode = async (req, res) => {
-  const { source_code, language_id, stdin, expected_outputs, problemId } =
-    req.body;
-  const userId = req.user.id;
   try {
-    if (
-      !Array.isArray(stdin) ||
-      stdin.length === 0 ||
-      !Array.isArray(expected_outputs) ||
-      expected_outputs.length !== stdin.length
-    ) {
-      return res.status(400).json({
-        error: "Invalid or missing test cases",
-      });
-    }
+    const { source_code, language_id, stdin, expected_outputs, problemId } =
+      submitCodeSchema.parse(req.body);
+    const userId = userIdSchema.parse(req.user).id;
 
     const submissions = stdin.map((input) => ({
       source_code,
@@ -209,6 +202,11 @@ export const submitCode = async (req, res) => {
       submission: submissionWithTestCase,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while executing source code", error);
     res.status(500).json({
       error: "Error while executing source code",

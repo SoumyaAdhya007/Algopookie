@@ -4,29 +4,34 @@ import {
   pollBatchResults,
   submissionBatch,
 } from "../libs/judge0.libs.js";
+import { userIdSchema } from "../validators/auth.validators.js";
+import { formatZodError } from "../validators/formatZodError.js";
+import { problemSchema } from "../validators/problem.validators.js";
 
 export const createProblem = async (req, res) => {
-  // going to get all the data from the request body
-  const {
-    title,
-    description,
-    difficulty,
-    tags,
-    examples,
-    constraints,
-    hints,
-    editorials,
-    testcases,
-    codeSnippets,
-    referenceSolutions,
-  } = req.body;
-  // going to check the user role once again
-  if (req.user.role !== "ADMIN") {
-    return res.status(403).json({
-      error: "You are not allowed to create a problem",
-    });
-  }
   try {
+    // going to get all the data from the request body
+    const {
+      title,
+      description,
+      difficulty,
+      tags,
+      companies,
+      examples,
+      constraints,
+      hints,
+      editorials,
+      testcases,
+      codeSnippets,
+      referenceSolutions,
+    } = problemSchema.parse(req.body);
+
+    // going to check the user role once again
+    if (req.user.role !== "ADMIN") {
+      return res.status(403).json({
+        error: "You are not allowed to create a problem",
+      });
+    }
     // loop through each reference solutions for different languages
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
       const languageId = getJudge0LanguageId(language);
@@ -49,7 +54,6 @@ export const createProblem = async (req, res) => {
 
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log("Result---------", result);
         if (result.status.id !== 3) {
           return res.status(400).json({
             error: `Testcase ${i + 1} failed for language ${language}`,
@@ -64,14 +68,18 @@ export const createProblem = async (req, res) => {
           description,
           difficulty,
           tags,
+          companies,
           examples,
           constraints,
+          hints,
+          editorials,
           testcases,
           codeSnippets,
           referenceSolutions,
           userId: req.user.id,
         },
       });
+
       return res.status(201).json({
         success: true,
         message: "Problem Created Successfully",
@@ -79,6 +87,11 @@ export const createProblem = async (req, res) => {
       });
     }
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error creating new problem:", error);
     res.status(500).json({
       error: "Error creating new problem",
@@ -103,6 +116,7 @@ export const getAllProblems = async (req, res) => {
         error: "No problems found",
       });
     }
+
     res.status(200).json({
       success: true,
       message: "Problem fetched Successfully",
@@ -117,8 +131,12 @@ export const getAllProblems = async (req, res) => {
 };
 
 export const getProblemById = async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ error: "Problem ID is required." });
+    }
+
     const problem = await db.problem.findUnique({
       where: {
         id,
@@ -145,22 +163,27 @@ export const getProblemById = async (req, res) => {
 };
 
 export const updateProblem = async (req, res) => {
-  const { id } = req.params;
-  const {
-    title,
-    description,
-    difficulty,
-    tags,
-    examples,
-    constraints,
-    hints,
-    editorials,
-    testcases,
-    codeSnippets,
-    referenceSolutions,
-  } = req.body;
-
   try {
+    const { id } = req.params;
+    const {
+      title,
+      description,
+      difficulty,
+      tags,
+      companies,
+      examples,
+      constraints,
+      hints,
+      editorials,
+      testcases,
+      codeSnippets,
+      referenceSolutions,
+    } = problemSchema.parse(req.body);
+
+    if (!id) {
+      return res.status(400).json({ error: "Problem ID is required." });
+    }
+
     const problem = await db.problem.findUnique({
       where: {
         id,
@@ -197,7 +220,6 @@ export const updateProblem = async (req, res) => {
 
       for (let i = 0; i < results.length; i++) {
         const result = results[i];
-        console.log("Result---------", result);
         if (result.status.id !== 3) {
           return res.status(400).json({
             error: `Testcase ${i + 1} failed for language ${language}`,
@@ -214,8 +236,11 @@ export const updateProblem = async (req, res) => {
           description,
           difficulty,
           tags,
+          companies,
           examples,
           constraints,
+          hints,
+          editorials,
           testcases,
           codeSnippets,
           referenceSolutions,
@@ -230,6 +255,11 @@ export const updateProblem = async (req, res) => {
       });
     }
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while updating problem", error);
     res.status(500).json({
       error: "Error while updating problem",
@@ -238,8 +268,13 @@ export const updateProblem = async (req, res) => {
 };
 
 export const deleteProblem = async (req, res) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "Problem ID is required." });
+    }
+
     const problem = await db.problem.findUnique({
       where: {
         id,
@@ -270,8 +305,9 @@ export const deleteProblem = async (req, res) => {
 };
 
 export const getAllSolvedProblemsByUser = async (req, res) => {
-  const userId = req.user.id;
   try {
+    const userId = userIdSchema.parse(req.user).id;
+
     const problems = await db.problem.findMany({
       where: {
         solvedBy: {
@@ -295,11 +331,14 @@ export const getAllSolvedProblemsByUser = async (req, res) => {
       problems,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while fetching solved problems", error);
     res.status(500).json({
       error: "Error while fetching solved problems",
     });
   }
 };
-
-// 30:51

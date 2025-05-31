@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model UserDailyActivity
+ * 
+ */
+export type UserDailyActivity = $Result.DefaultSelection<Prisma.$UserDailyActivityPayload>
+/**
  * Model Problem
  * 
  */
@@ -48,6 +53,11 @@ export type Playlist = $Result.DefaultSelection<Prisma.$PlaylistPayload>
  * 
  */
 export type ProblemsInPlaylist = $Result.DefaultSelection<Prisma.$ProblemsInPlaylistPayload>
+/**
+ * Model AssistanceRequest
+ * 
+ */
+export type AssistanceRequest = $Result.DefaultSelection<Prisma.$AssistanceRequestPayload>
 
 /**
  * Enums
@@ -59,6 +69,14 @@ export namespace $Enums {
 };
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
+
+
+export const PlanType: {
+  FREE: 'FREE',
+  PRO: 'PRO'
+};
+
+export type PlanType = (typeof PlanType)[keyof typeof PlanType]
 
 
 export const Difficulty: {
@@ -74,6 +92,10 @@ export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty]
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
+
+export type PlanType = $Enums.PlanType
+
+export const PlanType: typeof $Enums.PlanType
 
 export type Difficulty = $Enums.Difficulty
 
@@ -215,6 +237,16 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.userDailyActivity`: Exposes CRUD operations for the **UserDailyActivity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserDailyActivities
+    * const userDailyActivities = await prisma.userDailyActivity.findMany()
+    * ```
+    */
+  get userDailyActivity(): Prisma.UserDailyActivityDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.problem`: Exposes CRUD operations for the **Problem** model.
     * Example usage:
     * ```ts
@@ -273,6 +305,16 @@ export class PrismaClient<
     * ```
     */
   get problemsInPlaylist(): Prisma.ProblemsInPlaylistDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.assistanceRequest`: Exposes CRUD operations for the **AssistanceRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AssistanceRequests
+    * const assistanceRequests = await prisma.assistanceRequest.findMany()
+    * ```
+    */
+  get assistanceRequest(): Prisma.AssistanceRequestDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -714,12 +756,14 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    UserDailyActivity: 'UserDailyActivity',
     Problem: 'Problem',
     Submission: 'Submission',
     TestCaseResult: 'TestCaseResult',
     ProblemSolved: 'ProblemSolved',
     Playlist: 'Playlist',
-    ProblemsInPlaylist: 'ProblemsInPlaylist'
+    ProblemsInPlaylist: 'ProblemsInPlaylist',
+    AssistanceRequest: 'AssistanceRequest'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -738,7 +782,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist"
+      modelProps: "user" | "userDailyActivity" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist" | "assistanceRequest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -813,6 +857,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserDailyActivity: {
+        payload: Prisma.$UserDailyActivityPayload<ExtArgs>
+        fields: Prisma.UserDailyActivityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserDailyActivityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserDailyActivityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          findFirst: {
+            args: Prisma.UserDailyActivityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserDailyActivityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          findMany: {
+            args: Prisma.UserDailyActivityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>[]
+          }
+          create: {
+            args: Prisma.UserDailyActivityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          createMany: {
+            args: Prisma.UserDailyActivityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserDailyActivityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>[]
+          }
+          delete: {
+            args: Prisma.UserDailyActivityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          update: {
+            args: Prisma.UserDailyActivityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserDailyActivityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserDailyActivityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserDailyActivityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserDailyActivityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserDailyActivityPayload>
+          }
+          aggregate: {
+            args: Prisma.UserDailyActivityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserDailyActivity>
+          }
+          groupBy: {
+            args: Prisma.UserDailyActivityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserDailyActivityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserDailyActivityCountArgs<ExtArgs>
+            result: $Utils.Optional<UserDailyActivityCountAggregateOutputType> | number
           }
         }
       }
@@ -1260,6 +1378,80 @@ export namespace Prisma {
           }
         }
       }
+      AssistanceRequest: {
+        payload: Prisma.$AssistanceRequestPayload<ExtArgs>
+        fields: Prisma.AssistanceRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssistanceRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssistanceRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.AssistanceRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssistanceRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          findMany: {
+            args: Prisma.AssistanceRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
+          }
+          create: {
+            args: Prisma.AssistanceRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          createMany: {
+            args: Prisma.AssistanceRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AssistanceRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.AssistanceRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          update: {
+            args: Prisma.AssistanceRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssistanceRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssistanceRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AssistanceRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.AssistanceRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.AssistanceRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAssistanceRequest>
+          }
+          groupBy: {
+            args: Prisma.AssistanceRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AssistanceRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssistanceRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<AssistanceRequestCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1345,12 +1537,14 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    userDailyActivity?: UserDailyActivityOmit
     problem?: ProblemOmit
     submission?: SubmissionOmit
     testCaseResult?: TestCaseResultOmit
     problemSolved?: ProblemSolvedOmit
     playlist?: PlaylistOmit
     problemsInPlaylist?: ProblemsInPlaylistOmit
+    assistanceRequest?: AssistanceRequestOmit
   }
 
   /* Types for Logging */
@@ -1449,6 +1643,8 @@ export namespace Prisma {
     submission: number
     problemSolved: number
     playlists: number
+    dailyActivities: number
+    assistanceRequests: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1456,6 +1652,8 @@ export namespace Prisma {
     submission?: boolean | UserCountOutputTypeCountSubmissionArgs
     problemSolved?: boolean | UserCountOutputTypeCountProblemSolvedArgs
     playlists?: boolean | UserCountOutputTypeCountPlaylistsArgs
+    dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
+    assistanceRequests?: boolean | UserCountOutputTypeCountAssistanceRequestsArgs
   }
 
   // Custom InputTypes
@@ -1497,6 +1695,20 @@ export namespace Prisma {
     where?: PlaylistWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDailyActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDailyActivityWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountAssistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssistanceRequestWhereInput
+  }
+
 
   /**
    * Count Type ProblemCountOutputType
@@ -1506,12 +1718,14 @@ export namespace Prisma {
     submission: number
     solvedBy: number
     problemsPlaylists: number
+    assistanceRequests: number
   }
 
   export type ProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     submission?: boolean | ProblemCountOutputTypeCountSubmissionArgs
     solvedBy?: boolean | ProblemCountOutputTypeCountSolvedByArgs
     problemsPlaylists?: boolean | ProblemCountOutputTypeCountProblemsPlaylistsArgs
+    assistanceRequests?: boolean | ProblemCountOutputTypeCountAssistanceRequestsArgs
   }
 
   // Custom InputTypes
@@ -1544,6 +1758,13 @@ export namespace Prisma {
    */
   export type ProblemCountOutputTypeCountProblemsPlaylistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProblemsInPlaylistWhereInput
+  }
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountAssistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssistanceRequestWhereInput
   }
 
 
@@ -1619,8 +1840,18 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
+  }
+
+  export type UserAvgAggregateOutputType = {
+    currentStreak: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    currentStreak: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1630,6 +1861,13 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+    isEmailVerified: boolean | null
+    emailVerificationToken: string | null
+    emailVerificationExpires: Date | null
+    plan: $Enums.PlanType | null
+    subscriptionExpires: Date | null
+    lastActivityDate: Date | null
+    currentStreak: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1641,6 +1879,13 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+    isEmailVerified: boolean | null
+    emailVerificationToken: string | null
+    emailVerificationExpires: Date | null
+    plan: $Enums.PlanType | null
+    subscriptionExpires: Date | null
+    lastActivityDate: Date | null
+    currentStreak: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1652,11 +1897,26 @@ export namespace Prisma {
     image: number
     role: number
     password: number
+    isEmailVerified: number
+    emailVerificationToken: number
+    emailVerificationExpires: number
+    plan: number
+    subscriptionExpires: number
+    lastActivityDate: number
+    currentStreak: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type UserAvgAggregateInputType = {
+    currentStreak?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    currentStreak?: true
+  }
 
   export type UserMinAggregateInputType = {
     id?: true
@@ -1665,6 +1925,13 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isEmailVerified?: true
+    emailVerificationToken?: true
+    emailVerificationExpires?: true
+    plan?: true
+    subscriptionExpires?: true
+    lastActivityDate?: true
+    currentStreak?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1676,6 +1943,13 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isEmailVerified?: true
+    emailVerificationToken?: true
+    emailVerificationExpires?: true
+    plan?: true
+    subscriptionExpires?: true
+    lastActivityDate?: true
+    currentStreak?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1687,6 +1961,13 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isEmailVerified?: true
+    emailVerificationToken?: true
+    emailVerificationExpires?: true
+    plan?: true
+    subscriptionExpires?: true
+    lastActivityDate?: true
+    currentStreak?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1730,6 +2011,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1760,6 +2053,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1771,9 +2066,18 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole
     password: string
+    isEmailVerified: boolean
+    emailVerificationToken: string | null
+    emailVerificationExpires: Date | null
+    plan: $Enums.PlanType
+    subscriptionExpires: Date | null
+    lastActivityDate: Date | null
+    currentStreak: number
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1799,12 +2103,21 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: boolean
+    emailVerificationExpires?: boolean
+    plan?: boolean
+    subscriptionExpires?: boolean
+    lastActivityDate?: boolean
+    currentStreak?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problems?: boolean | User$problemsArgs<ExtArgs>
     submission?: boolean | User$submissionArgs<ExtArgs>
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     playlists?: boolean | User$playlistsArgs<ExtArgs>
+    dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
+    assistanceRequests?: boolean | User$assistanceRequestsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1815,6 +2128,13 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: boolean
+    emailVerificationExpires?: boolean
+    plan?: boolean
+    subscriptionExpires?: boolean
+    lastActivityDate?: boolean
+    currentStreak?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1826,6 +2146,13 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: boolean
+    emailVerificationExpires?: boolean
+    plan?: boolean
+    subscriptionExpires?: boolean
+    lastActivityDate?: boolean
+    currentStreak?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1837,16 +2164,25 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: boolean
+    emailVerificationExpires?: boolean
+    plan?: boolean
+    subscriptionExpires?: boolean
+    lastActivityDate?: boolean
+    currentStreak?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "isEmailVerified" | "emailVerificationToken" | "emailVerificationExpires" | "plan" | "subscriptionExpires" | "lastActivityDate" | "currentStreak" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | User$problemsArgs<ExtArgs>
     submission?: boolean | User$submissionArgs<ExtArgs>
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     playlists?: boolean | User$playlistsArgs<ExtArgs>
+    dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
+    assistanceRequests?: boolean | User$assistanceRequestsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1859,6 +2195,8 @@ export namespace Prisma {
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       problemSolved: Prisma.$ProblemSolvedPayload<ExtArgs>[]
       playlists: Prisma.$PlaylistPayload<ExtArgs>[]
+      dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
+      assistanceRequests: Prisma.$AssistanceRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1867,6 +2205,13 @@ export namespace Prisma {
       image: string | null
       role: $Enums.UserRole
       password: string
+      isEmailVerified: boolean
+      emailVerificationToken: string | null
+      emailVerificationExpires: Date | null
+      plan: $Enums.PlanType
+      subscriptionExpires: Date | null
+      lastActivityDate: Date | null
+      currentStreak: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2267,6 +2612,8 @@ export namespace Prisma {
     submission<T extends User$submissionArgs<ExtArgs> = {}>(args?: Subset<T, User$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemSolved<T extends User$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, User$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     playlists<T extends User$playlistsArgs<ExtArgs> = {}>(args?: Subset<T, User$playlistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dailyActivities<T extends User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assistanceRequests<T extends User$assistanceRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$assistanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2302,6 +2649,13 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly password: FieldRef<"User", 'String'>
+    readonly isEmailVerified: FieldRef<"User", 'Boolean'>
+    readonly emailVerificationToken: FieldRef<"User", 'String'>
+    readonly emailVerificationExpires: FieldRef<"User", 'DateTime'>
+    readonly plan: FieldRef<"User", 'PlanType'>
+    readonly subscriptionExpires: FieldRef<"User", 'DateTime'>
+    readonly lastActivityDate: FieldRef<"User", 'DateTime'>
+    readonly currentStreak: FieldRef<"User", 'Int'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2788,6 +3142,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.dailyActivities
+   */
+  export type User$dailyActivitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    where?: UserDailyActivityWhereInput
+    orderBy?: UserDailyActivityOrderByWithRelationInput | UserDailyActivityOrderByWithRelationInput[]
+    cursor?: UserDailyActivityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserDailyActivityScalarFieldEnum | UserDailyActivityScalarFieldEnum[]
+  }
+
+  /**
+   * User.assistanceRequests
+   */
+  export type User$assistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    where?: AssistanceRequestWhereInput
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    cursor?: AssistanceRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2803,6 +3205,1064 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserDailyActivity
+   */
+
+  export type AggregateUserDailyActivity = {
+    _count: UserDailyActivityCountAggregateOutputType | null
+    _min: UserDailyActivityMinAggregateOutputType | null
+    _max: UserDailyActivityMaxAggregateOutputType | null
+  }
+
+  export type UserDailyActivityMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDailyActivityMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    date: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserDailyActivityCountAggregateOutputType = {
+    id: number
+    userId: number
+    date: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserDailyActivityMinAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDailyActivityMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserDailyActivityCountAggregateInputType = {
+    id?: true
+    userId?: true
+    date?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserDailyActivityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDailyActivity to aggregate.
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyActivities to fetch.
+     */
+    orderBy?: UserDailyActivityOrderByWithRelationInput | UserDailyActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserDailyActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserDailyActivities
+    **/
+    _count?: true | UserDailyActivityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserDailyActivityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserDailyActivityMaxAggregateInputType
+  }
+
+  export type GetUserDailyActivityAggregateType<T extends UserDailyActivityAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserDailyActivity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserDailyActivity[P]>
+      : GetScalarType<T[P], AggregateUserDailyActivity[P]>
+  }
+
+
+
+
+  export type UserDailyActivityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserDailyActivityWhereInput
+    orderBy?: UserDailyActivityOrderByWithAggregationInput | UserDailyActivityOrderByWithAggregationInput[]
+    by: UserDailyActivityScalarFieldEnum[] | UserDailyActivityScalarFieldEnum
+    having?: UserDailyActivityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserDailyActivityCountAggregateInputType | true
+    _min?: UserDailyActivityMinAggregateInputType
+    _max?: UserDailyActivityMaxAggregateInputType
+  }
+
+  export type UserDailyActivityGroupByOutputType = {
+    id: string
+    userId: string
+    date: Date
+    createdAt: Date
+    updatedAt: Date
+    _count: UserDailyActivityCountAggregateOutputType | null
+    _min: UserDailyActivityMinAggregateOutputType | null
+    _max: UserDailyActivityMaxAggregateOutputType | null
+  }
+
+  type GetUserDailyActivityGroupByPayload<T extends UserDailyActivityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserDailyActivityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserDailyActivityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserDailyActivityGroupByOutputType[P]>
+            : GetScalarType<T[P], UserDailyActivityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserDailyActivitySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyActivity"]>
+
+  export type UserDailyActivitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyActivity"]>
+
+  export type UserDailyActivitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userDailyActivity"]>
+
+  export type UserDailyActivitySelectScalar = {
+    id?: boolean
+    userId?: boolean
+    date?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserDailyActivityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "date" | "createdAt" | "updatedAt", ExtArgs["result"]["userDailyActivity"]>
+  export type UserDailyActivityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserDailyActivityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type UserDailyActivityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $UserDailyActivityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserDailyActivity"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      date: Date
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userDailyActivity"]>
+    composites: {}
+  }
+
+  type UserDailyActivityGetPayload<S extends boolean | null | undefined | UserDailyActivityDefaultArgs> = $Result.GetResult<Prisma.$UserDailyActivityPayload, S>
+
+  type UserDailyActivityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserDailyActivityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserDailyActivityCountAggregateInputType | true
+    }
+
+  export interface UserDailyActivityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserDailyActivity'], meta: { name: 'UserDailyActivity' } }
+    /**
+     * Find zero or one UserDailyActivity that matches the filter.
+     * @param {UserDailyActivityFindUniqueArgs} args - Arguments to find a UserDailyActivity
+     * @example
+     * // Get one UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserDailyActivityFindUniqueArgs>(args: SelectSubset<T, UserDailyActivityFindUniqueArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserDailyActivity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserDailyActivityFindUniqueOrThrowArgs} args - Arguments to find a UserDailyActivity
+     * @example
+     * // Get one UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserDailyActivityFindUniqueOrThrowArgs>(args: SelectSubset<T, UserDailyActivityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserDailyActivity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityFindFirstArgs} args - Arguments to find a UserDailyActivity
+     * @example
+     * // Get one UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserDailyActivityFindFirstArgs>(args?: SelectSubset<T, UserDailyActivityFindFirstArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserDailyActivity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityFindFirstOrThrowArgs} args - Arguments to find a UserDailyActivity
+     * @example
+     * // Get one UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserDailyActivityFindFirstOrThrowArgs>(args?: SelectSubset<T, UserDailyActivityFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserDailyActivities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserDailyActivities
+     * const userDailyActivities = await prisma.userDailyActivity.findMany()
+     * 
+     * // Get first 10 UserDailyActivities
+     * const userDailyActivities = await prisma.userDailyActivity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userDailyActivityWithIdOnly = await prisma.userDailyActivity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserDailyActivityFindManyArgs>(args?: SelectSubset<T, UserDailyActivityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserDailyActivity.
+     * @param {UserDailyActivityCreateArgs} args - Arguments to create a UserDailyActivity.
+     * @example
+     * // Create one UserDailyActivity
+     * const UserDailyActivity = await prisma.userDailyActivity.create({
+     *   data: {
+     *     // ... data to create a UserDailyActivity
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserDailyActivityCreateArgs>(args: SelectSubset<T, UserDailyActivityCreateArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserDailyActivities.
+     * @param {UserDailyActivityCreateManyArgs} args - Arguments to create many UserDailyActivities.
+     * @example
+     * // Create many UserDailyActivities
+     * const userDailyActivity = await prisma.userDailyActivity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserDailyActivityCreateManyArgs>(args?: SelectSubset<T, UserDailyActivityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserDailyActivities and returns the data saved in the database.
+     * @param {UserDailyActivityCreateManyAndReturnArgs} args - Arguments to create many UserDailyActivities.
+     * @example
+     * // Create many UserDailyActivities
+     * const userDailyActivity = await prisma.userDailyActivity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserDailyActivities and only return the `id`
+     * const userDailyActivityWithIdOnly = await prisma.userDailyActivity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserDailyActivityCreateManyAndReturnArgs>(args?: SelectSubset<T, UserDailyActivityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserDailyActivity.
+     * @param {UserDailyActivityDeleteArgs} args - Arguments to delete one UserDailyActivity.
+     * @example
+     * // Delete one UserDailyActivity
+     * const UserDailyActivity = await prisma.userDailyActivity.delete({
+     *   where: {
+     *     // ... filter to delete one UserDailyActivity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserDailyActivityDeleteArgs>(args: SelectSubset<T, UserDailyActivityDeleteArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserDailyActivity.
+     * @param {UserDailyActivityUpdateArgs} args - Arguments to update one UserDailyActivity.
+     * @example
+     * // Update one UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserDailyActivityUpdateArgs>(args: SelectSubset<T, UserDailyActivityUpdateArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserDailyActivities.
+     * @param {UserDailyActivityDeleteManyArgs} args - Arguments to filter UserDailyActivities to delete.
+     * @example
+     * // Delete a few UserDailyActivities
+     * const { count } = await prisma.userDailyActivity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserDailyActivityDeleteManyArgs>(args?: SelectSubset<T, UserDailyActivityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserDailyActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserDailyActivities
+     * const userDailyActivity = await prisma.userDailyActivity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserDailyActivityUpdateManyArgs>(args: SelectSubset<T, UserDailyActivityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserDailyActivities and returns the data updated in the database.
+     * @param {UserDailyActivityUpdateManyAndReturnArgs} args - Arguments to update many UserDailyActivities.
+     * @example
+     * // Update many UserDailyActivities
+     * const userDailyActivity = await prisma.userDailyActivity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserDailyActivities and only return the `id`
+     * const userDailyActivityWithIdOnly = await prisma.userDailyActivity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserDailyActivityUpdateManyAndReturnArgs>(args: SelectSubset<T, UserDailyActivityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserDailyActivity.
+     * @param {UserDailyActivityUpsertArgs} args - Arguments to update or create a UserDailyActivity.
+     * @example
+     * // Update or create a UserDailyActivity
+     * const userDailyActivity = await prisma.userDailyActivity.upsert({
+     *   create: {
+     *     // ... data to create a UserDailyActivity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserDailyActivity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserDailyActivityUpsertArgs>(args: SelectSubset<T, UserDailyActivityUpsertArgs<ExtArgs>>): Prisma__UserDailyActivityClient<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserDailyActivities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityCountArgs} args - Arguments to filter UserDailyActivities to count.
+     * @example
+     * // Count the number of UserDailyActivities
+     * const count = await prisma.userDailyActivity.count({
+     *   where: {
+     *     // ... the filter for the UserDailyActivities we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserDailyActivityCountArgs>(
+      args?: Subset<T, UserDailyActivityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserDailyActivityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserDailyActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserDailyActivityAggregateArgs>(args: Subset<T, UserDailyActivityAggregateArgs>): Prisma.PrismaPromise<GetUserDailyActivityAggregateType<T>>
+
+    /**
+     * Group by UserDailyActivity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserDailyActivityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserDailyActivityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserDailyActivityGroupByArgs['orderBy'] }
+        : { orderBy?: UserDailyActivityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserDailyActivityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserDailyActivityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserDailyActivity model
+   */
+  readonly fields: UserDailyActivityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserDailyActivity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserDailyActivityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserDailyActivity model
+   */
+  interface UserDailyActivityFieldRefs {
+    readonly id: FieldRef<"UserDailyActivity", 'String'>
+    readonly userId: FieldRef<"UserDailyActivity", 'String'>
+    readonly date: FieldRef<"UserDailyActivity", 'DateTime'>
+    readonly createdAt: FieldRef<"UserDailyActivity", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserDailyActivity", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserDailyActivity findUnique
+   */
+  export type UserDailyActivityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyActivity to fetch.
+     */
+    where: UserDailyActivityWhereUniqueInput
+  }
+
+  /**
+   * UserDailyActivity findUniqueOrThrow
+   */
+  export type UserDailyActivityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyActivity to fetch.
+     */
+    where: UserDailyActivityWhereUniqueInput
+  }
+
+  /**
+   * UserDailyActivity findFirst
+   */
+  export type UserDailyActivityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyActivity to fetch.
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyActivities to fetch.
+     */
+    orderBy?: UserDailyActivityOrderByWithRelationInput | UserDailyActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDailyActivities.
+     */
+    cursor?: UserDailyActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDailyActivities.
+     */
+    distinct?: UserDailyActivityScalarFieldEnum | UserDailyActivityScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyActivity findFirstOrThrow
+   */
+  export type UserDailyActivityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyActivity to fetch.
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyActivities to fetch.
+     */
+    orderBy?: UserDailyActivityOrderByWithRelationInput | UserDailyActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserDailyActivities.
+     */
+    cursor?: UserDailyActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyActivities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserDailyActivities.
+     */
+    distinct?: UserDailyActivityScalarFieldEnum | UserDailyActivityScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyActivity findMany
+   */
+  export type UserDailyActivityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter, which UserDailyActivities to fetch.
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserDailyActivities to fetch.
+     */
+    orderBy?: UserDailyActivityOrderByWithRelationInput | UserDailyActivityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserDailyActivities.
+     */
+    cursor?: UserDailyActivityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserDailyActivities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserDailyActivities.
+     */
+    skip?: number
+    distinct?: UserDailyActivityScalarFieldEnum | UserDailyActivityScalarFieldEnum[]
+  }
+
+  /**
+   * UserDailyActivity create
+   */
+  export type UserDailyActivityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserDailyActivity.
+     */
+    data: XOR<UserDailyActivityCreateInput, UserDailyActivityUncheckedCreateInput>
+  }
+
+  /**
+   * UserDailyActivity createMany
+   */
+  export type UserDailyActivityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserDailyActivities.
+     */
+    data: UserDailyActivityCreateManyInput | UserDailyActivityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserDailyActivity createManyAndReturn
+   */
+  export type UserDailyActivityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserDailyActivities.
+     */
+    data: UserDailyActivityCreateManyInput | UserDailyActivityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserDailyActivity update
+   */
+  export type UserDailyActivityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserDailyActivity.
+     */
+    data: XOR<UserDailyActivityUpdateInput, UserDailyActivityUncheckedUpdateInput>
+    /**
+     * Choose, which UserDailyActivity to update.
+     */
+    where: UserDailyActivityWhereUniqueInput
+  }
+
+  /**
+   * UserDailyActivity updateMany
+   */
+  export type UserDailyActivityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserDailyActivities.
+     */
+    data: XOR<UserDailyActivityUpdateManyMutationInput, UserDailyActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which UserDailyActivities to update
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * Limit how many UserDailyActivities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserDailyActivity updateManyAndReturn
+   */
+  export type UserDailyActivityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * The data used to update UserDailyActivities.
+     */
+    data: XOR<UserDailyActivityUpdateManyMutationInput, UserDailyActivityUncheckedUpdateManyInput>
+    /**
+     * Filter which UserDailyActivities to update
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * Limit how many UserDailyActivities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserDailyActivity upsert
+   */
+  export type UserDailyActivityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserDailyActivity to update in case it exists.
+     */
+    where: UserDailyActivityWhereUniqueInput
+    /**
+     * In case the UserDailyActivity found by the `where` argument doesn't exist, create a new UserDailyActivity with this data.
+     */
+    create: XOR<UserDailyActivityCreateInput, UserDailyActivityUncheckedCreateInput>
+    /**
+     * In case the UserDailyActivity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserDailyActivityUpdateInput, UserDailyActivityUncheckedUpdateInput>
+  }
+
+  /**
+   * UserDailyActivity delete
+   */
+  export type UserDailyActivityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
+    /**
+     * Filter which UserDailyActivity to delete.
+     */
+    where: UserDailyActivityWhereUniqueInput
+  }
+
+  /**
+   * UserDailyActivity deleteMany
+   */
+  export type UserDailyActivityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserDailyActivities to delete
+     */
+    where?: UserDailyActivityWhereInput
+    /**
+     * Limit how many UserDailyActivities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserDailyActivity without action
+   */
+  export type UserDailyActivityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserDailyActivity
+     */
+    select?: UserDailyActivitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserDailyActivity
+     */
+    omit?: UserDailyActivityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserDailyActivityInclude<ExtArgs> | null
   }
 
 
@@ -2848,6 +4308,7 @@ export namespace Prisma {
     description: number
     difficulty: number
     tags: number
+    companies: number
     userId: number
     examples: number
     constraints: number
@@ -2894,6 +4355,7 @@ export namespace Prisma {
     description?: true
     difficulty?: true
     tags?: true
+    companies?: true
     userId?: true
     examples?: true
     constraints?: true
@@ -2985,6 +4447,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags: string[]
+    companies: string[]
     userId: string
     examples: JsonValue
     constraints: string
@@ -3020,6 +4483,7 @@ export namespace Prisma {
     description?: boolean
     difficulty?: boolean
     tags?: boolean
+    companies?: boolean
     userId?: boolean
     examples?: boolean
     constraints?: boolean
@@ -3034,6 +4498,7 @@ export namespace Prisma {
     submission?: boolean | Problem$submissionArgs<ExtArgs>
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
+    assistanceRequests?: boolean | Problem$assistanceRequestsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -3043,6 +4508,7 @@ export namespace Prisma {
     description?: boolean
     difficulty?: boolean
     tags?: boolean
+    companies?: boolean
     userId?: boolean
     examples?: boolean
     constraints?: boolean
@@ -3062,6 +4528,7 @@ export namespace Prisma {
     description?: boolean
     difficulty?: boolean
     tags?: boolean
+    companies?: boolean
     userId?: boolean
     examples?: boolean
     constraints?: boolean
@@ -3081,6 +4548,7 @@ export namespace Prisma {
     description?: boolean
     difficulty?: boolean
     tags?: boolean
+    companies?: boolean
     userId?: boolean
     examples?: boolean
     constraints?: boolean
@@ -3093,12 +4561,13 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficulty" | "tags" | "userId" | "examples" | "constraints" | "hints" | "editorials" | "testcases" | "codeSnippets" | "referenceSolutions" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficulty" | "tags" | "companies" | "userId" | "examples" | "constraints" | "hints" | "editorials" | "testcases" | "codeSnippets" | "referenceSolutions" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
   export type ProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     submission?: boolean | Problem$submissionArgs<ExtArgs>
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
+    assistanceRequests?: boolean | Problem$assistanceRequestsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3115,6 +4584,7 @@ export namespace Prisma {
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       solvedBy: Prisma.$ProblemSolvedPayload<ExtArgs>[]
       problemsPlaylists: Prisma.$ProblemsInPlaylistPayload<ExtArgs>[]
+      assistanceRequests: Prisma.$AssistanceRequestPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3122,6 +4592,7 @@ export namespace Prisma {
       description: string
       difficulty: $Enums.Difficulty
       tags: string[]
+      companies: string[]
       userId: string
       examples: Prisma.JsonValue
       constraints: string
@@ -3530,6 +5001,7 @@ export namespace Prisma {
     submission<T extends Problem$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Problem$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     solvedBy<T extends Problem$solvedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$solvedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemsPlaylists<T extends Problem$problemsPlaylistsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemsPlaylistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsInPlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assistanceRequests<T extends Problem$assistanceRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$assistanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3564,6 +5036,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Problem", 'String'>
     readonly difficulty: FieldRef<"Problem", 'Difficulty'>
     readonly tags: FieldRef<"Problem", 'String[]'>
+    readonly companies: FieldRef<"Problem", 'String[]'>
     readonly userId: FieldRef<"Problem", 'String'>
     readonly examples: FieldRef<"Problem", 'Json'>
     readonly constraints: FieldRef<"Problem", 'String'>
@@ -4039,6 +5512,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProblemsInPlaylistScalarFieldEnum | ProblemsInPlaylistScalarFieldEnum[]
+  }
+
+  /**
+   * Problem.assistanceRequests
+   */
+  export type Problem$assistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    where?: AssistanceRequestWhereInput
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    cursor?: AssistanceRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
   }
 
   /**
@@ -9699,6 +11196,1059 @@ export namespace Prisma {
 
 
   /**
+   * Model AssistanceRequest
+   */
+
+  export type AggregateAssistanceRequest = {
+    _count: AssistanceRequestCountAggregateOutputType | null
+    _min: AssistanceRequestMinAggregateOutputType | null
+    _max: AssistanceRequestMaxAggregateOutputType | null
+  }
+
+  export type AssistanceRequestMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    createdAt: Date | null
+  }
+
+  export type AssistanceRequestMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    createdAt: Date | null
+  }
+
+  export type AssistanceRequestCountAggregateOutputType = {
+    id: number
+    userId: number
+    problemId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AssistanceRequestMinAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    createdAt?: true
+  }
+
+  export type AssistanceRequestMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    createdAt?: true
+  }
+
+  export type AssistanceRequestCountAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AssistanceRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssistanceRequest to aggregate.
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssistanceRequests to fetch.
+     */
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssistanceRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssistanceRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssistanceRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AssistanceRequests
+    **/
+    _count?: true | AssistanceRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssistanceRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssistanceRequestMaxAggregateInputType
+  }
+
+  export type GetAssistanceRequestAggregateType<T extends AssistanceRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateAssistanceRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAssistanceRequest[P]>
+      : GetScalarType<T[P], AggregateAssistanceRequest[P]>
+  }
+
+
+
+
+  export type AssistanceRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssistanceRequestWhereInput
+    orderBy?: AssistanceRequestOrderByWithAggregationInput | AssistanceRequestOrderByWithAggregationInput[]
+    by: AssistanceRequestScalarFieldEnum[] | AssistanceRequestScalarFieldEnum
+    having?: AssistanceRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssistanceRequestCountAggregateInputType | true
+    _min?: AssistanceRequestMinAggregateInputType
+    _max?: AssistanceRequestMaxAggregateInputType
+  }
+
+  export type AssistanceRequestGroupByOutputType = {
+    id: string
+    userId: string
+    problemId: string
+    createdAt: Date
+    _count: AssistanceRequestCountAggregateOutputType | null
+    _min: AssistanceRequestMinAggregateOutputType | null
+    _max: AssistanceRequestMaxAggregateOutputType | null
+  }
+
+  type GetAssistanceRequestGroupByPayload<T extends AssistanceRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssistanceRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssistanceRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssistanceRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], AssistanceRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssistanceRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assistanceRequest"]>
+
+  export type AssistanceRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assistanceRequest"]>
+
+  export type AssistanceRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    createdAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assistanceRequest"]>
+
+  export type AssistanceRequestSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    createdAt?: boolean
+  }
+
+  export type AssistanceRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "createdAt", ExtArgs["result"]["assistanceRequest"]>
+  export type AssistanceRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type AssistanceRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type AssistanceRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+
+  export type $AssistanceRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AssistanceRequest"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      problem: Prisma.$ProblemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      problemId: string
+      createdAt: Date
+    }, ExtArgs["result"]["assistanceRequest"]>
+    composites: {}
+  }
+
+  type AssistanceRequestGetPayload<S extends boolean | null | undefined | AssistanceRequestDefaultArgs> = $Result.GetResult<Prisma.$AssistanceRequestPayload, S>
+
+  type AssistanceRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AssistanceRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AssistanceRequestCountAggregateInputType | true
+    }
+
+  export interface AssistanceRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AssistanceRequest'], meta: { name: 'AssistanceRequest' } }
+    /**
+     * Find zero or one AssistanceRequest that matches the filter.
+     * @param {AssistanceRequestFindUniqueArgs} args - Arguments to find a AssistanceRequest
+     * @example
+     * // Get one AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AssistanceRequestFindUniqueArgs>(args: SelectSubset<T, AssistanceRequestFindUniqueArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AssistanceRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AssistanceRequestFindUniqueOrThrowArgs} args - Arguments to find a AssistanceRequest
+     * @example
+     * // Get one AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AssistanceRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, AssistanceRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssistanceRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestFindFirstArgs} args - Arguments to find a AssistanceRequest
+     * @example
+     * // Get one AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AssistanceRequestFindFirstArgs>(args?: SelectSubset<T, AssistanceRequestFindFirstArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AssistanceRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestFindFirstOrThrowArgs} args - Arguments to find a AssistanceRequest
+     * @example
+     * // Get one AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AssistanceRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, AssistanceRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AssistanceRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AssistanceRequests
+     * const assistanceRequests = await prisma.assistanceRequest.findMany()
+     * 
+     * // Get first 10 AssistanceRequests
+     * const assistanceRequests = await prisma.assistanceRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AssistanceRequestFindManyArgs>(args?: SelectSubset<T, AssistanceRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AssistanceRequest.
+     * @param {AssistanceRequestCreateArgs} args - Arguments to create a AssistanceRequest.
+     * @example
+     * // Create one AssistanceRequest
+     * const AssistanceRequest = await prisma.assistanceRequest.create({
+     *   data: {
+     *     // ... data to create a AssistanceRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends AssistanceRequestCreateArgs>(args: SelectSubset<T, AssistanceRequestCreateArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AssistanceRequests.
+     * @param {AssistanceRequestCreateManyArgs} args - Arguments to create many AssistanceRequests.
+     * @example
+     * // Create many AssistanceRequests
+     * const assistanceRequest = await prisma.assistanceRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AssistanceRequestCreateManyArgs>(args?: SelectSubset<T, AssistanceRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AssistanceRequests and returns the data saved in the database.
+     * @param {AssistanceRequestCreateManyAndReturnArgs} args - Arguments to create many AssistanceRequests.
+     * @example
+     * // Create many AssistanceRequests
+     * const assistanceRequest = await prisma.assistanceRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AssistanceRequests and only return the `id`
+     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AssistanceRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, AssistanceRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AssistanceRequest.
+     * @param {AssistanceRequestDeleteArgs} args - Arguments to delete one AssistanceRequest.
+     * @example
+     * // Delete one AssistanceRequest
+     * const AssistanceRequest = await prisma.assistanceRequest.delete({
+     *   where: {
+     *     // ... filter to delete one AssistanceRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AssistanceRequestDeleteArgs>(args: SelectSubset<T, AssistanceRequestDeleteArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AssistanceRequest.
+     * @param {AssistanceRequestUpdateArgs} args - Arguments to update one AssistanceRequest.
+     * @example
+     * // Update one AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AssistanceRequestUpdateArgs>(args: SelectSubset<T, AssistanceRequestUpdateArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AssistanceRequests.
+     * @param {AssistanceRequestDeleteManyArgs} args - Arguments to filter AssistanceRequests to delete.
+     * @example
+     * // Delete a few AssistanceRequests
+     * const { count } = await prisma.assistanceRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AssistanceRequestDeleteManyArgs>(args?: SelectSubset<T, AssistanceRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssistanceRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AssistanceRequests
+     * const assistanceRequest = await prisma.assistanceRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AssistanceRequestUpdateManyArgs>(args: SelectSubset<T, AssistanceRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AssistanceRequests and returns the data updated in the database.
+     * @param {AssistanceRequestUpdateManyAndReturnArgs} args - Arguments to update many AssistanceRequests.
+     * @example
+     * // Update many AssistanceRequests
+     * const assistanceRequest = await prisma.assistanceRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AssistanceRequests and only return the `id`
+     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AssistanceRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, AssistanceRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AssistanceRequest.
+     * @param {AssistanceRequestUpsertArgs} args - Arguments to update or create a AssistanceRequest.
+     * @example
+     * // Update or create a AssistanceRequest
+     * const assistanceRequest = await prisma.assistanceRequest.upsert({
+     *   create: {
+     *     // ... data to create a AssistanceRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AssistanceRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AssistanceRequestUpsertArgs>(args: SelectSubset<T, AssistanceRequestUpsertArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AssistanceRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestCountArgs} args - Arguments to filter AssistanceRequests to count.
+     * @example
+     * // Count the number of AssistanceRequests
+     * const count = await prisma.assistanceRequest.count({
+     *   where: {
+     *     // ... the filter for the AssistanceRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssistanceRequestCountArgs>(
+      args?: Subset<T, AssistanceRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssistanceRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AssistanceRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssistanceRequestAggregateArgs>(args: Subset<T, AssistanceRequestAggregateArgs>): Prisma.PrismaPromise<GetAssistanceRequestAggregateType<T>>
+
+    /**
+     * Group by AssistanceRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssistanceRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssistanceRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssistanceRequestGroupByArgs['orderBy'] }
+        : { orderBy?: AssistanceRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssistanceRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssistanceRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AssistanceRequest model
+   */
+  readonly fields: AssistanceRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AssistanceRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssistanceRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AssistanceRequest model
+   */
+  interface AssistanceRequestFieldRefs {
+    readonly id: FieldRef<"AssistanceRequest", 'String'>
+    readonly userId: FieldRef<"AssistanceRequest", 'String'>
+    readonly problemId: FieldRef<"AssistanceRequest", 'String'>
+    readonly createdAt: FieldRef<"AssistanceRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AssistanceRequest findUnique
+   */
+  export type AssistanceRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which AssistanceRequest to fetch.
+     */
+    where: AssistanceRequestWhereUniqueInput
+  }
+
+  /**
+   * AssistanceRequest findUniqueOrThrow
+   */
+  export type AssistanceRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which AssistanceRequest to fetch.
+     */
+    where: AssistanceRequestWhereUniqueInput
+  }
+
+  /**
+   * AssistanceRequest findFirst
+   */
+  export type AssistanceRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which AssistanceRequest to fetch.
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssistanceRequests to fetch.
+     */
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssistanceRequests.
+     */
+    cursor?: AssistanceRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssistanceRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssistanceRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssistanceRequests.
+     */
+    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
+  }
+
+  /**
+   * AssistanceRequest findFirstOrThrow
+   */
+  export type AssistanceRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which AssistanceRequest to fetch.
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssistanceRequests to fetch.
+     */
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AssistanceRequests.
+     */
+    cursor?: AssistanceRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssistanceRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssistanceRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AssistanceRequests.
+     */
+    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
+  }
+
+  /**
+   * AssistanceRequest findMany
+   */
+  export type AssistanceRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which AssistanceRequests to fetch.
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AssistanceRequests to fetch.
+     */
+    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AssistanceRequests.
+     */
+    cursor?: AssistanceRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AssistanceRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AssistanceRequests.
+     */
+    skip?: number
+    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
+  }
+
+  /**
+   * AssistanceRequest create
+   */
+  export type AssistanceRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AssistanceRequest.
+     */
+    data: XOR<AssistanceRequestCreateInput, AssistanceRequestUncheckedCreateInput>
+  }
+
+  /**
+   * AssistanceRequest createMany
+   */
+  export type AssistanceRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AssistanceRequests.
+     */
+    data: AssistanceRequestCreateManyInput | AssistanceRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AssistanceRequest createManyAndReturn
+   */
+  export type AssistanceRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many AssistanceRequests.
+     */
+    data: AssistanceRequestCreateManyInput | AssistanceRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssistanceRequest update
+   */
+  export type AssistanceRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AssistanceRequest.
+     */
+    data: XOR<AssistanceRequestUpdateInput, AssistanceRequestUncheckedUpdateInput>
+    /**
+     * Choose, which AssistanceRequest to update.
+     */
+    where: AssistanceRequestWhereUniqueInput
+  }
+
+  /**
+   * AssistanceRequest updateMany
+   */
+  export type AssistanceRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AssistanceRequests.
+     */
+    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which AssistanceRequests to update
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * Limit how many AssistanceRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssistanceRequest updateManyAndReturn
+   */
+  export type AssistanceRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update AssistanceRequests.
+     */
+    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which AssistanceRequests to update
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * Limit how many AssistanceRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AssistanceRequest upsert
+   */
+  export type AssistanceRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AssistanceRequest to update in case it exists.
+     */
+    where: AssistanceRequestWhereUniqueInput
+    /**
+     * In case the AssistanceRequest found by the `where` argument doesn't exist, create a new AssistanceRequest with this data.
+     */
+    create: XOR<AssistanceRequestCreateInput, AssistanceRequestUncheckedCreateInput>
+    /**
+     * In case the AssistanceRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssistanceRequestUpdateInput, AssistanceRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * AssistanceRequest delete
+   */
+  export type AssistanceRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+    /**
+     * Filter which AssistanceRequest to delete.
+     */
+    where: AssistanceRequestWhereUniqueInput
+  }
+
+  /**
+   * AssistanceRequest deleteMany
+   */
+  export type AssistanceRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AssistanceRequests to delete
+     */
+    where?: AssistanceRequestWhereInput
+    /**
+     * Limit how many AssistanceRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AssistanceRequest without action
+   */
+  export type AssistanceRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AssistanceRequest
+     */
+    select?: AssistanceRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AssistanceRequest
+     */
+    omit?: AssistanceRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssistanceRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9719,11 +12269,29 @@ export namespace Prisma {
     image: 'image',
     role: 'role',
     password: 'password',
+    isEmailVerified: 'isEmailVerified',
+    emailVerificationToken: 'emailVerificationToken',
+    emailVerificationExpires: 'emailVerificationExpires',
+    plan: 'plan',
+    subscriptionExpires: 'subscriptionExpires',
+    lastActivityDate: 'lastActivityDate',
+    currentStreak: 'currentStreak',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const UserDailyActivityScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    date: 'date',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserDailyActivityScalarFieldEnum = (typeof UserDailyActivityScalarFieldEnum)[keyof typeof UserDailyActivityScalarFieldEnum]
 
 
   export const ProblemScalarFieldEnum: {
@@ -9732,6 +12300,7 @@ export namespace Prisma {
     description: 'description',
     difficulty: 'difficulty',
     tags: 'tags',
+    companies: 'companies',
     userId: 'userId',
     examples: 'examples',
     constraints: 'constraints',
@@ -9820,6 +12389,16 @@ export namespace Prisma {
   export type ProblemsInPlaylistScalarFieldEnum = (typeof ProblemsInPlaylistScalarFieldEnum)[keyof typeof ProblemsInPlaylistScalarFieldEnum]
 
 
+  export const AssistanceRequestScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    problemId: 'problemId',
+    createdAt: 'createdAt'
+  };
+
+  export type AssistanceRequestScalarFieldEnum = (typeof AssistanceRequestScalarFieldEnum)[keyof typeof AssistanceRequestScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -9894,6 +12473,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -9904,6 +12490,34 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PlanType'
+   */
+  export type EnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType'>
+    
+
+
+  /**
+   * Reference to a field of type 'PlanType[]'
+   */
+  export type ListEnumPlanTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlanType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -9936,27 +12550,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -9983,12 +12576,21 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+    isEmailVerified?: BoolFilter<"User"> | boolean
+    emailVerificationToken?: StringNullableFilter<"User"> | string | null
+    emailVerificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    plan?: EnumPlanTypeFilter<"User"> | $Enums.PlanType
+    subscriptionExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    lastActivityDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    currentStreak?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     problems?: ProblemListRelationFilter
     submission?: SubmissionListRelationFilter
     problemSolved?: ProblemSolvedListRelationFilter
     playlists?: PlaylistListRelationFilter
+    dailyActivities?: UserDailyActivityListRelationFilter
+    assistanceRequests?: AssistanceRequestListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9998,12 +12600,21 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerificationToken?: SortOrderInput | SortOrder
+    emailVerificationExpires?: SortOrderInput | SortOrder
+    plan?: SortOrder
+    subscriptionExpires?: SortOrderInput | SortOrder
+    lastActivityDate?: SortOrderInput | SortOrder
+    currentStreak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     problems?: ProblemOrderByRelationAggregateInput
     submission?: SubmissionOrderByRelationAggregateInput
     problemSolved?: ProblemSolvedOrderByRelationAggregateInput
     playlists?: PlaylistOrderByRelationAggregateInput
+    dailyActivities?: UserDailyActivityOrderByRelationAggregateInput
+    assistanceRequests?: AssistanceRequestOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10016,12 +12627,21 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+    isEmailVerified?: BoolFilter<"User"> | boolean
+    emailVerificationToken?: StringNullableFilter<"User"> | string | null
+    emailVerificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    plan?: EnumPlanTypeFilter<"User"> | $Enums.PlanType
+    subscriptionExpires?: DateTimeNullableFilter<"User"> | Date | string | null
+    lastActivityDate?: DateTimeNullableFilter<"User"> | Date | string | null
+    currentStreak?: IntFilter<"User"> | number
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     problems?: ProblemListRelationFilter
     submission?: SubmissionListRelationFilter
     problemSolved?: ProblemSolvedListRelationFilter
     playlists?: PlaylistListRelationFilter
+    dailyActivities?: UserDailyActivityListRelationFilter
+    assistanceRequests?: AssistanceRequestListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -10031,11 +12651,20 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerificationToken?: SortOrderInput | SortOrder
+    emailVerificationExpires?: SortOrderInput | SortOrder
+    plan?: SortOrder
+    subscriptionExpires?: SortOrderInput | SortOrder
+    lastActivityDate?: SortOrderInput | SortOrder
+    currentStreak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -10048,8 +12677,71 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     password?: StringWithAggregatesFilter<"User"> | string
+    isEmailVerified?: BoolWithAggregatesFilter<"User"> | boolean
+    emailVerificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
+    emailVerificationExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    plan?: EnumPlanTypeWithAggregatesFilter<"User"> | $Enums.PlanType
+    subscriptionExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    lastActivityDate?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    currentStreak?: IntWithAggregatesFilter<"User"> | number
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type UserDailyActivityWhereInput = {
+    AND?: UserDailyActivityWhereInput | UserDailyActivityWhereInput[]
+    OR?: UserDailyActivityWhereInput[]
+    NOT?: UserDailyActivityWhereInput | UserDailyActivityWhereInput[]
+    id?: StringFilter<"UserDailyActivity"> | string
+    userId?: StringFilter<"UserDailyActivity"> | string
+    date?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    createdAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type UserDailyActivityOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type UserDailyActivityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_date?: UserDailyActivityUserIdDateCompoundUniqueInput
+    AND?: UserDailyActivityWhereInput | UserDailyActivityWhereInput[]
+    OR?: UserDailyActivityWhereInput[]
+    NOT?: UserDailyActivityWhereInput | UserDailyActivityWhereInput[]
+    userId?: StringFilter<"UserDailyActivity"> | string
+    date?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    createdAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId_date">
+
+  export type UserDailyActivityOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserDailyActivityCountOrderByAggregateInput
+    _max?: UserDailyActivityMaxOrderByAggregateInput
+    _min?: UserDailyActivityMinOrderByAggregateInput
+  }
+
+  export type UserDailyActivityScalarWhereWithAggregatesInput = {
+    AND?: UserDailyActivityScalarWhereWithAggregatesInput | UserDailyActivityScalarWhereWithAggregatesInput[]
+    OR?: UserDailyActivityScalarWhereWithAggregatesInput[]
+    NOT?: UserDailyActivityScalarWhereWithAggregatesInput | UserDailyActivityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserDailyActivity"> | string
+    userId?: StringWithAggregatesFilter<"UserDailyActivity"> | string
+    date?: DateTimeWithAggregatesFilter<"UserDailyActivity"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"UserDailyActivity"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserDailyActivity"> | Date | string
   }
 
   export type ProblemWhereInput = {
@@ -10061,6 +12753,7 @@ export namespace Prisma {
     description?: StringFilter<"Problem"> | string
     difficulty?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
     tags?: StringNullableListFilter<"Problem">
+    companies?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
     constraints?: StringFilter<"Problem"> | string
@@ -10075,6 +12768,7 @@ export namespace Prisma {
     submission?: SubmissionListRelationFilter
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
+    assistanceRequests?: AssistanceRequestListRelationFilter
   }
 
   export type ProblemOrderByWithRelationInput = {
@@ -10083,6 +12777,7 @@ export namespace Prisma {
     description?: SortOrder
     difficulty?: SortOrder
     tags?: SortOrder
+    companies?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
     constraints?: SortOrder
@@ -10097,6 +12792,7 @@ export namespace Prisma {
     submission?: SubmissionOrderByRelationAggregateInput
     solvedBy?: ProblemSolvedOrderByRelationAggregateInput
     problemsPlaylists?: ProblemsInPlaylistOrderByRelationAggregateInput
+    assistanceRequests?: AssistanceRequestOrderByRelationAggregateInput
   }
 
   export type ProblemWhereUniqueInput = Prisma.AtLeast<{
@@ -10108,6 +12804,7 @@ export namespace Prisma {
     description?: StringFilter<"Problem"> | string
     difficulty?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
     tags?: StringNullableListFilter<"Problem">
+    companies?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
     constraints?: StringFilter<"Problem"> | string
@@ -10122,6 +12819,7 @@ export namespace Prisma {
     submission?: SubmissionListRelationFilter
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
+    assistanceRequests?: AssistanceRequestListRelationFilter
   }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
@@ -10130,6 +12828,7 @@ export namespace Prisma {
     description?: SortOrder
     difficulty?: SortOrder
     tags?: SortOrder
+    companies?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
     constraints?: SortOrder
@@ -10154,6 +12853,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Problem"> | string
     difficulty?: EnumDifficultyWithAggregatesFilter<"Problem"> | $Enums.Difficulty
     tags?: StringNullableListFilter<"Problem">
+    companies?: StringNullableListFilter<"Problem">
     userId?: StringWithAggregatesFilter<"Problem"> | string
     examples?: JsonWithAggregatesFilter<"Problem">
     constraints?: StringWithAggregatesFilter<"Problem"> | string
@@ -10551,6 +13251,59 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ProblemsInPlaylist"> | Date | string
   }
 
+  export type AssistanceRequestWhereInput = {
+    AND?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
+    OR?: AssistanceRequestWhereInput[]
+    NOT?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
+    id?: StringFilter<"AssistanceRequest"> | string
+    userId?: StringFilter<"AssistanceRequest"> | string
+    problemId?: StringFilter<"AssistanceRequest"> | string
+    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }
+
+  export type AssistanceRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    problem?: ProblemOrderByWithRelationInput
+  }
+
+  export type AssistanceRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
+    OR?: AssistanceRequestWhereInput[]
+    NOT?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
+    userId?: StringFilter<"AssistanceRequest"> | string
+    problemId?: StringFilter<"AssistanceRequest"> | string
+    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }, "id">
+
+  export type AssistanceRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    createdAt?: SortOrder
+    _count?: AssistanceRequestCountOrderByAggregateInput
+    _max?: AssistanceRequestMaxOrderByAggregateInput
+    _min?: AssistanceRequestMinOrderByAggregateInput
+  }
+
+  export type AssistanceRequestScalarWhereWithAggregatesInput = {
+    AND?: AssistanceRequestScalarWhereWithAggregatesInput | AssistanceRequestScalarWhereWithAggregatesInput[]
+    OR?: AssistanceRequestScalarWhereWithAggregatesInput[]
+    NOT?: AssistanceRequestScalarWhereWithAggregatesInput | AssistanceRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AssistanceRequest"> | string
+    userId?: StringWithAggregatesFilter<"AssistanceRequest"> | string
+    problemId?: StringWithAggregatesFilter<"AssistanceRequest"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"AssistanceRequest"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -10558,12 +13311,21 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10573,12 +13335,21 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -10588,12 +13359,21 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10603,12 +13383,21 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10618,6 +13407,13 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -10629,6 +13425,13 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10640,6 +13443,68 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyActivityCreateInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutDailyActivitiesInput
+  }
+
+  export type UserDailyActivityUncheckedCreateInput = {
+    id?: string
+    userId: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyActivityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDailyActivitiesNestedInput
+  }
+
+  export type UserDailyActivityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyActivityCreateManyInput = {
+    id?: string
+    userId: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyActivityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyActivityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10650,6 +13515,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -10663,6 +13529,7 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateInput = {
@@ -10671,6 +13538,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
@@ -10684,6 +13552,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUpdateInput = {
@@ -10692,6 +13561,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10705,6 +13575,7 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateInput = {
@@ -10713,6 +13584,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
@@ -10726,6 +13598,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateManyInput = {
@@ -10734,6 +13607,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
@@ -10752,6 +13626,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10769,6 +13644,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
@@ -11187,6 +14063,53 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AssistanceRequestCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAssistanceRequestsInput
+    problem: ProblemCreateNestedOneWithoutAssistanceRequestsInput
+  }
+
+  export type AssistanceRequestUncheckedCreateInput = {
+    id?: string
+    userId: string
+    problemId: string
+    createdAt?: Date | string
+  }
+
+  export type AssistanceRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput
+  }
+
+  export type AssistanceRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestCreateManyInput = {
+    id?: string
+    userId: string
+    problemId: string
+    createdAt?: Date | string
+  }
+
+  export type AssistanceRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -11224,6 +14147,40 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type EnumPlanTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanType | EnumPlanTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanTypeFilter<$PrismaModel> | $Enums.PlanType
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11259,6 +14216,18 @@ export namespace Prisma {
     none?: PlaylistWhereInput
   }
 
+  export type UserDailyActivityListRelationFilter = {
+    every?: UserDailyActivityWhereInput
+    some?: UserDailyActivityWhereInput
+    none?: UserDailyActivityWhereInput
+  }
+
+  export type AssistanceRequestListRelationFilter = {
+    every?: AssistanceRequestWhereInput
+    some?: AssistanceRequestWhereInput
+    none?: AssistanceRequestWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -11280,6 +14249,14 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type UserDailyActivityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AssistanceRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -11287,8 +14264,19 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerificationToken?: SortOrder
+    emailVerificationExpires?: SortOrder
+    plan?: SortOrder
+    subscriptionExpires?: SortOrder
+    lastActivityDate?: SortOrder
+    currentStreak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    currentStreak?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -11298,6 +14286,13 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerificationToken?: SortOrder
+    emailVerificationExpires?: SortOrder
+    plan?: SortOrder
+    subscriptionExpires?: SortOrder
+    lastActivityDate?: SortOrder
+    currentStreak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -11309,8 +14304,19 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    emailVerificationToken?: SortOrder
+    emailVerificationExpires?: SortOrder
+    plan?: SortOrder
+    subscriptionExpires?: SortOrder
+    lastActivityDate?: SortOrder
+    currentStreak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type UserSumOrderByAggregateInput = {
+    currentStreak?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11359,6 +14365,54 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPlanTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanType | EnumPlanTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanTypeWithAggregatesFilter<$PrismaModel> | $Enums.PlanType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPlanTypeFilter<$PrismaModel>
+    _max?: NestedEnumPlanTypeFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11371,6 +14425,40 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserDailyActivityUserIdDateCompoundUniqueInput = {
+    userId: string
+    date: Date | string
+  }
+
+  export type UserDailyActivityCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDailyActivityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserDailyActivityMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    date?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type EnumDifficultyFilter<$PrismaModel = never> = {
@@ -11411,11 +14499,6 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
-  }
-
   export type ProblemsInPlaylistListRelationFilter = {
     every?: ProblemsInPlaylistWhereInput
     some?: ProblemsInPlaylistWhereInput
@@ -11432,6 +14515,7 @@ export namespace Prisma {
     description?: SortOrder
     difficulty?: SortOrder
     tags?: SortOrder
+    companies?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
     constraints?: SortOrder
@@ -11570,22 +14654,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type SubmissionScalarRelationFilter = {
     is?: SubmissionWhereInput
     isNot?: SubmissionWhereInput
@@ -11645,30 +14713,6 @@ export namespace Prisma {
 
   export type TestCaseResultSumOrderByAggregateInput = {
     testCase?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ProblemSolvedUserIdProblemIdCompoundUniqueInput = {
@@ -11766,6 +14810,27 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AssistanceRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssistanceRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AssistanceRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    createdAt?: SortOrder
+  }
+
   export type ProblemCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -11792,6 +14857,20 @@ export namespace Prisma {
     connectOrCreate?: PlaylistCreateOrConnectWithoutUserInput | PlaylistCreateOrConnectWithoutUserInput[]
     createMany?: PlaylistCreateManyUserInputEnvelope
     connect?: PlaylistWhereUniqueInput | PlaylistWhereUniqueInput[]
+  }
+
+  export type UserDailyActivityCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput> | UserDailyActivityCreateWithoutUserInput[] | UserDailyActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyActivityCreateOrConnectWithoutUserInput | UserDailyActivityCreateOrConnectWithoutUserInput[]
+    createMany?: UserDailyActivityCreateManyUserInputEnvelope
+    connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+  }
+
+  export type AssistanceRequestCreateNestedManyWithoutUserInput = {
+    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
+    createMany?: AssistanceRequestCreateManyUserInputEnvelope
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
   }
 
   export type ProblemUncheckedCreateNestedManyWithoutUserInput = {
@@ -11822,6 +14901,20 @@ export namespace Prisma {
     connect?: PlaylistWhereUniqueInput | PlaylistWhereUniqueInput[]
   }
 
+  export type UserDailyActivityUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput> | UserDailyActivityCreateWithoutUserInput[] | UserDailyActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyActivityCreateOrConnectWithoutUserInput | UserDailyActivityCreateOrConnectWithoutUserInput[]
+    createMany?: UserDailyActivityCreateManyUserInputEnvelope
+    connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+  }
+
+  export type AssistanceRequestUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
+    createMany?: AssistanceRequestCreateManyUserInputEnvelope
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -11832,6 +14925,26 @@ export namespace Prisma {
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
     set?: $Enums.UserRole
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type EnumPlanTypeFieldUpdateOperationsInput = {
+    set?: $Enums.PlanType
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -11894,6 +15007,34 @@ export namespace Prisma {
     deleteMany?: PlaylistScalarWhereInput | PlaylistScalarWhereInput[]
   }
 
+  export type UserDailyActivityUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput> | UserDailyActivityCreateWithoutUserInput[] | UserDailyActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyActivityCreateOrConnectWithoutUserInput | UserDailyActivityCreateOrConnectWithoutUserInput[]
+    upsert?: UserDailyActivityUpsertWithWhereUniqueWithoutUserInput | UserDailyActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserDailyActivityCreateManyUserInputEnvelope
+    set?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    disconnect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    delete?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    update?: UserDailyActivityUpdateWithWhereUniqueWithoutUserInput | UserDailyActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserDailyActivityUpdateManyWithWhereWithoutUserInput | UserDailyActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
+  }
+
+  export type AssistanceRequestUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
+    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutUserInput | AssistanceRequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AssistanceRequestCreateManyUserInputEnvelope
+    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    update?: AssistanceRequestUpdateWithWhereUniqueWithoutUserInput | AssistanceRequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutUserInput | AssistanceRequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
+  }
+
   export type ProblemUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -11950,7 +15091,53 @@ export namespace Prisma {
     deleteMany?: PlaylistScalarWhereInput | PlaylistScalarWhereInput[]
   }
 
+  export type UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput> | UserDailyActivityCreateWithoutUserInput[] | UserDailyActivityUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: UserDailyActivityCreateOrConnectWithoutUserInput | UserDailyActivityCreateOrConnectWithoutUserInput[]
+    upsert?: UserDailyActivityUpsertWithWhereUniqueWithoutUserInput | UserDailyActivityUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: UserDailyActivityCreateManyUserInputEnvelope
+    set?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    disconnect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    delete?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
+    update?: UserDailyActivityUpdateWithWhereUniqueWithoutUserInput | UserDailyActivityUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: UserDailyActivityUpdateManyWithWhereWithoutUserInput | UserDailyActivityUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
+  }
+
+  export type AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
+    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutUserInput | AssistanceRequestUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AssistanceRequestCreateManyUserInputEnvelope
+    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    update?: AssistanceRequestUpdateWithWhereUniqueWithoutUserInput | AssistanceRequestUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutUserInput | AssistanceRequestUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutDailyActivitiesInput = {
+    create?: XOR<UserCreateWithoutDailyActivitiesInput, UserUncheckedCreateWithoutDailyActivitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyActivitiesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDailyActivitiesNestedInput = {
+    create?: XOR<UserCreateWithoutDailyActivitiesInput, UserUncheckedCreateWithoutDailyActivitiesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDailyActivitiesInput
+    upsert?: UserUpsertWithoutDailyActivitiesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDailyActivitiesInput, UserUpdateWithoutDailyActivitiesInput>, UserUncheckedUpdateWithoutDailyActivitiesInput>
+  }
+
   export type ProblemCreatetagsInput = {
+    set: string[]
+  }
+
+  export type ProblemCreatecompaniesInput = {
     set: string[]
   }
 
@@ -11981,6 +15168,13 @@ export namespace Prisma {
     connect?: ProblemsInPlaylistWhereUniqueInput | ProblemsInPlaylistWhereUniqueInput[]
   }
 
+  export type AssistanceRequestCreateNestedManyWithoutProblemInput = {
+    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
+    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+  }
+
   export type SubmissionUncheckedCreateNestedManyWithoutProblemInput = {
     create?: XOR<SubmissionCreateWithoutProblemInput, SubmissionUncheckedCreateWithoutProblemInput> | SubmissionCreateWithoutProblemInput[] | SubmissionUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutProblemInput | SubmissionCreateOrConnectWithoutProblemInput[]
@@ -12002,11 +15196,23 @@ export namespace Prisma {
     connect?: ProblemsInPlaylistWhereUniqueInput | ProblemsInPlaylistWhereUniqueInput[]
   }
 
+  export type AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
+    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+  }
+
   export type EnumDifficultyFieldUpdateOperationsInput = {
     set?: $Enums.Difficulty
   }
 
   export type ProblemUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProblemUpdatecompaniesInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -12061,6 +15267,20 @@ export namespace Prisma {
     deleteMany?: ProblemsInPlaylistScalarWhereInput | ProblemsInPlaylistScalarWhereInput[]
   }
 
+  export type AssistanceRequestUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
+    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput | AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
+    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    update?: AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput | AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutProblemInput | AssistanceRequestUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
+  }
+
   export type SubmissionUncheckedUpdateManyWithoutProblemNestedInput = {
     create?: XOR<SubmissionCreateWithoutProblemInput, SubmissionUncheckedCreateWithoutProblemInput> | SubmissionCreateWithoutProblemInput[] | SubmissionUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutProblemInput | SubmissionCreateOrConnectWithoutProblemInput[]
@@ -12101,6 +15321,20 @@ export namespace Prisma {
     update?: ProblemsInPlaylistUpdateWithWhereUniqueWithoutProblemInput | ProblemsInPlaylistUpdateWithWhereUniqueWithoutProblemInput[]
     updateMany?: ProblemsInPlaylistUpdateManyWithWhereWithoutProblemInput | ProblemsInPlaylistUpdateManyWithWhereWithoutProblemInput[]
     deleteMany?: ProblemsInPlaylistScalarWhereInput | ProblemsInPlaylistScalarWhereInput[]
+  }
+
+  export type AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
+    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput | AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
+    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
+    update?: AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput | AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutProblemInput | AssistanceRequestUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSubmissionInput = {
@@ -12177,18 +15411,6 @@ export namespace Prisma {
     create?: XOR<SubmissionCreateWithoutTestCasesInput, SubmissionUncheckedCreateWithoutTestCasesInput>
     connectOrCreate?: SubmissionCreateOrConnectWithoutTestCasesInput
     connect?: SubmissionWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type SubmissionUpdateOneRequiredWithoutTestCasesNestedInput = {
@@ -12311,6 +15533,34 @@ export namespace Prisma {
     update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutProblemsPlaylistsInput, ProblemUpdateWithoutProblemsPlaylistsInput>, ProblemUncheckedUpdateWithoutProblemsPlaylistsInput>
   }
 
+  export type UserCreateNestedOneWithoutAssistanceRequestsInput = {
+    create?: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssistanceRequestsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProblemCreateNestedOneWithoutAssistanceRequestsInput = {
+    create?: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutAssistanceRequestsInput
+    connect?: ProblemWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput = {
+    create?: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssistanceRequestsInput
+    upsert?: UserUpsertWithoutAssistanceRequestsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssistanceRequestsInput, UserUpdateWithoutAssistanceRequestsInput>, UserUncheckedUpdateWithoutAssistanceRequestsInput>
+  }
+
+  export type ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput = {
+    create?: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutAssistanceRequestsInput
+    upsert?: ProblemUpsertWithoutAssistanceRequestsInput
+    connect?: ProblemWhereUniqueInput
+    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutAssistanceRequestsInput, ProblemUpdateWithoutAssistanceRequestsInput>, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -12346,6 +15596,40 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedEnumPlanTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanType | EnumPlanTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanTypeFilter<$PrismaModel> | $Enums.PlanType
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12372,17 +15656,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12421,6 +15694,65 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumUserRoleFilter<$PrismaModel>
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPlanTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlanType | EnumPlanTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlanType[] | ListEnumPlanTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlanTypeWithAggregatesFilter<$PrismaModel> | $Enums.PlanType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPlanTypeFilter<$PrismaModel>
+    _max?: NestedEnumPlanTypeFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12477,52 +15809,13 @@ export namespace Prisma {
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type ProblemCreateWithoutUserInput = {
     id?: string
     title: string
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -12535,6 +15828,7 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutUserInput = {
@@ -12543,6 +15837,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -12555,6 +15850,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutUserInput = {
@@ -12663,6 +15959,52 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserDailyActivityCreateWithoutUserInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyActivityUncheckedCreateWithoutUserInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserDailyActivityCreateOrConnectWithoutUserInput = {
+    where: UserDailyActivityWhereUniqueInput
+    create: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDailyActivityCreateManyUserInputEnvelope = {
+    data: UserDailyActivityCreateManyUserInput | UserDailyActivityCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AssistanceRequestCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutAssistanceRequestsInput
+  }
+
+  export type AssistanceRequestUncheckedCreateWithoutUserInput = {
+    id?: string
+    problemId: string
+    createdAt?: Date | string
+  }
+
+  export type AssistanceRequestCreateOrConnectWithoutUserInput = {
+    where: AssistanceRequestWhereUniqueInput
+    create: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type AssistanceRequestCreateManyUserInputEnvelope = {
+    data: AssistanceRequestCreateManyUserInput | AssistanceRequestCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProblemUpsertWithWhereUniqueWithoutUserInput = {
     where: ProblemWhereUniqueInput
     update: XOR<ProblemUpdateWithoutUserInput, ProblemUncheckedUpdateWithoutUserInput>
@@ -12688,6 +16030,7 @@ export namespace Prisma {
     description?: StringFilter<"Problem"> | string
     difficulty?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
     tags?: StringNullableListFilter<"Problem">
+    companies?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
     constraints?: StringFilter<"Problem"> | string
@@ -12791,6 +16134,167 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Playlist"> | Date | string
   }
 
+  export type UserDailyActivityUpsertWithWhereUniqueWithoutUserInput = {
+    where: UserDailyActivityWhereUniqueInput
+    update: XOR<UserDailyActivityUpdateWithoutUserInput, UserDailyActivityUncheckedUpdateWithoutUserInput>
+    create: XOR<UserDailyActivityCreateWithoutUserInput, UserDailyActivityUncheckedCreateWithoutUserInput>
+  }
+
+  export type UserDailyActivityUpdateWithWhereUniqueWithoutUserInput = {
+    where: UserDailyActivityWhereUniqueInput
+    data: XOR<UserDailyActivityUpdateWithoutUserInput, UserDailyActivityUncheckedUpdateWithoutUserInput>
+  }
+
+  export type UserDailyActivityUpdateManyWithWhereWithoutUserInput = {
+    where: UserDailyActivityScalarWhereInput
+    data: XOR<UserDailyActivityUpdateManyMutationInput, UserDailyActivityUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type UserDailyActivityScalarWhereInput = {
+    AND?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
+    OR?: UserDailyActivityScalarWhereInput[]
+    NOT?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
+    id?: StringFilter<"UserDailyActivity"> | string
+    userId?: StringFilter<"UserDailyActivity"> | string
+    date?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    createdAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+    updatedAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
+  }
+
+  export type AssistanceRequestUpsertWithWhereUniqueWithoutUserInput = {
+    where: AssistanceRequestWhereUniqueInput
+    update: XOR<AssistanceRequestUpdateWithoutUserInput, AssistanceRequestUncheckedUpdateWithoutUserInput>
+    create: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput>
+  }
+
+  export type AssistanceRequestUpdateWithWhereUniqueWithoutUserInput = {
+    where: AssistanceRequestWhereUniqueInput
+    data: XOR<AssistanceRequestUpdateWithoutUserInput, AssistanceRequestUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AssistanceRequestUpdateManyWithWhereWithoutUserInput = {
+    where: AssistanceRequestScalarWhereInput
+    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type AssistanceRequestScalarWhereInput = {
+    AND?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
+    OR?: AssistanceRequestScalarWhereInput[]
+    NOT?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
+    id?: StringFilter<"AssistanceRequest"> | string
+    userId?: StringFilter<"AssistanceRequest"> | string
+    problemId?: StringFilter<"AssistanceRequest"> | string
+    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
+  }
+
+  export type UserCreateWithoutDailyActivitiesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDailyActivitiesInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDailyActivitiesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDailyActivitiesInput, UserUncheckedCreateWithoutDailyActivitiesInput>
+  }
+
+  export type UserUpsertWithoutDailyActivitiesInput = {
+    update: XOR<UserUpdateWithoutDailyActivitiesInput, UserUncheckedUpdateWithoutDailyActivitiesInput>
+    create: XOR<UserCreateWithoutDailyActivitiesInput, UserUncheckedCreateWithoutDailyActivitiesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDailyActivitiesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDailyActivitiesInput, UserUncheckedUpdateWithoutDailyActivitiesInput>
+  }
+
+  export type UserUpdateWithoutDailyActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDailyActivitiesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutProblemsInput = {
     id?: string
     name?: string | null
@@ -12798,11 +16302,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     submission?: SubmissionCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemsInput = {
@@ -12812,11 +16325,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemsInput = {
@@ -12916,6 +16438,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AssistanceRequestCreateWithoutProblemInput = {
+    id?: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutAssistanceRequestsInput
+  }
+
+  export type AssistanceRequestUncheckedCreateWithoutProblemInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
+  }
+
+  export type AssistanceRequestCreateOrConnectWithoutProblemInput = {
+    where: AssistanceRequestWhereUniqueInput
+    create: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput>
+  }
+
+  export type AssistanceRequestCreateManyProblemInputEnvelope = {
+    data: AssistanceRequestCreateManyProblemInput | AssistanceRequestCreateManyProblemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProblemsInput = {
     update: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
     create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
@@ -12934,11 +16478,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemsInput = {
@@ -12948,11 +16501,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SubmissionUpsertWithWhereUniqueWithoutProblemInput = {
@@ -13014,6 +16576,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProblemsInPlaylist"> | Date | string
   }
 
+  export type AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput = {
+    where: AssistanceRequestWhereUniqueInput
+    update: XOR<AssistanceRequestUpdateWithoutProblemInput, AssistanceRequestUncheckedUpdateWithoutProblemInput>
+    create: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput>
+  }
+
+  export type AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput = {
+    where: AssistanceRequestWhereUniqueInput
+    data: XOR<AssistanceRequestUpdateWithoutProblemInput, AssistanceRequestUncheckedUpdateWithoutProblemInput>
+  }
+
+  export type AssistanceRequestUpdateManyWithWhereWithoutProblemInput = {
+    where: AssistanceRequestScalarWhereInput
+    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyWithoutProblemInput>
+  }
+
   export type UserCreateWithoutSubmissionInput = {
     id?: string
     name?: string | null
@@ -13021,11 +16599,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubmissionInput = {
@@ -13035,11 +16622,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubmissionInput = {
@@ -13053,6 +16649,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -13065,6 +16662,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSubmissionInput = {
@@ -13073,6 +16671,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
@@ -13085,6 +16684,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSubmissionInput = {
@@ -13150,11 +16750,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubmissionInput = {
@@ -13164,11 +16773,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemUpsertWithoutSubmissionInput = {
@@ -13188,6 +16806,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13200,6 +16819,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSubmissionInput = {
@@ -13208,6 +16828,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
@@ -13220,6 +16841,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type TestCaseResultUpsertWithWhereUniqueWithoutSubmissionInput = {
@@ -13348,11 +16970,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProblemSolvedInput = {
@@ -13362,11 +16993,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProblemSolvedInput = {
@@ -13380,6 +17020,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -13392,6 +17033,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSolvedByInput = {
@@ -13400,6 +17042,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
@@ -13412,6 +17055,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSolvedByInput = {
@@ -13437,11 +17081,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProblemSolvedInput = {
@@ -13451,11 +17104,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProblemUpsertWithoutSolvedByInput = {
@@ -13475,6 +17137,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13487,6 +17150,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSolvedByInput = {
@@ -13495,6 +17159,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
@@ -13507,6 +17172,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemsInPlaylistCreateWithoutPlaylistInput = {
@@ -13540,11 +17206,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
     submission?: SubmissionCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPlaylistsInput = {
@@ -13554,11 +17229,20 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPlaylistsInput = {
@@ -13600,11 +17284,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPlaylistsInput = {
@@ -13614,11 +17307,20 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type PlaylistCreateWithoutProblemsInput = {
@@ -13650,6 +17352,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -13662,6 +17365,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemsPlaylistsInput = {
@@ -13670,6 +17374,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
@@ -13682,6 +17387,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
+    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemsPlaylistsInput = {
@@ -13735,6 +17441,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13747,6 +17454,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemsPlaylistsInput = {
@@ -13755,6 +17463,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
@@ -13767,6 +17476,219 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type UserCreateWithoutAssistanceRequestsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAssistanceRequestsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAssistanceRequestsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
+  }
+
+  export type ProblemCreateWithoutAssistanceRequestsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: string | null
+    editorials?: string | null
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProblemsInput
+    submission?: SubmissionCreateNestedManyWithoutProblemInput
+    solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
+    problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateWithoutAssistanceRequestsInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: string | null
+    editorials?: string | null
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
+    solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
+    problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemCreateOrConnectWithoutAssistanceRequestsInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
+  }
+
+  export type UserUpsertWithoutAssistanceRequestsInput = {
+    update: XOR<UserUpdateWithoutAssistanceRequestsInput, UserUncheckedUpdateWithoutAssistanceRequestsInput>
+    create: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAssistanceRequestsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAssistanceRequestsInput, UserUncheckedUpdateWithoutAssistanceRequestsInput>
+  }
+
+  export type UserUpdateWithoutAssistanceRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAssistanceRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProblemUpsertWithoutAssistanceRequestsInput = {
+    update: XOR<ProblemUpdateWithoutAssistanceRequestsInput, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
+    create: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
+    where?: ProblemWhereInput
+  }
+
+  export type ProblemUpdateToOneWithWhereWithoutAssistanceRequestsInput = {
+    where?: ProblemWhereInput
+    data: XOR<ProblemUpdateWithoutAssistanceRequestsInput, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
+  }
+
+  export type ProblemUpdateWithoutAssistanceRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: NullableStringFieldUpdateOperationsInput | string | null
+    editorials?: NullableStringFieldUpdateOperationsInput | string | null
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+    submission?: SubmissionUpdateManyWithoutProblemNestedInput
+    solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
+    problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutAssistanceRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: NullableStringFieldUpdateOperationsInput | string | null
+    editorials?: NullableStringFieldUpdateOperationsInput | string | null
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
+    solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateManyUserInput = {
@@ -13775,6 +17697,7 @@ export namespace Prisma {
     description: string
     difficulty: $Enums.Difficulty
     tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints: string
     hints?: string | null
@@ -13817,12 +17740,26 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type UserDailyActivityCreateManyUserInput = {
+    id?: string
+    date: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssistanceRequestCreateManyUserInput = {
+    id?: string
+    problemId: string
+    createdAt?: Date | string
+  }
+
   export type ProblemUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13835,6 +17772,7 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutUserInput = {
@@ -13843,6 +17781,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13855,6 +17794,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateManyWithoutUserInput = {
@@ -13863,6 +17803,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: StringFieldUpdateOperationsInput | string
     hints?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13971,6 +17912,45 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type UserDailyActivityUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyActivityUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserDailyActivityUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput
+  }
+
+  export type AssistanceRequestUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SubmissionCreateManyProblemInput = {
     id?: string
     userId: string
@@ -13999,6 +17979,12 @@ export namespace Prisma {
     playlistId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type AssistanceRequestCreateManyProblemInput = {
+    id?: string
+    userId: string
+    createdAt?: Date | string
   }
 
   export type SubmissionUpdateWithoutProblemInput = {
@@ -14091,6 +18077,24 @@ export namespace Prisma {
     playlistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput
+  }
+
+  export type AssistanceRequestUncheckedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssistanceRequestUncheckedUpdateManyWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TestCaseResultCreateManySubmissionInput = {

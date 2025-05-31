@@ -13,6 +13,11 @@ enum UserRole {
   USER
 }
 
+enum PlanType {
+  FREE
+  PRO
+}
+
 enum Difficulty {
   EASY
   MEDIUM
@@ -20,18 +25,49 @@ enum Difficulty {
 }
 
 model User {
-  id            String          @id @default(uuid())
-  name          String?
-  email         String          @unique
-  image         String?
-  role          UserRole        @default(USER)
-  password      String
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  problems      Problem[]
-  submission    Submission[]
-  problemSolved ProblemSolved[]
-  playlists     Playlist[]
+  id       String   @id @default(uuid())
+  name     String?
+  email    String   @unique
+  image    String?
+  role     UserRole @default(USER)
+  password String
+
+  // Email verification
+  isEmailVerified          Boolean   @default(false)
+  emailVerificationToken   String?
+  emailVerificationExpires DateTime?
+
+  // Subscription plan (FREE or PRO)
+  plan                PlanType  @default(FREE)
+  subscriptionExpires DateTime?
+
+  // For daily-streak tracking 
+  lastActivityDate DateTime?
+  currentStreak    Int       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  problems           Problem[]
+  submission         Submission[]
+  problemSolved      ProblemSolved[]
+  playlists          Playlist[]
+  dailyActivities    UserDailyActivity[]
+  assistanceRequests AssistanceRequest[]
+}
+
+model UserDailyActivity {
+  id     String   @id @default(uuid())
+  userId String
+  date   DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // RELATION
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
 }
 
 model Problem {
@@ -40,6 +76,7 @@ model Problem {
   description        String
   difficulty         Difficulty
   tags               String[] //["tag1","tag2","tag3"]
+  companies          String[] //["google","meta","microsoft"]
   userId             String
   examples           Json
   constraints        String
@@ -50,12 +87,14 @@ model Problem {
   referenceSolutions Json
   createdAt          DateTime   @default(now())
   updatedAt          DateTime   @updatedAt
-  //Relationship
-  user               User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  submission        Submission[]
-  solvedBy          ProblemSolved[]
-  problemsPlaylists ProblemsInPlaylist[]
+  // RELATION
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  submission         Submission[]
+  solvedBy           ProblemSolved[]
+  problemsPlaylists  ProblemsInPlaylist[]
+  assistanceRequests AssistanceRequest[]
 }
 
 model Submission {
@@ -74,6 +113,7 @@ model Submission {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  // RELATIONS
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
@@ -95,6 +135,7 @@ model TestCaseResult {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
+  // RELATION
   submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@index([submissionId])
@@ -107,6 +148,7 @@ model ProblemSolved {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  // RELATIONS
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
@@ -123,6 +165,7 @@ model Playlist {
 
   problems ProblemsInPlaylist[]
 
+  // RELATION
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([name, userId])
@@ -135,9 +178,22 @@ model ProblemsInPlaylist {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
+  // RELATIONS
   playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
-
-  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  problem  Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([playlistId, problemId])
+}
+
+model AssistanceRequest {
+  id        String   @id @default(uuid())
+  userId    String
+  problemId String
+  createdAt DateTime @default(now())
+
+  // RELATIONS
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+
+  @@index([userId, problemId])
 }
