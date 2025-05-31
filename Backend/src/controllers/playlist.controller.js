@@ -1,8 +1,15 @@
 import { db } from "../libs/db.js";
+import { userIdSchema } from "../validators/auth.validators.js";
+import { formatZodError } from "../validators/formatZodError.js";
+import {
+  addProblemToPlaylistSchema,
+  createPlaylistSchema,
+} from "../validators/playlist.validators.js";
 
 export const getAllListDetails = async (req, res) => {
-  const userId = req.user.id;
   try {
+    const userId = userIdSchema.parse(req.user).id;
+
     const playlists = await db.playlist.findMany({
       where: {
         userId,
@@ -22,6 +29,11 @@ export const getAllListDetails = async (req, res) => {
       playlists,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+    
     console.error("Error fetching playlists", error);
     res.status(500).json({
       error: "Error fetching playlists",
@@ -32,6 +44,10 @@ export const getAllListDetails = async (req, res) => {
 export const getPlaylistDetails = async (req, res) => {
   const { playlistId } = req.params;
   try {
+    if (!playlistId) {
+      return res.status(400).json({ error: "Playlist ID is required." });
+    }
+
     const playlist = await db.playlist.findUnique({
       where: {
         id: playlistId,
@@ -50,6 +66,7 @@ export const getPlaylistDetails = async (req, res) => {
         error: "Playlist not found",
       });
     }
+
     res.status(200).json({
       success: true,
       message: "Playlist fetched successfully",
@@ -64,9 +81,10 @@ export const getPlaylistDetails = async (req, res) => {
 };
 
 export const createPlaylist = async (req, res) => {
-  const { name, description } = req.body;
-  const userId = req.user.id;
   try {
+    const { name, description } = createPlaylistSchema.parse(req.body);
+    const userId = userIdSchema.parse(req.user).id;
+
     const playlist = await db.playlist.create({
       data: {
         name,
@@ -81,6 +99,11 @@ export const createPlaylist = async (req, res) => {
       playlist,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error creating playlist", error);
     res.status(500).json({
       error: "Error creating playlist",
@@ -89,13 +112,12 @@ export const createPlaylist = async (req, res) => {
 };
 
 export const addProblemToPlaylist = async (req, res) => {
-  const { playlistId } = req.params;
-  const { problemIds } = req.body;
   try {
-    if (!Array.isArray(problemIds) || problemIds.length === 0) {
-      return res.status(400).json({
-        error: "Invalid or missing problemId",
-      });
+    const { playlistId } = req.params;
+    const { problemIds } = addProblemToPlaylistSchema.parse(req.body);
+
+    if (!playlistId) {
+      return res.status(400).json({ error: "Playlist ID is required." });
     }
 
     const problemsInPlaylist = await db.problemsInPlaylist.createMany({
@@ -111,6 +133,11 @@ export const addProblemToPlaylist = async (req, res) => {
       problemsInPlaylist,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while adding problems to playlist", error);
     res.status(500).json({
       error: "Error while adding problems to playlist",
@@ -119,8 +146,13 @@ export const addProblemToPlaylist = async (req, res) => {
 };
 
 export const deletePlaylist = async (req, res) => {
-  const { playlistId } = req.params;
   try {
+    const { playlistId } = req.params;
+
+    if (!playlistId) {
+      return res.status(400).json({ error: "Playlist ID is required." });
+    }
+
     const deletePlaylist = await db.playlist.delete({
       where: {
         id: playlistId,

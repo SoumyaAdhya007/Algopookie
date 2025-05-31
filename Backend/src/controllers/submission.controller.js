@@ -1,8 +1,10 @@
 import { db } from "../libs/db.js";
+import { userIdSchema } from "../validators/auth.validators.js";
 
 export const getAllSubmissions = async (req, res) => {
-  const userId = req.user.id;
   try {
+    const userId = userIdSchema.parse(req.user).id;
+
     const submissions = await db.submission.findMany({
       where: {
         userId,
@@ -15,6 +17,11 @@ export const getAllSubmissions = async (req, res) => {
       submissions,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while fetching submissions", error);
     res.status(500).json({
       error: "Error while fetching submissions",
@@ -23,9 +30,14 @@ export const getAllSubmissions = async (req, res) => {
 };
 
 export const getSubmissionsForProblem = async (req, res) => {
-  const userId = req.user.id;
-  const problemId = req.params.problemId;
   try {
+    const userId = userIdSchema.parse(req.user).id;
+    const problemId = req.params.problemId;
+
+    if (!problemId) {
+      return res.status(400).json({ error: "Problem ID is required." });
+    }
+
     const problem = await db.problem.findUnique({
       where: {
         id: problemId,
@@ -51,6 +63,11 @@ export const getSubmissionsForProblem = async (req, res) => {
       submissions,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while fetching submissions", error);
     res.status(500).json({
       error: "Error while fetching submissions",
@@ -59,8 +76,13 @@ export const getSubmissionsForProblem = async (req, res) => {
 };
 
 export const getAllSubmissionsCountForProblem = async (req, res) => {
-  const problemId = req.params.problemId;
   try {
+    const problemId = req.params.problemId;
+
+    if (!problemId) {
+      return res.status(400).json({ error: "Problem ID is required." });
+    }
+    
     const problem = await db.problem.findUnique({
       where: {
         id: problemId,

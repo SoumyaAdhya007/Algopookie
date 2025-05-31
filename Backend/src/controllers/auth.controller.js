@@ -1,10 +1,15 @@
 import bcrypt from "bcryptjs";
-import { db } from "../libs/db.js";
+import { ZodError } from "zod";
 import jwt from "jsonwebtoken";
+import { db } from "../libs/db.js";
 import { UserRole } from "../generated/prisma/index.js";
+import { registerSchema, loginSchema } from "../validators/auth.validators.js";
+import { formatZodError } from "../validators/formatZodError.js";
+
 export const register = async (req, res) => {
-  const { email, password, name } = req.body;
   try {
+    const { email, password, name } = registerSchema.parse(req.body);
+
     const existingUser = await db.user.findUnique({
       where: {
         email,
@@ -16,10 +21,12 @@ export const register = async (req, res) => {
         error: "User already exists",
       });
     }
+
     const hashedPassword = await bcrypt.hash(
       password,
       Number(process.env.BCRYPT_SALT)
     );
+
     const newUser = await db.user.create({
       data: {
         email,
@@ -28,6 +35,7 @@ export const register = async (req, res) => {
         role: UserRole.USER,
       },
     });
+
     const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -38,6 +46,7 @@ export const register = async (req, res) => {
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
     });
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
@@ -50,6 +59,11 @@ export const register = async (req, res) => {
       },
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error creating user:", error);
     res.status(500).json({
       error: "Error creating user",
@@ -58,24 +72,29 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
   try {
+    const { email, password } = loginSchema.parse(req.body);
+
     const user = await db.user.findUnique({
       where: {
         email,
       },
     });
+
     if (!user) {
       return res.status(401).json({
         error: "User not found",
       });
     }
+
     const isMatch = await bcrypt.compare(password, user.password);
+
     if (!isMatch) {
       return res.status(401).json({
         error: "Invalid credentials",
       });
     }
+
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -86,6 +105,7 @@ export const login = async (req, res) => {
       secure: process.env.NODE_ENV !== "development",
       maxAge: 1000 * 60 * 60 * 24 * 7, //7 days
     });
+
     res.status(201).json({
       success: true,
       message: "User login successfully",
@@ -98,6 +118,11 @@ export const login = async (req, res) => {
       },
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error login user:", error);
     res.status(500).json({
       error: "Error login user",

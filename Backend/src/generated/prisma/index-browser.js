@@ -124,6 +124,21 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   role: 'role',
   password: 'password',
+  isEmailVerified: 'isEmailVerified',
+  emailVerificationToken: 'emailVerificationToken',
+  emailVerificationExpires: 'emailVerificationExpires',
+  plan: 'plan',
+  subscriptionExpires: 'subscriptionExpires',
+  lastActivityDate: 'lastActivityDate',
+  currentStreak: 'currentStreak',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserDailyActivityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  date: 'date',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -134,6 +149,7 @@ exports.Prisma.ProblemScalarFieldEnum = {
   description: 'description',
   difficulty: 'difficulty',
   tags: 'tags',
+  companies: 'companies',
   userId: 'userId',
   examples: 'examples',
   constraints: 'constraints',
@@ -204,6 +220,13 @@ exports.Prisma.ProblemsInPlaylistScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AssistanceRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -233,6 +256,11 @@ exports.UserRole = exports.$Enums.UserRole = {
   USER: 'USER'
 };
 
+exports.PlanType = exports.$Enums.PlanType = {
+  FREE: 'FREE',
+  PRO: 'PRO'
+};
+
 exports.Difficulty = exports.$Enums.Difficulty = {
   EASY: 'EASY',
   MEDIUM: 'MEDIUM',
@@ -241,12 +269,14 @@ exports.Difficulty = exports.$Enums.Difficulty = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  UserDailyActivity: 'UserDailyActivity',
   Problem: 'Problem',
   Submission: 'Submission',
   TestCaseResult: 'TestCaseResult',
   ProblemSolved: 'ProblemSolved',
   Playlist: 'Playlist',
-  ProblemsInPlaylist: 'ProblemsInPlaylist'
+  ProblemsInPlaylist: 'ProblemsInPlaylist',
+  AssistanceRequest: 'AssistanceRequest'
 };
 
 /**
