@@ -59,13 +59,11 @@ const ProfileSubmission = () => {
   });
 
   return (
-    <div className="n bg-base-200 p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-gray-900 w-full rounded-2xl mb-8 p-6  md:col-span-2">
+      <div className="max-w-6xl mx-auto max-h-[70vh] overflow-y-auto scroll-smooth custom-scrollbar">
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold text-primary mb-4 md:mb-0">
-            My Submissions
-          </h1>
-
+          <h1 className="text-xl font-bold text-white">My Submissions</h1>
+          {/* bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors duration-300 cursor-pointer */}
           <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <div className="dropdown dropdown-end">
               <div tabIndex={0} role="button" className="btn btn-outline gap-2">
@@ -74,7 +72,7 @@ const ProfileSubmission = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-10 menu p-2 shadow bg-gray-800 rounded-box w-52"
               >
                 <li>
                   <button onClick={() => setFilter("all")}>
@@ -98,24 +96,11 @@ const ProfileSubmission = () => {
                 </li>
               </ul>
             </div>
-
-            <div className="stats shadow bg-base-100">
-              <div className="stat p-2">
-                <div className="stat-title">Total</div>
-                <div className="stat-value text-lg">{submissions.length}</div>
-              </div>
-              <div className="stat p-2">
-                <div className="stat-title">Accepted</div>
-                <div className="stat-value text-lg text-success">
-                  {submissions.filter((s) => s.status === "Accepted").length}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
         {filteredSubmissions.length === 0 ? (
-          <div className="card bg-base-100 shadow-xl">
+          <div className="card bg-gray-800 shadow-xl">
             <div className="card-body items-center text-center">
               <h2 className="card-title">No submissions found</h2>
               <p>
@@ -129,7 +114,7 @@ const ProfileSubmission = () => {
             {filteredSubmissions.map((submission) => (
               <div
                 key={submission.id}
-                className="card bg-base-100 shadow-xl overflow-hidden transition-all duration-300"
+                className="card bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
               >
                 <div
                   className="card-body p-0"
@@ -137,7 +122,7 @@ const ProfileSubmission = () => {
                   onClick={() => toggleExpand(submission.id)}
                 >
                   {/* Submission Header */}
-                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-4 cursor-pointer hover:bg-base-200">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-4 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
                     <div className="flex flex-col md:flex-row md:items-center gap-3 w-full">
                       <div
                         className={`badge badge-lg ${getStatusClass(

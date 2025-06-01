@@ -11,11 +11,25 @@ import {
   ChevronDown,
   ChevronUp,
   Filter,
+  Check,
 } from "lucide-react";
 
 const SubmissionsList = ({ submissions, isLoading }) => {
   const [expandedSubmission, setExpandedSubmission] = useState(null);
   const [filter, setFilter] = useState("all");
+
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "Accepted":
+        return "text-success";
+      case "Wrong Answer":
+        return "text-error";
+      case "Time Limit Exceeded":
+        return "text-warning";
+      default:
+        return "bg-info text-info-content";
+    }
+  };
 
   // Helper function to safely parse JSON strings
   const safeParse = (data) => {
@@ -77,7 +91,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-h-[90vh] overflow-y-auto scroll-smooth custom-scrollbar">
       <div className="flex flex-col justify-between items-center sm:flex-row w-full md:w-auto">
         <div className="dropdown dropdown-start">
           <div tabIndex={0} role="button" className="btn btn-outline gap-2">
@@ -128,7 +142,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
           </div>
         </div>
       ) : (
-        <div className="space-y-4 max-h-[90vh] overflow-y-auto scroll-smooth custom-scrollbar">
+        <div className="space-y-4">
           {filteredSubmissions.map((submission) => (
             <div
               key={submission.id}
@@ -146,26 +160,18 @@ const SubmissionsList = ({ submissions, isLoading }) => {
                 >
                   <div className="card-body p-4">
                     <div className="flex items-center justify-between">
-                      {/* Left Section: Status and Language */}
-                      <div className="flex items-center gap-4">
+                      <div
+                        className={`badge badge-lg ${getStatusClass(
+                          submission.status
+                        )}`}
+                      >
                         {submission.status === "Accepted" ? (
-                          <div className="flex items-center gap-2 text-success">
-                            <CheckCircle2 className="w-6 h-6" />
-                            <span className="font-semibold">Accepted</span>
-                          </div>
+                          <CheckCircle2 className="w-6 h-6" />
                         ) : (
-                          <div className="flex items-center gap-2 text-error">
-                            <XCircle className="w-6 h-6" />
-                            <span className="font-semibold">
-                              {submission.status}
-                            </span>
-                          </div>
+                          <XCircle className="w-6 h-6" />
                         )}
-                        <div className="badge badge-neutral">
-                          {submission.language}
-                        </div>
+                        {submission.status}
                       </div>
-
                       {/* Right Section: Runtime, Memory, and Date */}
                       <div className="flex items-center gap-4 text-base-content/70">
                         <div className="flex items-center gap-1">

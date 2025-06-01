@@ -12,6 +12,7 @@ import AdminRoute from "./components/AdminRoute";
 import AddProblem from "./page/AddProblem";
 import ProblemPage from "./page/ProblemPage";
 import Profile from "./page/Profile";
+import ProblemsPage from "./page/ProblemsPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -28,42 +29,69 @@ const App = () => {
     );
   }
   return (
-    <div className="flex flex-col items-center justify-start">
+    <div>
       <Toaster />
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route element={<Layout />}>
           <Route
             index
-            element={authUser ? <HomePage /> : <Navigate to="/login" />}
+            element={!authUser ? <HomePage /> : <Navigate to="/problems" />}
+          />
+          <Route
+            path="/login"
+            element={!authUser ? <LoginPage /> : <Navigate to="/problems" />}
+          />
+          <Route
+            path="/signup"
+            element={!authUser ? <SignUpPage /> : <Navigate to="/problems" />}
+          />
+          <Route
+            path="/problems"
+            element={authUser ? <ProblemsPage /> : <Navigate to={"/"} />}
+          />
+          <Route
+            path="/profile"
+            element={authUser ? <Profile /> : <Navigate to="/" />}
+          />
+        </Route>
+        {/* 
+        <Route path="/problems" element={<Layout />}>
+          <Route
+            path="/problems"
+            element={authUser ? <ProblemsPage /> : <Navigate to={"/"} />}
           />
         </Route>
 
-        <Route
-          path="/login"
-          element={!authUser ? <LoginPage /> : <Navigate to="/" />}
-        />
+        <Route path="/profile" element={<Layout />}>
+          <Route
+            path="/profile"
+            element={authUser ? <Profile /> : <Navigate to="/" />}
+          />
+        </Route>
 
-        <Route
+        <Route path="/login" element={<Layout />}>
+          <Route
+            path="/login"
+            element={!authUser ? <LoginPage /> : <Navigate to="/problems" />}
+          />
+        </Route> */}
+
+        {/* <Route
           path="/signup"
-          element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
-        />
+          element={!authUser ? <SignUpPage /> : <Navigate to="/problems" />}
+        /> */}
 
         <Route
           path="/problem/:id"
-          element={authUser ? <ProblemPage /> : <Navigate to={"/login"} />}
+          element={authUser ? <ProblemPage /> : <Navigate to={"/"} />}
         />
 
         <Route element={<AdminRoute />}>
           <Route
             path="/add-problem"
-            element={authUser ? <AddProblem /> : <Navigate to="/login" />}
+            element={authUser ? <AddProblem /> : <Navigate to="/" />}
           />
         </Route>
-
-        <Route
-          path="/profile"
-          element={authUser ? <Profile /> : <Navigate to="/login" />}
-        />
       </Routes>
     </div>
   );
