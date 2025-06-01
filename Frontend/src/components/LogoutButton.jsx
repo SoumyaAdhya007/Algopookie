@@ -8,7 +8,10 @@ const LogoutButton = ({ children }) => {
   };
 
   return (
-    <button className="btn btn-primary" onClick={onLogout}>
+    <button
+      className="flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300"
+      onClick={onLogout}
+    >
       {children}
     </button>
   );

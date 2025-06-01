@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "react-router-dom";
 import { z } from "zod";
-import { Code, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
+import { Code, Code2, Eye, EyeOff, Loader2, Lock, Mail } from "lucide-react";
 
 import AuthImagePattern from "../components/AuthImagePattern";
 import { useAuthStore } from "../store/useAuthStore";
+import ColorfulCodeEditor from "../components/AuthImagePattern";
 
 const LoginSchema = z.object({
   email: z.string().email("Enter a valid email"),
@@ -32,41 +33,33 @@ const LoginPage = () => {
       console.error("Login failed:", error);
     }
   };
+
   return (
-    <div className="h-screen grid lg:grid-cols-2">
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
+    <div className="min-h-screen pt-5 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex items-center">
+      {/* Left Side - Login Form */}
+      <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
-          <div className="text-center mb-8">
-            <div className="flex flex-col items-center gap-2 group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                <Code className="w-6 h-6 text-primary" />
-              </div>
-              <h1 className="text-2xl font-bold mt-2">Welcome </h1>
-              <p className="text-base-content/60">Login to your account</p>
-            </div>
+          {/* Header */}
+          <div className="text-center space-y-2">
+            <h1 className="text-4xl font-bold text-white">Welcome</h1>
+            <p className="text-gray-400 text-lg">Login to your account</p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Email */}
-            <div className="form-control">
+            {/* Email Field */}
+            <div className="form-control w-full">
               <label className="label">
-                <span className="label-text font-medium">Email</span>
+                <span className="label-text text-gray-300">Email</span>
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-base-content/40" />
-                </div>
-                <input
-                  type="email"
-                  {...register("email")}
-                  className={`input input-bordered w-full pl-10 ${
-                    errors.email ? "input-error" : ""
-                  }`}
-                  placeholder="you@example.com"
-                />
-              </div>
+              <input
+                type="email"
+                {...register("email")}
+                placeholder="you@example.com"
+                className={`w-full px-4 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 pr-12 ${
+                  errors.email ? "input-error" : ""
+                }`}
+              />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">
                   {errors.email.message}
@@ -74,46 +67,43 @@ const LoginPage = () => {
               )}
             </div>
 
-            {/* Password */}
-            <div className="form-control">
+            {/* Password Field */}
+            <div className="form-control w-full">
               <label className="label">
-                <span className="label-text font-medium">Password</span>
+                <span className="label-text text-gray-300">Password</span>
               </label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-base-content/40" />
-                </div>
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password")}
-                  className={`input input-bordered w-full pl-10 ${
+                  placeholder="••••••••"
+                  className={`w-full px-4 py-4 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 pr-12 ${
                     errors.password ? "input-error" : ""
                   }`}
-                  placeholder="••••••••"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
                   onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-base-content/40" />
+                    <EyeOff className="w-5 h-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-base-content/40" />
+                    <Eye className="w-5 h-5" />
                   )}
                 </button>
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.password.message}
-                </p>
-              )}
             </div>
 
-            {/* Submit Button */}
+            {/* Login Button */}
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="btn btn-primary w-full bg-gradient-to-r from-blue-500 to-purple-600 border-none text-white font-semibold hover:from-blue-600 hover:to-purple-700 hover:scale-105 transition-all duration-300"
               disabled={isLoggingIn}
             >
               {isLoggingIn ? (
@@ -127,25 +117,19 @@ const LoginPage = () => {
             </button>
           </form>
 
-          {/* Footer */}
+          {/* Sign Up Link */}
           <div className="text-center">
-            <p className="text-base-content/60">
-              Don't have an account?{" "}
+            <p className="text-gray-400">
+              Don’t have an account?{" "}
               <Link to="/signup" className="link link-primary">
-                Sign up
+                Sign Up
               </Link>
             </p>
           </div>
         </div>
       </div>
-
-      {/* Right Side - Image/Pattern */}
-      <AuthImagePattern
-        title={"Welcome back!"}
-        subtitle={
-          "Sign in to continue your journey with us. Don't have an account? Create one now."
-        }
-      />
+      {/* Right Side - Code Editor */}
+      <ColorfulCodeEditor />
     </div>
   );
 };

@@ -46,36 +46,37 @@ const ProblemSolvedByUser = () => {
   };
 
   return (
-    <div className="p-4 bg-base-200 ">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-2xl font-bold text-primary mb-6">
-          Problems Solved
-        </h2>
+    <div className="p-6 bg-gray-900 rounded-2xl">
+      <div className="max-w-full mx-auto">
+        <h2 className="text-xl font-bold text-white mb-4">Problems Solved</h2>
 
         {solvedProblems.length === 0 ? (
-          <div className="card bg-base-100 shadow-xl">
+          <div className="card bg-gray-800 shadow-xl">
             <div className="card-body">
-              <h3 className="text-lg font-medium">No problems solved yet</h3>
+              <h3 className="text-lg font-medium text-white">
+                No problems solved yet
+              </h3>
               <p className="text-base-content/70">
                 Start solving problems to see them listed here!
               </p>
               <div className="card-actions justify-end">
-                <Link to="/problems" className="btn btn-primary">
+                <Link to="/" className="btn btn-primary">
                   View Problems
                 </Link>
               </div>
             </div>
           </div>
         ) : (
-          <div className="card bg-base-100 shadow-xl overflow-hidden">
+          <div className="card bg-gray-800 rounded-lg p-2 hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
+            {/* bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors duration-300 cursor-pointer */}
             <div className="overflow-x-auto">
               <table className="table table-zebra w-full">
                 <thead>
                   <tr>
-                    <th className="bg-base-300">Problem</th>
-                    <th className="bg-base-300">Difficulty</th>
-                    <th className="bg-base-300">Tags</th>
-                    <th className="bg-base-300 text-center">Actions</th>
+                    <th className="text-pink-500">Problem</th>
+                    <th className="text-pink-500">Difficulty</th>
+                    <th className="text-pink-500">Tags</th>
+                    <th className="text-pink-500 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -114,13 +115,15 @@ const ProblemSolvedByUser = () => {
               </table>
             </div>
 
-            <div className="card-footer bg-base-200 p-4">
+            <div className="card-footer bg-base-800 p-4">
               <div className="flex justify-between items-center">
-                <span className="text-sm">
+                <span className="text-sm text-pink-500 font-bold">
                   Total problems solved:{" "}
-                  <span className="font-bold">{solvedProblems.length}</span>
+                  <span className="font-bold text-white">
+                    {solvedProblems.length}
+                  </span>
                 </span>
-                <Link to="/problems" className="btn btn-sm btn-primary">
+                <Link to="/problems" className="btn btn-sm bg-pink-500">
                   Solve more problems
                 </Link>
               </div>
@@ -131,19 +134,19 @@ const ProblemSolvedByUser = () => {
         {/* Stats Cards */}
         {solvedProblems.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            <div className="stat bg-base-100 shadow rounded-box">
+            <div className="stat bg-gray-800 shadow rounded-box">
               <div className="stat-title">Easy</div>
               <div className="stat-value text-success">
                 {solvedProblems.filter((p) => p.difficulty === "EASY").length}
               </div>
             </div>
-            <div className="stat bg-base-100 shadow rounded-box">
+            <div className="stat bg-gray-800 shadow rounded-box">
               <div className="stat-title">Medium</div>
               <div className="stat-value text-warning">
                 {solvedProblems.filter((p) => p.difficulty === "MEDIUM").length}
               </div>
             </div>
-            <div className="stat bg-base-100 shadow rounded-box">
+            <div className="stat bg-gray-800 shadow rounded-box">
               <div className="stat-title">Hard</div>
               <div className="stat-value text-error">
                 {solvedProblems.filter((p) => p.difficulty === "HARD").length}
