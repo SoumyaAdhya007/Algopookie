@@ -135,7 +135,7 @@ model TestCaseResult {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-// RELATION
+  // RELATION
   submission Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@index([submissionId])
@@ -148,7 +148,7 @@ model ProblemSolved {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-// RELATIONS
+  // RELATIONS
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
@@ -178,9 +178,9 @@ model ProblemsInPlaylist {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
-// RELATIONS
+  // RELATIONS
   playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
-  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  problem  Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([playlistId, problemId])
 }
@@ -191,8 +191,8 @@ model AssistanceRequest {
   problemId String
   createdAt DateTime @default(now())
 
-// RELATIONS
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // RELATIONS
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@index([userId, problemId])

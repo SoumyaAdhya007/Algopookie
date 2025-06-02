@@ -111,11 +111,13 @@ export const submitCode = async (req, res) => {
     const results = await pollBatchResults(tokens);
 
     let allPassed = true;
+    let timeLimitExceeded = 0;
     const detailedResults = results.map((result, i) => {
       const stdout = result.stdout?.trim();
       const expected_output = expected_outputs[i]?.trim();
       const passed = stdout === expected_output;
-
+      if (result.status.description === "Time Limit Exceeded")
+        timeLimitExceeded++;
       if (!passed) allPassed = false;
       return {
         testCase: i + 1,
@@ -144,7 +146,11 @@ export const submitCode = async (req, res) => {
         compileOutput: detailedResults.some((r) => r.compile_output)
           ? JSON.stringify(detailedResults.map((r) => r.compile_output))
           : null,
-        status: allPassed ? "Accepted" : "Wrong Answer",
+        status: allPassed
+          ? "Accepted"
+          : timeLimitExceeded > 0
+          ? "Time Limit Exceeded"
+          : "Wrong Answer",
         memory: detailedResults.some((r) => r.memory)
           ? JSON.stringify(detailedResults.map((r) => r.memory))
           : null,
@@ -193,6 +199,27 @@ export const submitCode = async (req, res) => {
       },
       include: {
         testCases: true,
+      },
+    });
+
+    const now = new Date();
+    const utcYear = now.getUTCFullYear();
+    const utcMonth = now.getUTCMonth();
+    const utcDay = now.getUTCDate();
+    const midnightUTC = new Date(
+      Date.UTC(utcYear, utcMonth, utcDay, 0, 0, 0, 0)
+    );
+    await db.userDailyActivity.upsert({
+      where: {
+        userId_date: {
+          userId: userId,
+          date: midnightUTC,
+        },
+      },
+      update: {},
+      create: {
+        userId: userId,
+        date: midnightUTC,
       },
     });
 
