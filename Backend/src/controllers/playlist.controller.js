@@ -33,7 +33,7 @@ export const getAllListDetails = async (req, res) => {
     if (validationErrors) {
       return res.status(400).json({ error: validationErrors });
     }
-    
+
     console.error("Error fetching playlists", error);
     res.status(500).json({
       error: "Error fetching playlists",
@@ -41,9 +41,42 @@ export const getAllListDetails = async (req, res) => {
   }
 };
 
-export const getPlaylistDetails = async (req, res) => {
-  const { playlistId } = req.params;
+export const getPublicPlaylists = async (req, res) => {
   try {
+    const playlists = await db.playlist.findMany({
+      where: { isPublic: true },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Playlist fetched successfully",
+      playlists,
+    });
+  } catch (error) {
+    console.error("Error fetching public playlists:", error);
+    return res.status(500).json({ error: "Error fetching public playlists" });
+  }
+};
+
+export const getPlaylistDetails = async (req, res) => {
+  try {
+    const { playlistId } = req.params;
+    const viewerId = req.user.id;
+
     if (!playlistId) {
       return res.status(400).json({ error: "Playlist ID is required." });
     }
@@ -60,6 +93,10 @@ export const getPlaylistDetails = async (req, res) => {
         },
       },
     });
+
+    if (!playlist.isPublic && playlist.userId !== viewerId) {
+      return res.status(403).json({ error: "Access denied." });
+    }
 
     if (!playlist) {
       return res.status(404).json({
@@ -82,13 +119,16 @@ export const getPlaylistDetails = async (req, res) => {
 
 export const createPlaylist = async (req, res) => {
   try {
-    const { name, description } = createPlaylistSchema.parse(req.body);
+    const { name, description, isPublic } = createPlaylistSchema.parse(
+      req.body
+    );
     const userId = userIdSchema.parse(req.user).id;
 
     const playlist = await db.playlist.create({
       data: {
         name,
         description,
+        isPublic,
         userId,
       },
     });
@@ -119,6 +159,19 @@ export const addProblemToPlaylist = async (req, res) => {
     if (!playlistId) {
       return res.status(400).json({ error: "Playlist ID is required." });
     }
+    
+    const existing = await db.playlist.findUnique({
+      where: { id: playlistId },
+      select: { userId: true },
+    });
+
+    if (!existing) {
+      return res.status(404).json({ error: "Playlist not found." });
+    }
+
+    if (existing.userId !== userId) {
+      return res.status(403).json({ error: "Not your playlist." });
+    }
 
     const problemsInPlaylist = await db.problemsInPlaylist.createMany({
       data: problemIds.map((problemId) => ({
@@ -147,12 +200,25 @@ export const addProblemToPlaylist = async (req, res) => {
 
 export const deletePlaylist = async (req, res) => {
   try {
+    const userId = userIdSchema(req.user).id;
     const { playlistId } = req.params;
 
     if (!playlistId) {
       return res.status(400).json({ error: "Playlist ID is required." });
     }
 
+    const existing = await db.playlist.findUnique({
+      where: { id: playlistId },
+      select: { userId: true },
+    });
+
+    if (!existing) {
+      return res.status(404).json({ error: "Playlist not found." });
+    }
+
+    if (existing.userId !== userId) {
+      return res.status(403).json({ error: "Not your playlist." });
+    }
     const deletePlaylist = await db.playlist.delete({
       where: {
         id: playlistId,
@@ -165,6 +231,11 @@ export const deletePlaylist = async (req, res) => {
       deletePlaylist,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while deleting playlist", error);
     res.status(500).json({
       error: "Error while deleting playlist",
@@ -173,13 +244,25 @@ export const deletePlaylist = async (req, res) => {
 };
 
 export const removeProblemFromPlaylist = async (req, res) => {
-  const { playlistId } = req.params;
-  const { problemIds } = req.body;
   try {
-    if (!Array.isArray(problemIds) || problemIds.length === 0) {
-      return res.status(404).json({
-        error: "Invalid or missing problemsId",
-      });
+    const { playlistId } = req.params;
+    const { problemIds } = addProblemToPlaylistSchema.parse(req.body);
+
+    if (!playlistId) {
+      return res.status(400).json({ error: "Playlist ID is required." });
+    }
+
+    const existing = await db.playlist.findUnique({
+      where: { id: playlistId },
+      select: { userId: true },
+    });
+
+    if (!existing) {
+      return res.status(404).json({ error: "Playlist not found." });
+    }
+
+    if (existing.userId !== userId) {
+      return res.status(403).json({ error: "Not your playlist." });
     }
 
     const deleteProblem = await db.problemsInPlaylist.deleteMany({
@@ -197,6 +280,11 @@ export const removeProblemFromPlaylist = async (req, res) => {
       deleteProblem,
     });
   } catch (error) {
+    const validationErrors = formatZodError(error);
+    if (validationErrors) {
+      return res.status(400).json({ error: validationErrors });
+    }
+
     console.error("Error while removing problem from playlist", error);
     res.status(500).json({
       error: "Error while removing problem from playlist",

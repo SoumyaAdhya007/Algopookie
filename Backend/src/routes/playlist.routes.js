@@ -6,12 +6,14 @@ import {
   deletePlaylist,
   getAllListDetails,
   getPlaylistDetails,
+  getPublicPlaylists,
   removeProblemFromPlaylist,
 } from "../controllers/playlist.controller.js";
 
 const PlaylistRoutes = express.Router();
 
 PlaylistRoutes.get("/", authMiddleware, getAllListDetails);
+PlaylistRoutes.get("/public", authMiddleware, getPublicPlaylists);
 
 PlaylistRoutes.get("/:playlistId", authMiddleware, getPlaylistDetails);
 
