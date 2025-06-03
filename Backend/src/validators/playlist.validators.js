@@ -3,6 +3,7 @@ import { z } from "zod";
 export const createPlaylistSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters."),
   description: z.string().optional(),
+  isPublic: z.boolean(),
 });
 
 export const addProblemToPlaylistSchema = z.object({

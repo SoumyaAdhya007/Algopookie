@@ -9,6 +9,7 @@ import SubmissionRoutes from "./routes/submission.routes.js";
 import PlaylistRoutes from "./routes/playlist.routes.js";
 import StreakRoutes from "./routes/streak.routes.js";
 import LeaderboardRoutes from "./routes/leaderboard.routes.js";
+import AdminRoutes from "./routes/admin.routes.js";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use("/api/v1/submission", SubmissionRoutes);
 app.use("/api/v1/playlist", PlaylistRoutes);
 app.use("/api/v1/streak", StreakRoutes);
 app.use("/api/v1/leaderboard", LeaderboardRoutes);
+app.use("/api/v1/admin", AdminRoutes);
 app.listen(process.env.PORT, () => {
   console.log("Server is running on 8080");
 });

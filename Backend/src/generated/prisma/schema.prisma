@@ -25,12 +25,13 @@ enum Difficulty {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  name     String?
-  email    String   @unique
-  image    String?
-  role     UserRole @default(USER)
-  password String
+  id        String   @id @default(uuid())
+  name      String?
+  email     String   @unique
+  image     String?
+  role      UserRole @default(USER)
+  password  String
+  isBlocked Boolean  @default(false)
 
   // Email verification
   isEmailVerified          Boolean   @default(false)
@@ -162,6 +163,7 @@ model Playlist {
   userId      String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  isPublic    Boolean  @default(false)
 
   problems ProblemsInPlaylist[]
 

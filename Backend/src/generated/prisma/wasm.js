@@ -124,6 +124,7 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   role: 'role',
   password: 'password',
+  isBlocked: 'isBlocked',
   isEmailVerified: 'isEmailVerified',
   emailVerificationToken: 'emailVerificationToken',
   emailVerificationExpires: 'emailVerificationExpires',
@@ -209,7 +210,8 @@ exports.Prisma.PlaylistScalarFieldEnum = {
   description: 'description',
   userId: 'userId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  isPublic: 'isPublic'
 };
 
 exports.Prisma.ProblemsInPlaylistScalarFieldEnum = {

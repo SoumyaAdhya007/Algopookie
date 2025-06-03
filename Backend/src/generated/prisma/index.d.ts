@@ -1861,6 +1861,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+    isBlocked: boolean | null
     isEmailVerified: boolean | null
     emailVerificationToken: string | null
     emailVerificationExpires: Date | null
@@ -1879,6 +1880,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+    isBlocked: boolean | null
     isEmailVerified: boolean | null
     emailVerificationToken: string | null
     emailVerificationExpires: Date | null
@@ -1897,6 +1899,7 @@ export namespace Prisma {
     image: number
     role: number
     password: number
+    isBlocked: number
     isEmailVerified: number
     emailVerificationToken: number
     emailVerificationExpires: number
@@ -1925,6 +1928,7 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isBlocked?: true
     isEmailVerified?: true
     emailVerificationToken?: true
     emailVerificationExpires?: true
@@ -1943,6 +1947,7 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isBlocked?: true
     isEmailVerified?: true
     emailVerificationToken?: true
     emailVerificationExpires?: true
@@ -1961,6 +1966,7 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+    isBlocked?: true
     isEmailVerified?: true
     emailVerificationToken?: true
     emailVerificationExpires?: true
@@ -2066,6 +2072,7 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole
     password: string
+    isBlocked: boolean
     isEmailVerified: boolean
     emailVerificationToken: string | null
     emailVerificationExpires: Date | null
@@ -2103,6 +2110,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: boolean
     emailVerificationExpires?: boolean
@@ -2128,6 +2136,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: boolean
     emailVerificationExpires?: boolean
@@ -2146,6 +2155,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: boolean
     emailVerificationExpires?: boolean
@@ -2164,6 +2174,7 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: boolean
     emailVerificationExpires?: boolean
@@ -2175,7 +2186,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "isEmailVerified" | "emailVerificationToken" | "emailVerificationExpires" | "plan" | "subscriptionExpires" | "lastActivityDate" | "currentStreak" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "isBlocked" | "isEmailVerified" | "emailVerificationToken" | "emailVerificationExpires" | "plan" | "subscriptionExpires" | "lastActivityDate" | "currentStreak" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | User$problemsArgs<ExtArgs>
     submission?: boolean | User$submissionArgs<ExtArgs>
@@ -2205,6 +2216,7 @@ export namespace Prisma {
       image: string | null
       role: $Enums.UserRole
       password: string
+      isBlocked: boolean
       isEmailVerified: boolean
       emailVerificationToken: string | null
       emailVerificationExpires: Date | null
@@ -2649,6 +2661,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly password: FieldRef<"User", 'String'>
+    readonly isBlocked: FieldRef<"User", 'Boolean'>
     readonly isEmailVerified: FieldRef<"User", 'Boolean'>
     readonly emailVerificationToken: FieldRef<"User", 'String'>
     readonly emailVerificationExpires: FieldRef<"User", 'DateTime'>
@@ -9045,6 +9058,7 @@ export namespace Prisma {
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isPublic: boolean | null
   }
 
   export type PlaylistMaxAggregateOutputType = {
@@ -9054,6 +9068,7 @@ export namespace Prisma {
     userId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    isPublic: boolean | null
   }
 
   export type PlaylistCountAggregateOutputType = {
@@ -9063,6 +9078,7 @@ export namespace Prisma {
     userId: number
     createdAt: number
     updatedAt: number
+    isPublic: number
     _all: number
   }
 
@@ -9074,6 +9090,7 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
   }
 
   export type PlaylistMaxAggregateInputType = {
@@ -9083,6 +9100,7 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
   }
 
   export type PlaylistCountAggregateInputType = {
@@ -9092,6 +9110,7 @@ export namespace Prisma {
     userId?: true
     createdAt?: true
     updatedAt?: true
+    isPublic?: true
     _all?: true
   }
 
@@ -9174,6 +9193,7 @@ export namespace Prisma {
     userId: string
     createdAt: Date
     updatedAt: Date
+    isPublic: boolean
     _count: PlaylistCountAggregateOutputType | null
     _min: PlaylistMinAggregateOutputType | null
     _max: PlaylistMaxAggregateOutputType | null
@@ -9200,6 +9220,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     problems?: boolean | Playlist$problemsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | PlaylistCountOutputTypeDefaultArgs<ExtArgs>
@@ -9212,6 +9233,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playlist"]>
 
@@ -9222,6 +9244,7 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["playlist"]>
 
@@ -9232,9 +9255,10 @@ export namespace Prisma {
     userId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    isPublic?: boolean
   }
 
-  export type PlaylistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["playlist"]>
+  export type PlaylistOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "userId" | "createdAt" | "updatedAt" | "isPublic", ExtArgs["result"]["playlist"]>
   export type PlaylistInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | Playlist$problemsArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -9260,6 +9284,7 @@ export namespace Prisma {
       userId: string
       createdAt: Date
       updatedAt: Date
+      isPublic: boolean
     }, ExtArgs["result"]["playlist"]>
     composites: {}
   }
@@ -9691,6 +9716,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Playlist", 'String'>
     readonly createdAt: FieldRef<"Playlist", 'DateTime'>
     readonly updatedAt: FieldRef<"Playlist", 'DateTime'>
+    readonly isPublic: FieldRef<"Playlist", 'Boolean'>
   }
     
 
@@ -12269,6 +12295,7 @@ export namespace Prisma {
     image: 'image',
     role: 'role',
     password: 'password',
+    isBlocked: 'isBlocked',
     isEmailVerified: 'isEmailVerified',
     emailVerificationToken: 'emailVerificationToken',
     emailVerificationExpires: 'emailVerificationExpires',
@@ -12372,7 +12399,8 @@ export namespace Prisma {
     description: 'description',
     userId: 'userId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    isPublic: 'isPublic'
   };
 
   export type PlaylistScalarFieldEnum = (typeof PlaylistScalarFieldEnum)[keyof typeof PlaylistScalarFieldEnum]
@@ -12576,6 +12604,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+    isBlocked?: BoolFilter<"User"> | boolean
     isEmailVerified?: BoolFilter<"User"> | boolean
     emailVerificationToken?: StringNullableFilter<"User"> | string | null
     emailVerificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -12600,6 +12629,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+    isBlocked?: SortOrder
     isEmailVerified?: SortOrder
     emailVerificationToken?: SortOrderInput | SortOrder
     emailVerificationExpires?: SortOrderInput | SortOrder
@@ -12627,6 +12657,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+    isBlocked?: BoolFilter<"User"> | boolean
     isEmailVerified?: BoolFilter<"User"> | boolean
     emailVerificationToken?: StringNullableFilter<"User"> | string | null
     emailVerificationExpires?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -12651,6 +12682,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+    isBlocked?: SortOrder
     isEmailVerified?: SortOrder
     emailVerificationToken?: SortOrderInput | SortOrder
     emailVerificationExpires?: SortOrderInput | SortOrder
@@ -12677,6 +12709,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     password?: StringWithAggregatesFilter<"User"> | string
+    isBlocked?: BoolWithAggregatesFilter<"User"> | boolean
     isEmailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     emailVerificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     emailVerificationExpires?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -13138,6 +13171,7 @@ export namespace Prisma {
     userId?: StringFilter<"Playlist"> | string
     createdAt?: DateTimeFilter<"Playlist"> | Date | string
     updatedAt?: DateTimeFilter<"Playlist"> | Date | string
+    isPublic?: BoolFilter<"Playlist"> | boolean
     problems?: ProblemsInPlaylistListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -13149,6 +13183,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
     problems?: ProblemsInPlaylistOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
   }
@@ -13164,6 +13199,7 @@ export namespace Prisma {
     userId?: StringFilter<"Playlist"> | string
     createdAt?: DateTimeFilter<"Playlist"> | Date | string
     updatedAt?: DateTimeFilter<"Playlist"> | Date | string
+    isPublic?: BoolFilter<"Playlist"> | boolean
     problems?: ProblemsInPlaylistListRelationFilter
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "name_userId">
@@ -13175,6 +13211,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
     _count?: PlaylistCountOrderByAggregateInput
     _max?: PlaylistMaxOrderByAggregateInput
     _min?: PlaylistMinOrderByAggregateInput
@@ -13190,6 +13227,7 @@ export namespace Prisma {
     userId?: StringWithAggregatesFilter<"Playlist"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Playlist"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Playlist"> | Date | string
+    isPublic?: BoolWithAggregatesFilter<"Playlist"> | boolean
   }
 
   export type ProblemsInPlaylistWhereInput = {
@@ -13311,6 +13349,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -13335,6 +13374,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -13359,6 +13399,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13383,6 +13424,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13407,6 +13449,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -13425,6 +13468,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13443,6 +13487,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13949,6 +13994,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     problems?: ProblemsInPlaylistCreateNestedManyWithoutPlaylistInput
     user: UserCreateNestedOneWithoutPlaylistsInput
   }
@@ -13960,6 +14006,7 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     problems?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutPlaylistInput
   }
 
@@ -13969,6 +14016,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     problems?: ProblemsInPlaylistUpdateManyWithoutPlaylistNestedInput
     user?: UserUpdateOneRequiredWithoutPlaylistsNestedInput
   }
@@ -13980,6 +14028,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     problems?: ProblemsInPlaylistUncheckedUpdateManyWithoutPlaylistNestedInput
   }
 
@@ -13990,6 +14039,7 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
   }
 
   export type PlaylistUpdateManyMutationInput = {
@@ -13998,6 +14048,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PlaylistUncheckedUpdateManyInput = {
@@ -14007,6 +14058,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProblemsInPlaylistCreateInput = {
@@ -14264,6 +14316,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isBlocked?: SortOrder
     isEmailVerified?: SortOrder
     emailVerificationToken?: SortOrder
     emailVerificationExpires?: SortOrder
@@ -14286,6 +14339,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isBlocked?: SortOrder
     isEmailVerified?: SortOrder
     emailVerificationToken?: SortOrder
     emailVerificationExpires?: SortOrder
@@ -14304,6 +14358,7 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+    isBlocked?: SortOrder
     isEmailVerified?: SortOrder
     emailVerificationToken?: SortOrder
     emailVerificationExpires?: SortOrder
@@ -14756,6 +14811,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type PlaylistMaxOrderByAggregateInput = {
@@ -14765,6 +14821,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type PlaylistMinOrderByAggregateInput = {
@@ -14774,6 +14831,7 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    isPublic?: SortOrder
   }
 
   export type PlaylistScalarRelationFilter = {
@@ -15937,6 +15995,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     problems?: ProblemsInPlaylistCreateNestedManyWithoutPlaylistInput
   }
 
@@ -15946,6 +16005,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     problems?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutPlaylistInput
   }
 
@@ -16132,6 +16192,7 @@ export namespace Prisma {
     userId?: StringFilter<"Playlist"> | string
     createdAt?: DateTimeFilter<"Playlist"> | Date | string
     updatedAt?: DateTimeFilter<"Playlist"> | Date | string
+    isPublic?: BoolFilter<"Playlist"> | boolean
   }
 
   export type UserDailyActivityUpsertWithWhereUniqueWithoutUserInput = {
@@ -16194,6 +16255,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16217,6 +16279,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16256,6 +16319,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16279,6 +16343,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16302,6 +16367,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16325,6 +16391,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16478,6 +16545,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16501,6 +16569,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16599,6 +16668,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16622,6 +16692,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16750,6 +16821,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16773,6 +16845,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16970,6 +17043,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -16993,6 +17067,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -17081,6 +17156,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17104,6 +17180,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17206,6 +17283,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -17229,6 +17307,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -17284,6 +17363,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17307,6 +17387,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17329,6 +17410,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
     user: UserCreateNestedOneWithoutPlaylistsInput
   }
 
@@ -17339,6 +17421,7 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
   }
 
   export type PlaylistCreateOrConnectWithoutProblemsInput = {
@@ -17412,6 +17495,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutPlaylistsNestedInput
   }
 
@@ -17422,6 +17506,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProblemUpsertWithoutProblemsPlaylistsInput = {
@@ -17486,6 +17571,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -17509,6 +17595,7 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+    isBlocked?: boolean
     isEmailVerified?: boolean
     emailVerificationToken?: string | null
     emailVerificationExpires?: Date | string | null
@@ -17597,6 +17684,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17620,6 +17708,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17738,6 +17827,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    isPublic?: boolean
   }
 
   export type UserDailyActivityCreateManyUserInput = {
@@ -17892,6 +17982,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     problems?: ProblemsInPlaylistUpdateManyWithoutPlaylistNestedInput
   }
 
@@ -17901,6 +17992,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     problems?: ProblemsInPlaylistUncheckedUpdateManyWithoutPlaylistNestedInput
   }
 
@@ -17910,6 +18002,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserDailyActivityUpdateWithoutUserInput = {
