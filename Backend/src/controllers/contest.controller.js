@@ -1,0 +1,390 @@
+import { db } from "../libs/db.js";
+import { scheduleContestEvents } from "../libs/contestScheduler.js";
+
+export const adminCreateContest = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+    const { title, description, startTime, endTime, problemIds } = req.body;
+
+    // Basic validation
+    if (!title || typeof title !== "string") {
+      return res.status(400).json({ error: "Contest title is required." });
+    }
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    if (isNaN(start.getTime()) || isNaN(end.getTime()) || end <= start) {
+      return res
+        .status(400)
+        .json({ error: "Invalid startTime/endTime. Ensure end > start." });
+    }
+    if (
+      !Array.isArray(problemIds) ||
+      problemIds.some((pid) => typeof pid !== "string")
+    ) {
+      return res
+        .status(400)
+        .json({ error: "problemIds must be string array." });
+    }
+
+    // Create contest
+    const contest = await db.contest.create({
+      data: {
+        title,
+        description: description || null,
+        startTime: start,
+        endTime: end,
+        createdBy: adminId,
+        userId: adminId,
+        problems: {
+          create: problemIds.map((pid) => ({ problemId: pid })),
+        },
+      },
+      include: {
+        problems: {
+          include: { problem: { select: { id: true, title: true } } },
+        },
+      },
+    });
+
+    // Optionally emit a socket event here to notify all clients of a new contest.
+    // e.g. socketServer.emit('contestCreated', { contestId: contest.id, title: contest.title });
+    scheduleContestEvents(contest);
+
+    return res.status(201).json({
+      success: true,
+      message: "Contest created successfully",
+      contest,
+    });
+  } catch (error) {
+    console.error("Error while creating contest:", error);
+    return res.status(500).json({ error: "Error while creating contest" });
+  }
+};
+
+export const adminGetAllContests = async (req, res) => {
+  try {
+    const contests = await db.contest.findMany({
+      include: {
+        creator: { select: { id: true, name: true, email: true } },
+        problems: {
+          include: { problem: true },
+        },
+      },
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Contest fetched Successfully",
+      contests,
+    });
+  } catch (error) {
+    console.error("Error while fetching contests:", error);
+    return res.status(500).json({ error: "Error while fetching contests" });
+  }
+};
+
+export const adminGetContestById = async (req, res) => {
+  try {
+    const contestId = req.params.contestId;
+
+    if (!contestId) {
+      return res.status(400).json({ error: "ContestId ID is required." });
+    }
+
+    const contest = await db.contest.findUnique({
+      where: { id: contestId },
+      include: {
+        creator: { select: { id: true, name: true, email: true } },
+        problems: { include: { problem: true } },
+        registrations: {
+          include: { user: { select: { id: true, name: true } } },
+        },
+        contestSubmissions: {
+          include: {
+            submission: {
+              include: {
+                user: { select: { id: true, name: true, email: true } },
+                problem: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    if (!contest) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+    return res.status(200).json({
+      success: true,
+      message: "Contest fetched Successfully",
+      contest,
+    });
+  } catch (error) {
+    console.error("Error while fetching contest:", error);
+    return res.status(500).json({ error: "Error while fetching contest" });
+  }
+};
+
+export const adminUpdateContest = async (req, res) => {
+  try {
+    const contestId = req.params.contestId;
+
+    if (!contestId) {
+      return res.status(400).json({ error: "ContestId ID is required." });
+    }
+
+    const { title, description, startTime, endTime, problemIds } = req.body;
+
+    const existing = await db.contest.findUnique({
+      where: { id: contestId },
+      select: { startTime: true },
+    });
+    if (!existing) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+
+    // If contest has already started, disallow updates
+    if (new Date() >= existing.startTime) {
+      return res
+        .status(400)
+        .json({ error: "Cannot update a contest that has started." });
+    }
+
+    // Build data object dynamically
+    const data = {};
+    if (title) data.title = title;
+    if (description !== undefined) data.description = description;
+    if (startTime) data.startTime = new Date(startTime);
+    if (endTime) data.endTime = new Date(endTime);
+
+    // If problemIds is provided, reset the ContestProblem table
+    if (Array.isArray(problemIds)) {
+      // Delete old problem links, then create new ones
+      await db.contestProblem.deleteMany({ where: { contestId } });
+      data.problems = {
+        create: problemIds.map((pid) => ({ problemId: pid })),
+      };
+    }
+
+    const updated = await db.contest.update({
+      where: { id: contestId },
+      data,
+      include: {
+        problems: {
+          include: { problem: { select: { id: true, title: true } } },
+        },
+      },
+    });
+
+    // Optionally emit a socket event: contestUpdated
+    // socketServer.emit('contestUpdated', { contestId: updated.id, title: updated.title });
+
+    return res.status(200).json({
+      success: true,
+      message: "Contest updated Successfully",
+      contest: updated,
+    });
+  } catch (error) {
+    console.error("Error while updating contest:", error);
+    return res.status(500).json({ error: "Error while updating contest" });
+  }
+};
+
+export const adminDeleteContest = async (req, res) => {
+  try {
+    const contestId = req.params.contestId;
+
+    if (!contestId) {
+      return res.status(400).json({ error: "ContestId ID is required." });
+    }
+
+    const existing = await db.contest.findUnique({
+      where: { id: contestId },
+      select: { startTime: true },
+    });
+    if (!existing) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+
+    if (new Date() >= existing.startTime) {
+      return res
+        .status(400)
+        .json({ error: "Cannot delete a contest that has started." });
+    }
+
+    // Deleting the contest will cascade‐delete ContestProblem, ContestRegistration, etc.
+    await db.contest.delete({ where: { id: contestId } });
+
+    // Optionally emit a socket event: contestDeleted
+    // socketServer.emit('contestDeleted', { contestId });
+
+    return res
+      .status(200)
+      .json({ success: true, message: "Contest deleted successfully" });
+  } catch (error) {
+    console.error("Error while deleting contest:", error);
+    return res.status(500).json({ error: "Error while deleting contest" });
+  }
+};
+
+export const listActiveContests = async (req, res) => {
+  try {
+    const now = new Date();
+    // const contests = await db.contest.findMany({
+    //   where: { endTime: { gt: now } },
+    //   select: {
+    //     id: true,
+    //     title: true,
+    //     description: true,
+    //     startTime: true,
+    //     endTime: true,
+    //     problems: {
+    //       select: { problem: { select: { id: true, title: true } } },
+    //     },
+    //   },
+    //   orderBy: { startTime: "asc" },
+    // });
+    const contests = await db.contest.findMany({
+      where: {},
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        startTime: true,
+        endTime: true,
+        problems: {
+          include: {
+            problem: true,
+          },
+        },
+      },
+      orderBy: { startTime: "asc" },
+    });
+    return res.status(200).json({
+      success: true,
+      message: "Contest fetched Successfully",
+      contests,
+    });
+  } catch (error) {
+    console.error("Error while fetching contests:", error);
+    return res.status(500).json({ error: "Error while fetching contests" });
+  }
+};
+
+export const getContestDetails = async (req, res) => {
+  try {
+    const contestId = req.params.contestId;
+
+    if (!contestId) {
+      return res.status(400).json({ error: "ContestId ID is required." });
+    }
+
+    const contest = await db.contest.findUnique({
+      where: { id: contestId },
+      include: {
+        creator: { select: { id: true, name: true } },
+        problems: { include: { problem: true } },
+        registrations: { where: { userId: req.user.id } },
+      },
+    });
+
+    if (!contest) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+
+    // If you want to restrict “only registered” users from seeing problems, check:
+    const isRegistered = contest.registrations.length > 0;
+    if (!isRegistered)
+      return res.status(403).json({ error: "Not registered." });
+
+    return res.status(200).json({
+      success: true,
+      message: "Contest fetched Successfully",
+      contest,
+    });
+  } catch (error) {
+    console.error("Error while fetching contests:", error);
+    return res.status(500).json({ error: "Error while fetching contests" });
+  }
+};
+
+export const registerForContest = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const contestId = req.params.contestId;
+
+    if (!contestId) {
+      return res.status(400).json({ error: "ContestId ID is required." });
+    }
+
+    const contest = await db.contest.findUnique({
+      where: { id: contestId },
+      select: { startTime: true },
+    });
+    if (!contest) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+
+    const now = new Date();
+    if (now >= contest.endTime) {
+      return res
+        .status(400)
+        .json({ error: "Cannot register after contest has ended." });
+    }
+
+    // Upsert registration so duplicate registrations are a no-op
+    await db.contestRegistration.upsert({
+      where: {
+        userId_contestId: { userId, contestId },
+      },
+      update: {}, // no-change
+      create: { userId, contestId },
+    });
+
+    return res
+      .status(201)
+      .json({ success: true, message: "Registered successfully." });
+  } catch (error) {
+    console.error("Error while register contest:", error);
+    return res.status(500).json({ error: "Error while register contest" });
+  }
+};
+
+export const submitContestProblem = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { contestId, submissionId } = req.body;
+
+    const contest = await db.contest.findUnique({
+      where: { id: contestId },
+      select: { startTime: true, endTime: true },
+    });
+
+    if (!contest) {
+      return res.status(404).json({ error: "Contest not found." });
+    }
+
+    const now = new Date();
+    if (now < contest.startTime || now > contest.endTime) {
+      return res
+        .status(400)
+        .json({ error: "Contest is not accepting submissions at this time." });
+    }
+
+    const contestSubmission = await db.contestSubmission.create({
+      data: {
+        userId,
+        contestId,
+        submissionId,
+      },
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Submission received for contest.",
+      submission: contestSubmission,
+    });
+  } catch (error) {
+    console.error("Error in submitContestProblem:", error);
+    return res.status(500).json({ error: "Internal server error." });
+  }
+};

@@ -1,4 +1,6 @@
 import express from "express";
+import http from "http";
+import { Server as SocketIOServer } from "socket.io";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -10,10 +12,22 @@ import PlaylistRoutes from "./routes/playlist.routes.js";
 import StreakRoutes from "./routes/streak.routes.js";
 import LeaderboardRoutes from "./routes/leaderboard.routes.js";
 import AdminRoutes from "./routes/admin.routes.js";
+import ContestRouter from "./routes/contest.routes.js";
+import { initAllContestSchedules } from "./libs/contestScheduler.js";
+import connectDB from "./libs/mongodb.js";
 
 dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
+
+const io = new SocketIOServer(
+  server,
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -31,6 +45,29 @@ app.use("/api/v1/playlist", PlaylistRoutes);
 app.use("/api/v1/streak", StreakRoutes);
 app.use("/api/v1/leaderboard", LeaderboardRoutes);
 app.use("/api/v1/admin", AdminRoutes);
-app.listen(process.env.PORT, () => {
-  console.log("Server is running on 8080");
-});
+app.use("/api/v1/contests", ContestRouter);
+
+export { io };
+
+// server.listen(process.env.PORT, () => {
+//   console.log("Server is running on 8080");
+
+//   initAllContestSchedules()
+//     .then(() => console.log("Contest schedules initialized."))
+//     .catch((err) => console.error("Scheduler init error:", err));
+// });
+
+connectDB()
+  .then(() => {
+    server.listen(process.env.PORT, () => {
+      console.log("Server is running on 8080");
+
+      initAllContestSchedules()
+        .then(() => console.log("Contest schedules initialized."))
+        .catch((err) => console.error("Scheduler init error:", err));
+    });
+  })
+  .catch((err) => {
+    console.error("Mongodb connection error", err);
+    process.exit(1);
+  });
