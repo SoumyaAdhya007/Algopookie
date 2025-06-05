@@ -13,8 +13,10 @@ import StreakRoutes from "./routes/streak.routes.js";
 import LeaderboardRoutes from "./routes/leaderboard.routes.js";
 import AdminRoutes from "./routes/admin.routes.js";
 import ContestRouter from "./routes/contest.routes.js";
-import { initAllContestSchedules } from "./libs/contestScheduler.js";
+import DiscussionRouter from "./routes/discussion.routes.js";
 import connectDB from "./libs/mongodb.js";
+import { initAllContestSchedules } from "./libs/contestScheduler.js";
+import { registerSocketEvents } from "./controllers/discussion.controller.js";
 
 dotenv.config();
 
@@ -28,6 +30,12 @@ const io = new SocketIOServer(
     credentials: true,
   })
 );
+
+io.on("connection", (socket) => {
+  console.log("New socket connected:", socket.id);
+  registerSocketEvents(socket, io);
+});
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -46,16 +54,9 @@ app.use("/api/v1/streak", StreakRoutes);
 app.use("/api/v1/leaderboard", LeaderboardRoutes);
 app.use("/api/v1/admin", AdminRoutes);
 app.use("/api/v1/contests", ContestRouter);
+app.use("/api/v1/discussions", DiscussionRouter);
 
 export { io };
-
-// server.listen(process.env.PORT, () => {
-//   console.log("Server is running on 8080");
-
-//   initAllContestSchedules()
-//     .then(() => console.log("Contest schedules initialized."))
-//     .catch((err) => console.error("Scheduler init error:", err));
-// });
 
 connectDB()
   .then(() => {

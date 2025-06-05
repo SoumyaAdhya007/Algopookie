@@ -54,11 +54,6 @@ export type Playlist = $Result.DefaultSelection<Prisma.$PlaylistPayload>
  */
 export type ProblemsInPlaylist = $Result.DefaultSelection<Prisma.$ProblemsInPlaylistPayload>
 /**
- * Model AssistanceRequest
- * 
- */
-export type AssistanceRequest = $Result.DefaultSelection<Prisma.$AssistanceRequestPayload>
-/**
  * Model Contest
  * 
  */
@@ -325,16 +320,6 @@ export class PrismaClient<
     * ```
     */
   get problemsInPlaylist(): Prisma.ProblemsInPlaylistDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.assistanceRequest`: Exposes CRUD operations for the **AssistanceRequest** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more AssistanceRequests
-    * const assistanceRequests = await prisma.assistanceRequest.findMany()
-    * ```
-    */
-  get assistanceRequest(): Prisma.AssistanceRequestDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.contest`: Exposes CRUD operations for the **Contest** model.
@@ -823,7 +808,6 @@ export namespace Prisma {
     ProblemSolved: 'ProblemSolved',
     Playlist: 'Playlist',
     ProblemsInPlaylist: 'ProblemsInPlaylist',
-    AssistanceRequest: 'AssistanceRequest',
     Contest: 'Contest',
     ContestProblem: 'ContestProblem',
     ContestRegistration: 'ContestRegistration',
@@ -846,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userDailyActivity" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist" | "assistanceRequest" | "contest" | "contestProblem" | "contestRegistration" | "contestSubmission"
+      modelProps: "user" | "userDailyActivity" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist" | "contest" | "contestProblem" | "contestRegistration" | "contestSubmission"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1442,80 +1426,6 @@ export namespace Prisma {
           }
         }
       }
-      AssistanceRequest: {
-        payload: Prisma.$AssistanceRequestPayload<ExtArgs>
-        fields: Prisma.AssistanceRequestFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.AssistanceRequestFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.AssistanceRequestFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          findFirst: {
-            args: Prisma.AssistanceRequestFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.AssistanceRequestFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          findMany: {
-            args: Prisma.AssistanceRequestFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
-          }
-          create: {
-            args: Prisma.AssistanceRequestCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          createMany: {
-            args: Prisma.AssistanceRequestCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.AssistanceRequestCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
-          }
-          delete: {
-            args: Prisma.AssistanceRequestDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          update: {
-            args: Prisma.AssistanceRequestUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          deleteMany: {
-            args: Prisma.AssistanceRequestDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.AssistanceRequestUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.AssistanceRequestUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>[]
-          }
-          upsert: {
-            args: Prisma.AssistanceRequestUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$AssistanceRequestPayload>
-          }
-          aggregate: {
-            args: Prisma.AssistanceRequestAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateAssistanceRequest>
-          }
-          groupBy: {
-            args: Prisma.AssistanceRequestGroupByArgs<ExtArgs>
-            result: $Utils.Optional<AssistanceRequestGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.AssistanceRequestCountArgs<ExtArgs>
-            result: $Utils.Optional<AssistanceRequestCountAggregateOutputType> | number
-          }
-        }
-      }
       Contest: {
         payload: Prisma.$ContestPayload<ExtArgs>
         fields: Prisma.ContestFieldRefs
@@ -1904,7 +1814,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedOmit
     playlist?: PlaylistOmit
     problemsInPlaylist?: ProblemsInPlaylistOmit
-    assistanceRequest?: AssistanceRequestOmit
     contest?: ContestOmit
     contestProblem?: ContestProblemOmit
     contestRegistration?: ContestRegistrationOmit
@@ -2008,7 +1917,6 @@ export namespace Prisma {
     problemSolved: number
     playlists: number
     dailyActivities: number
-    assistanceRequests: number
     contestRegistrations: number
     contestSubmissions: number
     contestsCreated: number
@@ -2021,7 +1929,6 @@ export namespace Prisma {
     problemSolved?: boolean | UserCountOutputTypeCountProblemSolvedArgs
     playlists?: boolean | UserCountOutputTypeCountPlaylistsArgs
     dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
-    assistanceRequests?: boolean | UserCountOutputTypeCountAssistanceRequestsArgs
     contestRegistrations?: boolean | UserCountOutputTypeCountContestRegistrationsArgs
     contestSubmissions?: boolean | UserCountOutputTypeCountContestSubmissionsArgs
     contestsCreated?: boolean | UserCountOutputTypeCountContestsCreatedArgs
@@ -2077,13 +1984,6 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountAssistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AssistanceRequestWhereInput
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
   export type UserCountOutputTypeCountContestRegistrationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContestRegistrationWhereInput
   }
@@ -2118,7 +2018,6 @@ export namespace Prisma {
     submission: number
     solvedBy: number
     problemsPlaylists: number
-    assistanceRequests: number
     contestProblems: number
   }
 
@@ -2126,7 +2025,6 @@ export namespace Prisma {
     submission?: boolean | ProblemCountOutputTypeCountSubmissionArgs
     solvedBy?: boolean | ProblemCountOutputTypeCountSolvedByArgs
     problemsPlaylists?: boolean | ProblemCountOutputTypeCountProblemsPlaylistsArgs
-    assistanceRequests?: boolean | ProblemCountOutputTypeCountAssistanceRequestsArgs
     contestProblems?: boolean | ProblemCountOutputTypeCountContestProblemsArgs
   }
 
@@ -2160,13 +2058,6 @@ export namespace Prisma {
    */
   export type ProblemCountOutputTypeCountProblemsPlaylistsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProblemsInPlaylistWhereInput
-  }
-
-  /**
-   * ProblemCountOutputType without action
-   */
-  export type ProblemCountOutputTypeCountAssistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AssistanceRequestWhereInput
   }
 
   /**
@@ -2583,7 +2474,6 @@ export namespace Prisma {
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     playlists?: boolean | User$playlistsArgs<ExtArgs>
     dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
-    assistanceRequests?: boolean | User$assistanceRequestsArgs<ExtArgs>
     contestRegistrations?: boolean | User$contestRegistrationsArgs<ExtArgs>
     contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
     contestsCreated?: boolean | User$contestsCreatedArgs<ExtArgs>
@@ -2655,7 +2545,6 @@ export namespace Prisma {
     problemSolved?: boolean | User$problemSolvedArgs<ExtArgs>
     playlists?: boolean | User$playlistsArgs<ExtArgs>
     dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
-    assistanceRequests?: boolean | User$assistanceRequestsArgs<ExtArgs>
     contestRegistrations?: boolean | User$contestRegistrationsArgs<ExtArgs>
     contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
     contestsCreated?: boolean | User$contestsCreatedArgs<ExtArgs>
@@ -2673,7 +2562,6 @@ export namespace Prisma {
       problemSolved: Prisma.$ProblemSolvedPayload<ExtArgs>[]
       playlists: Prisma.$PlaylistPayload<ExtArgs>[]
       dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
-      assistanceRequests: Prisma.$AssistanceRequestPayload<ExtArgs>[]
       contestRegistrations: Prisma.$ContestRegistrationPayload<ExtArgs>[]
       contestSubmissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
       contestsCreated: Prisma.$ContestPayload<ExtArgs>[]
@@ -3095,7 +2983,6 @@ export namespace Prisma {
     problemSolved<T extends User$problemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, User$problemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     playlists<T extends User$playlistsArgs<ExtArgs> = {}>(args?: Subset<T, User$playlistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     dailyActivities<T extends User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    assistanceRequests<T extends User$assistanceRequestsArgs<ExtArgs> = {}>(args?: Subset<T, User$assistanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestRegistrations<T extends User$contestRegistrationsArgs<ExtArgs> = {}>(args?: Subset<T, User$contestRegistrationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestRegistrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestSubmissions<T extends User$contestSubmissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$contestSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestsCreated<T extends User$contestsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$contestsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3650,30 +3537,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: UserDailyActivityScalarFieldEnum | UserDailyActivityScalarFieldEnum[]
-  }
-
-  /**
-   * User.assistanceRequests
-   */
-  export type User$assistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    where?: AssistanceRequestWhereInput
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    cursor?: AssistanceRequestWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
   }
 
   /**
@@ -5081,7 +4944,6 @@ export namespace Prisma {
     submission?: boolean | Problem$submissionArgs<ExtArgs>
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
-    assistanceRequests?: boolean | Problem$assistanceRequestsArgs<ExtArgs>
     contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
@@ -5151,7 +5013,6 @@ export namespace Prisma {
     submission?: boolean | Problem$submissionArgs<ExtArgs>
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
-    assistanceRequests?: boolean | Problem$assistanceRequestsArgs<ExtArgs>
     contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -5169,7 +5030,6 @@ export namespace Prisma {
       submission: Prisma.$SubmissionPayload<ExtArgs>[]
       solvedBy: Prisma.$ProblemSolvedPayload<ExtArgs>[]
       problemsPlaylists: Prisma.$ProblemsInPlaylistPayload<ExtArgs>[]
-      assistanceRequests: Prisma.$AssistanceRequestPayload<ExtArgs>[]
       contestProblems: Prisma.$ContestProblemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5587,7 +5447,6 @@ export namespace Prisma {
     submission<T extends Problem$submissionArgs<ExtArgs> = {}>(args?: Subset<T, Problem$submissionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     solvedBy<T extends Problem$solvedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$solvedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemsPlaylists<T extends Problem$problemsPlaylistsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemsPlaylistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsInPlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    assistanceRequests<T extends Problem$assistanceRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$assistanceRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestProblems<T extends Problem$contestProblemsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$contestProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6099,30 +5958,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProblemsInPlaylistScalarFieldEnum | ProblemsInPlaylistScalarFieldEnum[]
-  }
-
-  /**
-   * Problem.assistanceRequests
-   */
-  export type Problem$assistanceRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    where?: AssistanceRequestWhereInput
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    cursor?: AssistanceRequestWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
   }
 
   /**
@@ -11843,1059 +11678,6 @@ export namespace Prisma {
 
 
   /**
-   * Model AssistanceRequest
-   */
-
-  export type AggregateAssistanceRequest = {
-    _count: AssistanceRequestCountAggregateOutputType | null
-    _min: AssistanceRequestMinAggregateOutputType | null
-    _max: AssistanceRequestMaxAggregateOutputType | null
-  }
-
-  export type AssistanceRequestMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    problemId: string | null
-    createdAt: Date | null
-  }
-
-  export type AssistanceRequestMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    problemId: string | null
-    createdAt: Date | null
-  }
-
-  export type AssistanceRequestCountAggregateOutputType = {
-    id: number
-    userId: number
-    problemId: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type AssistanceRequestMinAggregateInputType = {
-    id?: true
-    userId?: true
-    problemId?: true
-    createdAt?: true
-  }
-
-  export type AssistanceRequestMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    problemId?: true
-    createdAt?: true
-  }
-
-  export type AssistanceRequestCountAggregateInputType = {
-    id?: true
-    userId?: true
-    problemId?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type AssistanceRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AssistanceRequest to aggregate.
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AssistanceRequests to fetch.
-     */
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: AssistanceRequestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AssistanceRequests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AssistanceRequests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned AssistanceRequests
-    **/
-    _count?: true | AssistanceRequestCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: AssistanceRequestMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: AssistanceRequestMaxAggregateInputType
-  }
-
-  export type GetAssistanceRequestAggregateType<T extends AssistanceRequestAggregateArgs> = {
-        [P in keyof T & keyof AggregateAssistanceRequest]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateAssistanceRequest[P]>
-      : GetScalarType<T[P], AggregateAssistanceRequest[P]>
-  }
-
-
-
-
-  export type AssistanceRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: AssistanceRequestWhereInput
-    orderBy?: AssistanceRequestOrderByWithAggregationInput | AssistanceRequestOrderByWithAggregationInput[]
-    by: AssistanceRequestScalarFieldEnum[] | AssistanceRequestScalarFieldEnum
-    having?: AssistanceRequestScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: AssistanceRequestCountAggregateInputType | true
-    _min?: AssistanceRequestMinAggregateInputType
-    _max?: AssistanceRequestMaxAggregateInputType
-  }
-
-  export type AssistanceRequestGroupByOutputType = {
-    id: string
-    userId: string
-    problemId: string
-    createdAt: Date
-    _count: AssistanceRequestCountAggregateOutputType | null
-    _min: AssistanceRequestMinAggregateOutputType | null
-    _max: AssistanceRequestMaxAggregateOutputType | null
-  }
-
-  type GetAssistanceRequestGroupByPayload<T extends AssistanceRequestGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<AssistanceRequestGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof AssistanceRequestGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], AssistanceRequestGroupByOutputType[P]>
-            : GetScalarType<T[P], AssistanceRequestGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type AssistanceRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    problemId?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["assistanceRequest"]>
-
-  export type AssistanceRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    problemId?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["assistanceRequest"]>
-
-  export type AssistanceRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    problemId?: boolean
-    createdAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["assistanceRequest"]>
-
-  export type AssistanceRequestSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    problemId?: boolean
-    createdAt?: boolean
-  }
-
-  export type AssistanceRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "createdAt", ExtArgs["result"]["assistanceRequest"]>
-  export type AssistanceRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }
-  export type AssistanceRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }
-  export type AssistanceRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    problem?: boolean | ProblemDefaultArgs<ExtArgs>
-  }
-
-  export type $AssistanceRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "AssistanceRequest"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      problem: Prisma.$ProblemPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      problemId: string
-      createdAt: Date
-    }, ExtArgs["result"]["assistanceRequest"]>
-    composites: {}
-  }
-
-  type AssistanceRequestGetPayload<S extends boolean | null | undefined | AssistanceRequestDefaultArgs> = $Result.GetResult<Prisma.$AssistanceRequestPayload, S>
-
-  type AssistanceRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<AssistanceRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: AssistanceRequestCountAggregateInputType | true
-    }
-
-  export interface AssistanceRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AssistanceRequest'], meta: { name: 'AssistanceRequest' } }
-    /**
-     * Find zero or one AssistanceRequest that matches the filter.
-     * @param {AssistanceRequestFindUniqueArgs} args - Arguments to find a AssistanceRequest
-     * @example
-     * // Get one AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends AssistanceRequestFindUniqueArgs>(args: SelectSubset<T, AssistanceRequestFindUniqueArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one AssistanceRequest that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {AssistanceRequestFindUniqueOrThrowArgs} args - Arguments to find a AssistanceRequest
-     * @example
-     * // Get one AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends AssistanceRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, AssistanceRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AssistanceRequest that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestFindFirstArgs} args - Arguments to find a AssistanceRequest
-     * @example
-     * // Get one AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends AssistanceRequestFindFirstArgs>(args?: SelectSubset<T, AssistanceRequestFindFirstArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first AssistanceRequest that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestFindFirstOrThrowArgs} args - Arguments to find a AssistanceRequest
-     * @example
-     * // Get one AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends AssistanceRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, AssistanceRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more AssistanceRequests that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all AssistanceRequests
-     * const assistanceRequests = await prisma.assistanceRequest.findMany()
-     * 
-     * // Get first 10 AssistanceRequests
-     * const assistanceRequests = await prisma.assistanceRequest.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends AssistanceRequestFindManyArgs>(args?: SelectSubset<T, AssistanceRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a AssistanceRequest.
-     * @param {AssistanceRequestCreateArgs} args - Arguments to create a AssistanceRequest.
-     * @example
-     * // Create one AssistanceRequest
-     * const AssistanceRequest = await prisma.assistanceRequest.create({
-     *   data: {
-     *     // ... data to create a AssistanceRequest
-     *   }
-     * })
-     * 
-     */
-    create<T extends AssistanceRequestCreateArgs>(args: SelectSubset<T, AssistanceRequestCreateArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many AssistanceRequests.
-     * @param {AssistanceRequestCreateManyArgs} args - Arguments to create many AssistanceRequests.
-     * @example
-     * // Create many AssistanceRequests
-     * const assistanceRequest = await prisma.assistanceRequest.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends AssistanceRequestCreateManyArgs>(args?: SelectSubset<T, AssistanceRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many AssistanceRequests and returns the data saved in the database.
-     * @param {AssistanceRequestCreateManyAndReturnArgs} args - Arguments to create many AssistanceRequests.
-     * @example
-     * // Create many AssistanceRequests
-     * const assistanceRequest = await prisma.assistanceRequest.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many AssistanceRequests and only return the `id`
-     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends AssistanceRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, AssistanceRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a AssistanceRequest.
-     * @param {AssistanceRequestDeleteArgs} args - Arguments to delete one AssistanceRequest.
-     * @example
-     * // Delete one AssistanceRequest
-     * const AssistanceRequest = await prisma.assistanceRequest.delete({
-     *   where: {
-     *     // ... filter to delete one AssistanceRequest
-     *   }
-     * })
-     * 
-     */
-    delete<T extends AssistanceRequestDeleteArgs>(args: SelectSubset<T, AssistanceRequestDeleteArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one AssistanceRequest.
-     * @param {AssistanceRequestUpdateArgs} args - Arguments to update one AssistanceRequest.
-     * @example
-     * // Update one AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends AssistanceRequestUpdateArgs>(args: SelectSubset<T, AssistanceRequestUpdateArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more AssistanceRequests.
-     * @param {AssistanceRequestDeleteManyArgs} args - Arguments to filter AssistanceRequests to delete.
-     * @example
-     * // Delete a few AssistanceRequests
-     * const { count } = await prisma.assistanceRequest.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends AssistanceRequestDeleteManyArgs>(args?: SelectSubset<T, AssistanceRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AssistanceRequests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many AssistanceRequests
-     * const assistanceRequest = await prisma.assistanceRequest.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends AssistanceRequestUpdateManyArgs>(args: SelectSubset<T, AssistanceRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more AssistanceRequests and returns the data updated in the database.
-     * @param {AssistanceRequestUpdateManyAndReturnArgs} args - Arguments to update many AssistanceRequests.
-     * @example
-     * // Update many AssistanceRequests
-     * const assistanceRequest = await prisma.assistanceRequest.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more AssistanceRequests and only return the `id`
-     * const assistanceRequestWithIdOnly = await prisma.assistanceRequest.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends AssistanceRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, AssistanceRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one AssistanceRequest.
-     * @param {AssistanceRequestUpsertArgs} args - Arguments to update or create a AssistanceRequest.
-     * @example
-     * // Update or create a AssistanceRequest
-     * const assistanceRequest = await prisma.assistanceRequest.upsert({
-     *   create: {
-     *     // ... data to create a AssistanceRequest
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the AssistanceRequest we want to update
-     *   }
-     * })
-     */
-    upsert<T extends AssistanceRequestUpsertArgs>(args: SelectSubset<T, AssistanceRequestUpsertArgs<ExtArgs>>): Prisma__AssistanceRequestClient<$Result.GetResult<Prisma.$AssistanceRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of AssistanceRequests.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestCountArgs} args - Arguments to filter AssistanceRequests to count.
-     * @example
-     * // Count the number of AssistanceRequests
-     * const count = await prisma.assistanceRequest.count({
-     *   where: {
-     *     // ... the filter for the AssistanceRequests we want to count
-     *   }
-     * })
-    **/
-    count<T extends AssistanceRequestCountArgs>(
-      args?: Subset<T, AssistanceRequestCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], AssistanceRequestCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a AssistanceRequest.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends AssistanceRequestAggregateArgs>(args: Subset<T, AssistanceRequestAggregateArgs>): Prisma.PrismaPromise<GetAssistanceRequestAggregateType<T>>
-
-    /**
-     * Group by AssistanceRequest.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {AssistanceRequestGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends AssistanceRequestGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: AssistanceRequestGroupByArgs['orderBy'] }
-        : { orderBy?: AssistanceRequestGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, AssistanceRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssistanceRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the AssistanceRequest model
-   */
-  readonly fields: AssistanceRequestFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for AssistanceRequest.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__AssistanceRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the AssistanceRequest model
-   */
-  interface AssistanceRequestFieldRefs {
-    readonly id: FieldRef<"AssistanceRequest", 'String'>
-    readonly userId: FieldRef<"AssistanceRequest", 'String'>
-    readonly problemId: FieldRef<"AssistanceRequest", 'String'>
-    readonly createdAt: FieldRef<"AssistanceRequest", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * AssistanceRequest findUnique
-   */
-  export type AssistanceRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter, which AssistanceRequest to fetch.
-     */
-    where: AssistanceRequestWhereUniqueInput
-  }
-
-  /**
-   * AssistanceRequest findUniqueOrThrow
-   */
-  export type AssistanceRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter, which AssistanceRequest to fetch.
-     */
-    where: AssistanceRequestWhereUniqueInput
-  }
-
-  /**
-   * AssistanceRequest findFirst
-   */
-  export type AssistanceRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter, which AssistanceRequest to fetch.
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AssistanceRequests to fetch.
-     */
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AssistanceRequests.
-     */
-    cursor?: AssistanceRequestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AssistanceRequests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AssistanceRequests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AssistanceRequests.
-     */
-    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
-  }
-
-  /**
-   * AssistanceRequest findFirstOrThrow
-   */
-  export type AssistanceRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter, which AssistanceRequest to fetch.
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AssistanceRequests to fetch.
-     */
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for AssistanceRequests.
-     */
-    cursor?: AssistanceRequestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AssistanceRequests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AssistanceRequests.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of AssistanceRequests.
-     */
-    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
-  }
-
-  /**
-   * AssistanceRequest findMany
-   */
-  export type AssistanceRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter, which AssistanceRequests to fetch.
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of AssistanceRequests to fetch.
-     */
-    orderBy?: AssistanceRequestOrderByWithRelationInput | AssistanceRequestOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing AssistanceRequests.
-     */
-    cursor?: AssistanceRequestWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` AssistanceRequests from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` AssistanceRequests.
-     */
-    skip?: number
-    distinct?: AssistanceRequestScalarFieldEnum | AssistanceRequestScalarFieldEnum[]
-  }
-
-  /**
-   * AssistanceRequest create
-   */
-  export type AssistanceRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * The data needed to create a AssistanceRequest.
-     */
-    data: XOR<AssistanceRequestCreateInput, AssistanceRequestUncheckedCreateInput>
-  }
-
-  /**
-   * AssistanceRequest createMany
-   */
-  export type AssistanceRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many AssistanceRequests.
-     */
-    data: AssistanceRequestCreateManyInput | AssistanceRequestCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * AssistanceRequest createManyAndReturn
-   */
-  export type AssistanceRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * The data used to create many AssistanceRequests.
-     */
-    data: AssistanceRequestCreateManyInput | AssistanceRequestCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AssistanceRequest update
-   */
-  export type AssistanceRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * The data needed to update a AssistanceRequest.
-     */
-    data: XOR<AssistanceRequestUpdateInput, AssistanceRequestUncheckedUpdateInput>
-    /**
-     * Choose, which AssistanceRequest to update.
-     */
-    where: AssistanceRequestWhereUniqueInput
-  }
-
-  /**
-   * AssistanceRequest updateMany
-   */
-  export type AssistanceRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update AssistanceRequests.
-     */
-    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyInput>
-    /**
-     * Filter which AssistanceRequests to update
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * Limit how many AssistanceRequests to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * AssistanceRequest updateManyAndReturn
-   */
-  export type AssistanceRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * The data used to update AssistanceRequests.
-     */
-    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyInput>
-    /**
-     * Filter which AssistanceRequests to update
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * Limit how many AssistanceRequests to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * AssistanceRequest upsert
-   */
-  export type AssistanceRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * The filter to search for the AssistanceRequest to update in case it exists.
-     */
-    where: AssistanceRequestWhereUniqueInput
-    /**
-     * In case the AssistanceRequest found by the `where` argument doesn't exist, create a new AssistanceRequest with this data.
-     */
-    create: XOR<AssistanceRequestCreateInput, AssistanceRequestUncheckedCreateInput>
-    /**
-     * In case the AssistanceRequest was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<AssistanceRequestUpdateInput, AssistanceRequestUncheckedUpdateInput>
-  }
-
-  /**
-   * AssistanceRequest delete
-   */
-  export type AssistanceRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-    /**
-     * Filter which AssistanceRequest to delete.
-     */
-    where: AssistanceRequestWhereUniqueInput
-  }
-
-  /**
-   * AssistanceRequest deleteMany
-   */
-  export type AssistanceRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which AssistanceRequests to delete
-     */
-    where?: AssistanceRequestWhereInput
-    /**
-     * Limit how many AssistanceRequests to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * AssistanceRequest without action
-   */
-  export type AssistanceRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the AssistanceRequest
-     */
-    select?: AssistanceRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the AssistanceRequest
-     */
-    omit?: AssistanceRequestOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AssistanceRequestInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Contest
    */
 
@@ -17473,16 +16255,6 @@ export namespace Prisma {
   export type ProblemsInPlaylistScalarFieldEnum = (typeof ProblemsInPlaylistScalarFieldEnum)[keyof typeof ProblemsInPlaylistScalarFieldEnum]
 
 
-  export const AssistanceRequestScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    problemId: 'problemId',
-    createdAt: 'createdAt'
-  };
-
-  export type AssistanceRequestScalarFieldEnum = (typeof AssistanceRequestScalarFieldEnum)[keyof typeof AssistanceRequestScalarFieldEnum]
-
-
   export const ContestScalarFieldEnum: {
     id: 'id',
     title: 'title',
@@ -17722,7 +16494,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedListRelationFilter
     playlists?: PlaylistListRelationFilter
     dailyActivities?: UserDailyActivityListRelationFilter
-    assistanceRequests?: AssistanceRequestListRelationFilter
     contestRegistrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
     contestsCreated?: ContestListRelationFilter
@@ -17751,7 +16522,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedOrderByRelationAggregateInput
     playlists?: PlaylistOrderByRelationAggregateInput
     dailyActivities?: UserDailyActivityOrderByRelationAggregateInput
-    assistanceRequests?: AssistanceRequestOrderByRelationAggregateInput
     contestRegistrations?: ContestRegistrationOrderByRelationAggregateInput
     contestSubmissions?: ContestSubmissionOrderByRelationAggregateInput
     contestsCreated?: ContestOrderByRelationAggregateInput
@@ -17783,7 +16553,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedListRelationFilter
     playlists?: PlaylistListRelationFilter
     dailyActivities?: UserDailyActivityListRelationFilter
-    assistanceRequests?: AssistanceRequestListRelationFilter
     contestRegistrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
     contestsCreated?: ContestListRelationFilter
@@ -17916,7 +16685,6 @@ export namespace Prisma {
     submission?: SubmissionListRelationFilter
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
-    assistanceRequests?: AssistanceRequestListRelationFilter
     contestProblems?: ContestProblemListRelationFilter
   }
 
@@ -17941,7 +16709,6 @@ export namespace Prisma {
     submission?: SubmissionOrderByRelationAggregateInput
     solvedBy?: ProblemSolvedOrderByRelationAggregateInput
     problemsPlaylists?: ProblemsInPlaylistOrderByRelationAggregateInput
-    assistanceRequests?: AssistanceRequestOrderByRelationAggregateInput
     contestProblems?: ContestProblemOrderByRelationAggregateInput
   }
 
@@ -17969,7 +16736,6 @@ export namespace Prisma {
     submission?: SubmissionListRelationFilter
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
-    assistanceRequests?: AssistanceRequestListRelationFilter
     contestProblems?: ContestProblemListRelationFilter
   }, "id">
 
@@ -18410,59 +17176,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ProblemsInPlaylist"> | Date | string
   }
 
-  export type AssistanceRequestWhereInput = {
-    AND?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
-    OR?: AssistanceRequestWhereInput[]
-    NOT?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
-    id?: StringFilter<"AssistanceRequest"> | string
-    userId?: StringFilter<"AssistanceRequest"> | string
-    problemId?: StringFilter<"AssistanceRequest"> | string
-    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
-  }
-
-  export type AssistanceRequestOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    problemId?: SortOrder
-    createdAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    problem?: ProblemOrderByWithRelationInput
-  }
-
-  export type AssistanceRequestWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
-    OR?: AssistanceRequestWhereInput[]
-    NOT?: AssistanceRequestWhereInput | AssistanceRequestWhereInput[]
-    userId?: StringFilter<"AssistanceRequest"> | string
-    problemId?: StringFilter<"AssistanceRequest"> | string
-    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
-  }, "id">
-
-  export type AssistanceRequestOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    problemId?: SortOrder
-    createdAt?: SortOrder
-    _count?: AssistanceRequestCountOrderByAggregateInput
-    _max?: AssistanceRequestMaxOrderByAggregateInput
-    _min?: AssistanceRequestMinOrderByAggregateInput
-  }
-
-  export type AssistanceRequestScalarWhereWithAggregatesInput = {
-    AND?: AssistanceRequestScalarWhereWithAggregatesInput | AssistanceRequestScalarWhereWithAggregatesInput[]
-    OR?: AssistanceRequestScalarWhereWithAggregatesInput[]
-    NOT?: AssistanceRequestScalarWhereWithAggregatesInput | AssistanceRequestScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"AssistanceRequest"> | string
-    userId?: StringWithAggregatesFilter<"AssistanceRequest"> | string
-    problemId?: StringWithAggregatesFilter<"AssistanceRequest"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"AssistanceRequest"> | Date | string
-  }
-
   export type ContestWhereInput = {
     AND?: ContestWhereInput | ContestWhereInput[]
     OR?: ContestWhereInput[]
@@ -18746,7 +17459,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -18775,7 +17487,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -18804,7 +17515,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -18833,7 +17543,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -18972,7 +17681,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
@@ -18996,7 +17704,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
@@ -19020,7 +17727,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
@@ -19044,7 +17750,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
@@ -19521,53 +18226,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type AssistanceRequestCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutAssistanceRequestsInput
-    problem: ProblemCreateNestedOneWithoutAssistanceRequestsInput
-  }
-
-  export type AssistanceRequestUncheckedCreateInput = {
-    id?: string
-    userId: string
-    problemId: string
-    createdAt?: Date | string
-  }
-
-  export type AssistanceRequestUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput
-    problem?: ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput
-  }
-
-  export type AssistanceRequestUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    problemId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestCreateManyInput = {
-    id?: string
-    userId: string
-    problemId: string
-    createdAt?: Date | string
-  }
-
-  export type AssistanceRequestUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    problemId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ContestCreateInput = {
     id?: string
     title: string
@@ -19928,12 +18586,6 @@ export namespace Prisma {
     none?: UserDailyActivityWhereInput
   }
 
-  export type AssistanceRequestListRelationFilter = {
-    every?: AssistanceRequestWhereInput
-    some?: AssistanceRequestWhereInput
-    none?: AssistanceRequestWhereInput
-  }
-
   export type ContestRegistrationListRelationFilter = {
     every?: ContestRegistrationWhereInput
     some?: ContestRegistrationWhereInput
@@ -19974,10 +18626,6 @@ export namespace Prisma {
   }
 
   export type UserDailyActivityOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type AssistanceRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20567,27 +19215,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type AssistanceRequestCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    problemId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AssistanceRequestMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    problemId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type AssistanceRequestMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    problemId?: SortOrder
-    createdAt?: SortOrder
-  }
-
   export type UserNullableScalarRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -20748,13 +19375,6 @@ export namespace Prisma {
     connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
   }
 
-  export type AssistanceRequestCreateNestedManyWithoutUserInput = {
-    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
-    createMany?: AssistanceRequestCreateManyUserInputEnvelope
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-  }
-
   export type ContestRegistrationCreateNestedManyWithoutUserInput = {
     create?: XOR<ContestRegistrationCreateWithoutUserInput, ContestRegistrationUncheckedCreateWithoutUserInput> | ContestRegistrationCreateWithoutUserInput[] | ContestRegistrationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ContestRegistrationCreateOrConnectWithoutUserInput | ContestRegistrationCreateOrConnectWithoutUserInput[]
@@ -20816,13 +19436,6 @@ export namespace Prisma {
     connectOrCreate?: UserDailyActivityCreateOrConnectWithoutUserInput | UserDailyActivityCreateOrConnectWithoutUserInput[]
     createMany?: UserDailyActivityCreateManyUserInputEnvelope
     connect?: UserDailyActivityWhereUniqueInput | UserDailyActivityWhereUniqueInput[]
-  }
-
-  export type AssistanceRequestUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
-    createMany?: AssistanceRequestCreateManyUserInputEnvelope
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
   }
 
   export type ContestRegistrationUncheckedCreateNestedManyWithoutUserInput = {
@@ -20959,20 +19572,6 @@ export namespace Prisma {
     deleteMany?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
   }
 
-  export type AssistanceRequestUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
-    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutUserInput | AssistanceRequestUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AssistanceRequestCreateManyUserInputEnvelope
-    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    update?: AssistanceRequestUpdateWithWhereUniqueWithoutUserInput | AssistanceRequestUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutUserInput | AssistanceRequestUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
-  }
-
   export type ContestRegistrationUpdateManyWithoutUserNestedInput = {
     create?: XOR<ContestRegistrationCreateWithoutUserInput, ContestRegistrationUncheckedCreateWithoutUserInput> | ContestRegistrationCreateWithoutUserInput[] | ContestRegistrationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ContestRegistrationCreateOrConnectWithoutUserInput | ContestRegistrationCreateOrConnectWithoutUserInput[]
@@ -21099,20 +19698,6 @@ export namespace Prisma {
     deleteMany?: UserDailyActivityScalarWhereInput | UserDailyActivityScalarWhereInput[]
   }
 
-  export type AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput> | AssistanceRequestCreateWithoutUserInput[] | AssistanceRequestUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutUserInput | AssistanceRequestCreateOrConnectWithoutUserInput[]
-    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutUserInput | AssistanceRequestUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: AssistanceRequestCreateManyUserInputEnvelope
-    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    update?: AssistanceRequestUpdateWithWhereUniqueWithoutUserInput | AssistanceRequestUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutUserInput | AssistanceRequestUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
-  }
-
   export type ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ContestRegistrationCreateWithoutUserInput, ContestRegistrationUncheckedCreateWithoutUserInput> | ContestRegistrationCreateWithoutUserInput[] | ContestRegistrationUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ContestRegistrationCreateOrConnectWithoutUserInput | ContestRegistrationCreateOrConnectWithoutUserInput[]
@@ -21218,13 +19803,6 @@ export namespace Prisma {
     connect?: ProblemsInPlaylistWhereUniqueInput | ProblemsInPlaylistWhereUniqueInput[]
   }
 
-  export type AssistanceRequestCreateNestedManyWithoutProblemInput = {
-    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
-    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-  }
-
   export type ContestProblemCreateNestedManyWithoutProblemInput = {
     create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
@@ -21251,13 +19829,6 @@ export namespace Prisma {
     connectOrCreate?: ProblemsInPlaylistCreateOrConnectWithoutProblemInput | ProblemsInPlaylistCreateOrConnectWithoutProblemInput[]
     createMany?: ProblemsInPlaylistCreateManyProblemInputEnvelope
     connect?: ProblemsInPlaylistWhereUniqueInput | ProblemsInPlaylistWhereUniqueInput[]
-  }
-
-  export type AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput = {
-    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
-    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
   }
 
   export type ContestProblemUncheckedCreateNestedManyWithoutProblemInput = {
@@ -21331,20 +19902,6 @@ export namespace Prisma {
     deleteMany?: ProblemsInPlaylistScalarWhereInput | ProblemsInPlaylistScalarWhereInput[]
   }
 
-  export type AssistanceRequestUpdateManyWithoutProblemNestedInput = {
-    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
-    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput | AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput[]
-    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
-    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    update?: AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput | AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput[]
-    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutProblemInput | AssistanceRequestUpdateManyWithWhereWithoutProblemInput[]
-    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
-  }
-
   export type ContestProblemUpdateManyWithoutProblemNestedInput = {
     create?: XOR<ContestProblemCreateWithoutProblemInput, ContestProblemUncheckedCreateWithoutProblemInput> | ContestProblemCreateWithoutProblemInput[] | ContestProblemUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
@@ -21399,20 +19956,6 @@ export namespace Prisma {
     update?: ProblemsInPlaylistUpdateWithWhereUniqueWithoutProblemInput | ProblemsInPlaylistUpdateWithWhereUniqueWithoutProblemInput[]
     updateMany?: ProblemsInPlaylistUpdateManyWithWhereWithoutProblemInput | ProblemsInPlaylistUpdateManyWithWhereWithoutProblemInput[]
     deleteMany?: ProblemsInPlaylistScalarWhereInput | ProblemsInPlaylistScalarWhereInput[]
-  }
-
-  export type AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput = {
-    create?: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput> | AssistanceRequestCreateWithoutProblemInput[] | AssistanceRequestUncheckedCreateWithoutProblemInput[]
-    connectOrCreate?: AssistanceRequestCreateOrConnectWithoutProblemInput | AssistanceRequestCreateOrConnectWithoutProblemInput[]
-    upsert?: AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput | AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput[]
-    createMany?: AssistanceRequestCreateManyProblemInputEnvelope
-    set?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    disconnect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    delete?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    connect?: AssistanceRequestWhereUniqueInput | AssistanceRequestWhereUniqueInput[]
-    update?: AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput | AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput[]
-    updateMany?: AssistanceRequestUpdateManyWithWhereWithoutProblemInput | AssistanceRequestUpdateManyWithWhereWithoutProblemInput[]
-    deleteMany?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
   }
 
   export type ContestProblemUncheckedUpdateManyWithoutProblemNestedInput = {
@@ -21655,34 +20198,6 @@ export namespace Prisma {
     upsert?: ProblemUpsertWithoutProblemsPlaylistsInput
     connect?: ProblemWhereUniqueInput
     update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutProblemsPlaylistsInput, ProblemUpdateWithoutProblemsPlaylistsInput>, ProblemUncheckedUpdateWithoutProblemsPlaylistsInput>
-  }
-
-  export type UserCreateNestedOneWithoutAssistanceRequestsInput = {
-    create?: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssistanceRequestsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type ProblemCreateNestedOneWithoutAssistanceRequestsInput = {
-    create?: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
-    connectOrCreate?: ProblemCreateOrConnectWithoutAssistanceRequestsInput
-    connect?: ProblemWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput = {
-    create?: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutAssistanceRequestsInput
-    upsert?: UserUpsertWithoutAssistanceRequestsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssistanceRequestsInput, UserUpdateWithoutAssistanceRequestsInput>, UserUncheckedUpdateWithoutAssistanceRequestsInput>
-  }
-
-  export type ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput = {
-    create?: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
-    connectOrCreate?: ProblemCreateOrConnectWithoutAssistanceRequestsInput
-    upsert?: ProblemUpsertWithoutAssistanceRequestsInput
-    connect?: ProblemWhereUniqueInput
-    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutAssistanceRequestsInput, ProblemUpdateWithoutAssistanceRequestsInput>, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
   }
 
   export type UserCreateNestedOneWithoutContestsCreatedInput = {
@@ -22208,7 +20723,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
@@ -22231,7 +20745,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
@@ -22366,28 +20879,6 @@ export namespace Prisma {
 
   export type UserDailyActivityCreateManyUserInputEnvelope = {
     data: UserDailyActivityCreateManyUserInput | UserDailyActivityCreateManyUserInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AssistanceRequestCreateWithoutUserInput = {
-    id?: string
-    createdAt?: Date | string
-    problem: ProblemCreateNestedOneWithoutAssistanceRequestsInput
-  }
-
-  export type AssistanceRequestUncheckedCreateWithoutUserInput = {
-    id?: string
-    problemId: string
-    createdAt?: Date | string
-  }
-
-  export type AssistanceRequestCreateOrConnectWithoutUserInput = {
-    where: AssistanceRequestWhereUniqueInput
-    create: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput>
-  }
-
-  export type AssistanceRequestCreateManyUserInputEnvelope = {
-    data: AssistanceRequestCreateManyUserInput | AssistanceRequestCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -22670,32 +21161,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"UserDailyActivity"> | Date | string
   }
 
-  export type AssistanceRequestUpsertWithWhereUniqueWithoutUserInput = {
-    where: AssistanceRequestWhereUniqueInput
-    update: XOR<AssistanceRequestUpdateWithoutUserInput, AssistanceRequestUncheckedUpdateWithoutUserInput>
-    create: XOR<AssistanceRequestCreateWithoutUserInput, AssistanceRequestUncheckedCreateWithoutUserInput>
-  }
-
-  export type AssistanceRequestUpdateWithWhereUniqueWithoutUserInput = {
-    where: AssistanceRequestWhereUniqueInput
-    data: XOR<AssistanceRequestUpdateWithoutUserInput, AssistanceRequestUncheckedUpdateWithoutUserInput>
-  }
-
-  export type AssistanceRequestUpdateManyWithWhereWithoutUserInput = {
-    where: AssistanceRequestScalarWhereInput
-    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type AssistanceRequestScalarWhereInput = {
-    AND?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
-    OR?: AssistanceRequestScalarWhereInput[]
-    NOT?: AssistanceRequestScalarWhereInput | AssistanceRequestScalarWhereInput[]
-    id?: StringFilter<"AssistanceRequest"> | string
-    userId?: StringFilter<"AssistanceRequest"> | string
-    problemId?: StringFilter<"AssistanceRequest"> | string
-    createdAt?: DateTimeFilter<"AssistanceRequest"> | Date | string
-  }
-
   export type ContestRegistrationUpsertWithWhereUniqueWithoutUserInput = {
     where: ContestRegistrationWhereUniqueInput
     update: XOR<ContestRegistrationUpdateWithoutUserInput, ContestRegistrationUncheckedUpdateWithoutUserInput>
@@ -22817,7 +21282,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -22845,7 +21309,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -22889,7 +21352,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -22917,7 +21379,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -22945,7 +21406,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -22973,7 +21433,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -23079,28 +21538,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type AssistanceRequestCreateWithoutProblemInput = {
-    id?: string
-    createdAt?: Date | string
-    user: UserCreateNestedOneWithoutAssistanceRequestsInput
-  }
-
-  export type AssistanceRequestUncheckedCreateWithoutProblemInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-  }
-
-  export type AssistanceRequestCreateOrConnectWithoutProblemInput = {
-    where: AssistanceRequestWhereUniqueInput
-    create: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput>
-  }
-
-  export type AssistanceRequestCreateManyProblemInputEnvelope = {
-    data: AssistanceRequestCreateManyProblemInput | AssistanceRequestCreateManyProblemInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ContestProblemCreateWithoutProblemInput = {
     id?: string
     createdAt?: Date | string
@@ -23157,7 +21594,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -23185,7 +21621,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -23251,22 +21686,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProblemsInPlaylist"> | Date | string
   }
 
-  export type AssistanceRequestUpsertWithWhereUniqueWithoutProblemInput = {
-    where: AssistanceRequestWhereUniqueInput
-    update: XOR<AssistanceRequestUpdateWithoutProblemInput, AssistanceRequestUncheckedUpdateWithoutProblemInput>
-    create: XOR<AssistanceRequestCreateWithoutProblemInput, AssistanceRequestUncheckedCreateWithoutProblemInput>
-  }
-
-  export type AssistanceRequestUpdateWithWhereUniqueWithoutProblemInput = {
-    where: AssistanceRequestWhereUniqueInput
-    data: XOR<AssistanceRequestUpdateWithoutProblemInput, AssistanceRequestUncheckedUpdateWithoutProblemInput>
-  }
-
-  export type AssistanceRequestUpdateManyWithWhereWithoutProblemInput = {
-    where: AssistanceRequestScalarWhereInput
-    data: XOR<AssistanceRequestUpdateManyMutationInput, AssistanceRequestUncheckedUpdateManyWithoutProblemInput>
-  }
-
   export type ContestProblemUpsertWithWhereUniqueWithoutProblemInput = {
     where: ContestProblemWhereUniqueInput
     update: XOR<ContestProblemUpdateWithoutProblemInput, ContestProblemUncheckedUpdateWithoutProblemInput>
@@ -23315,7 +21734,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -23343,7 +21761,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -23374,7 +21791,6 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
@@ -23397,7 +21813,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
@@ -23497,7 +21912,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -23525,7 +21939,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -23562,7 +21975,6 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
@@ -23585,7 +21997,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
@@ -23758,7 +22169,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -23786,7 +22196,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -23817,7 +22226,6 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
@@ -23840,7 +22248,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
@@ -23881,7 +22288,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -23909,7 +22315,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -23946,7 +22351,6 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
@@ -23969,7 +22373,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
@@ -24018,7 +22421,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -24046,7 +22448,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -24106,7 +22507,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -24134,7 +22534,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -24185,7 +22584,6 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutProblemsInput
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
   }
 
@@ -24208,7 +22606,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
   }
 
@@ -24278,7 +22675,6 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutProblemsNestedInput
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
@@ -24301,243 +22697,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
-    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
-  }
-
-  export type UserCreateWithoutAssistanceRequestsInput = {
-    id?: string
-    name?: string | null
-    email: string
-    image?: string | null
-    role?: $Enums.UserRole
-    password: string
-    isBlocked?: boolean
-    isEmailVerified?: boolean
-    emailVerificationToken?: string | null
-    emailVerificationExpires?: Date | string | null
-    plan?: $Enums.PlanType
-    subscriptionExpires?: Date | string | null
-    lastActivityDate?: Date | string | null
-    currentStreak?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    problems?: ProblemCreateNestedManyWithoutUserInput
-    submission?: SubmissionCreateNestedManyWithoutUserInput
-    problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
-    playlists?: PlaylistCreateNestedManyWithoutUserInput
-    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
-    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
-    contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
-    contest?: ContestCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutAssistanceRequestsInput = {
-    id?: string
-    name?: string | null
-    email: string
-    image?: string | null
-    role?: $Enums.UserRole
-    password: string
-    isBlocked?: boolean
-    isEmailVerified?: boolean
-    emailVerificationToken?: string | null
-    emailVerificationExpires?: Date | string | null
-    plan?: $Enums.PlanType
-    subscriptionExpires?: Date | string | null
-    lastActivityDate?: Date | string | null
-    currentStreak?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
-    submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
-    problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
-    playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
-    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
-    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
-    contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
-    contest?: ContestUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutAssistanceRequestsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
-  }
-
-  export type ProblemCreateWithoutAssistanceRequestsInput = {
-    id?: string
-    title: string
-    description: string
-    difficulty: $Enums.Difficulty
-    tags?: ProblemCreatetagsInput | string[]
-    companies?: ProblemCreatecompaniesInput | string[]
-    examples: JsonNullValueInput | InputJsonValue
-    constraints: string
-    hints?: string | null
-    editorials?: string | null
-    testcases: JsonNullValueInput | InputJsonValue
-    codeSnippets: JsonNullValueInput | InputJsonValue
-    referenceSolutions: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutProblemsInput
-    submission?: SubmissionCreateNestedManyWithoutProblemInput
-    solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
-    problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
-  }
-
-  export type ProblemUncheckedCreateWithoutAssistanceRequestsInput = {
-    id?: string
-    title: string
-    description: string
-    difficulty: $Enums.Difficulty
-    tags?: ProblemCreatetagsInput | string[]
-    companies?: ProblemCreatecompaniesInput | string[]
-    userId: string
-    examples: JsonNullValueInput | InputJsonValue
-    constraints: string
-    hints?: string | null
-    editorials?: string | null
-    testcases: JsonNullValueInput | InputJsonValue
-    codeSnippets: JsonNullValueInput | InputJsonValue
-    referenceSolutions: JsonNullValueInput | InputJsonValue
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
-    solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
-    problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
-  }
-
-  export type ProblemCreateOrConnectWithoutAssistanceRequestsInput = {
-    where: ProblemWhereUniqueInput
-    create: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
-  }
-
-  export type UserUpsertWithoutAssistanceRequestsInput = {
-    update: XOR<UserUpdateWithoutAssistanceRequestsInput, UserUncheckedUpdateWithoutAssistanceRequestsInput>
-    create: XOR<UserCreateWithoutAssistanceRequestsInput, UserUncheckedCreateWithoutAssistanceRequestsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutAssistanceRequestsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutAssistanceRequestsInput, UserUncheckedUpdateWithoutAssistanceRequestsInput>
-  }
-
-  export type UserUpdateWithoutAssistanceRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    password?: StringFieldUpdateOperationsInput | string
-    isBlocked?: BoolFieldUpdateOperationsInput | boolean
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
-    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    currentStreak?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    problems?: ProblemUpdateManyWithoutUserNestedInput
-    submission?: SubmissionUpdateManyWithoutUserNestedInput
-    problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
-    playlists?: PlaylistUpdateManyWithoutUserNestedInput
-    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
-    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
-    contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
-    contest?: ContestUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutAssistanceRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
-    password?: StringFieldUpdateOperationsInput | string
-    isBlocked?: BoolFieldUpdateOperationsInput | boolean
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
-    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
-    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    currentStreak?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
-    submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
-    problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
-    playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
-    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
-    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
-    contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
-    contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type ProblemUpsertWithoutAssistanceRequestsInput = {
-    update: XOR<ProblemUpdateWithoutAssistanceRequestsInput, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
-    create: XOR<ProblemCreateWithoutAssistanceRequestsInput, ProblemUncheckedCreateWithoutAssistanceRequestsInput>
-    where?: ProblemWhereInput
-  }
-
-  export type ProblemUpdateToOneWithWhereWithoutAssistanceRequestsInput = {
-    where?: ProblemWhereInput
-    data: XOR<ProblemUpdateWithoutAssistanceRequestsInput, ProblemUncheckedUpdateWithoutAssistanceRequestsInput>
-  }
-
-  export type ProblemUpdateWithoutAssistanceRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    tags?: ProblemUpdatetagsInput | string[]
-    companies?: ProblemUpdatecompaniesInput | string[]
-    examples?: JsonNullValueInput | InputJsonValue
-    constraints?: StringFieldUpdateOperationsInput | string
-    hints?: NullableStringFieldUpdateOperationsInput | string | null
-    editorials?: NullableStringFieldUpdateOperationsInput | string | null
-    testcases?: JsonNullValueInput | InputJsonValue
-    codeSnippets?: JsonNullValueInput | InputJsonValue
-    referenceSolutions?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
-    submission?: SubmissionUpdateManyWithoutProblemNestedInput
-    solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
-    problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
-  }
-
-  export type ProblemUncheckedUpdateWithoutAssistanceRequestsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
-    tags?: ProblemUpdatetagsInput | string[]
-    companies?: ProblemUpdatecompaniesInput | string[]
-    userId?: StringFieldUpdateOperationsInput | string
-    examples?: JsonNullValueInput | InputJsonValue
-    constraints?: StringFieldUpdateOperationsInput | string
-    hints?: NullableStringFieldUpdateOperationsInput | string | null
-    editorials?: NullableStringFieldUpdateOperationsInput | string | null
-    testcases?: JsonNullValueInput | InputJsonValue
-    codeSnippets?: JsonNullValueInput | InputJsonValue
-    referenceSolutions?: JsonNullValueInput | InputJsonValue
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
-    solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
-    problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
@@ -24563,7 +22722,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contest?: ContestCreateNestedManyWithoutUserInput
@@ -24591,7 +22749,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
@@ -24694,7 +22851,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
@@ -24722,7 +22878,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
@@ -24766,7 +22921,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
@@ -24794,7 +22948,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
@@ -24881,7 +23034,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
@@ -24909,7 +23061,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
@@ -24968,7 +23119,6 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutContestProblemsInput = {
@@ -24991,7 +23141,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutContestProblemsInput = {
@@ -25069,7 +23218,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutContestProblemsInput = {
@@ -25092,7 +23240,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserCreateWithoutContestRegistrationsInput = {
@@ -25117,7 +23264,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
@@ -25145,7 +23291,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
@@ -25222,7 +23367,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
@@ -25250,7 +23394,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
@@ -25391,7 +23534,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
@@ -25419,7 +23561,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
-    assistanceRequests?: AssistanceRequestUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
@@ -25549,7 +23690,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
@@ -25577,7 +23717,6 @@ export namespace Prisma {
     problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
@@ -25640,12 +23779,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type AssistanceRequestCreateManyUserInput = {
-    id?: string
-    problemId: string
-    createdAt?: Date | string
-  }
-
   export type ContestRegistrationCreateManyUserInput = {
     id?: string
     contestId: string
@@ -25700,7 +23833,6 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
   }
 
@@ -25723,7 +23855,6 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
-    assistanceRequests?: AssistanceRequestUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
   }
 
@@ -25866,24 +23997,6 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    problem?: ProblemUpdateOneRequiredWithoutAssistanceRequestsNestedInput
-  }
-
-  export type AssistanceRequestUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    problemId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    problemId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestRegistrationUpdateWithoutUserInput = {
@@ -26033,12 +24146,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type AssistanceRequestCreateManyProblemInput = {
-    id?: string
-    userId: string
-    createdAt?: Date | string
-  }
-
   export type ContestProblemCreateManyProblemInput = {
     id?: string
     contestId: string
@@ -26138,24 +24245,6 @@ export namespace Prisma {
     playlistId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestUpdateWithoutProblemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutAssistanceRequestsNestedInput
-  }
-
-  export type AssistanceRequestUncheckedUpdateWithoutProblemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AssistanceRequestUncheckedUpdateManyWithoutProblemInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ContestProblemUpdateWithoutProblemInput = {

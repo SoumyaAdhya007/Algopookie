@@ -1,4 +1,7 @@
 import axios from "axios";
+const headers = {
+  Authorization: `Bearer ${process.env.JUDGE0_SULU_TOKEN}`,
+};
 
 export const getJudge0LanguageId = (language) => {
   const languageMap = {
@@ -14,7 +17,8 @@ export const submissionBatch = async (submissions) => {
     `${process.env.JUDGE0_API_URL}/submissions/batch?base64_encoded=false`,
     {
       submissions,
-    }
+    },
+    { headers }
   );
   console.log("Submission tokens:", data);
   return data;
@@ -31,7 +35,8 @@ export const pollBatchResults = async (tokens) => {
           tokens: tokens.join(","),
           base64_encoded: false,
         },
-      }
+      },
+      { headers }
     );
 
     const results = data.submissions;
@@ -51,5 +56,5 @@ export const getLanguageName = (languageId) => {
     63: "JavaScript",
   };
 
-  return  LANGUAGE_NAMES[languageId]||"Unknown"
+  return LANGUAGE_NAMES[languageId] || "Unknown";
 };

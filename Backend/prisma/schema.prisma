@@ -54,7 +54,6 @@ model User {
   problemSolved        ProblemSolved[]
   playlists            Playlist[]
   dailyActivities      UserDailyActivity[]
-  assistanceRequests   AssistanceRequest[]
   contestRegistrations ContestRegistration[]
   contestSubmissions   ContestSubmission[]
   contestsCreated      Contest[]             @relation("ContestCreator")
@@ -99,7 +98,6 @@ model Problem {
   submission         Submission[]
   solvedBy           ProblemSolved[]
   problemsPlaylists  ProblemsInPlaylist[]
-  assistanceRequests AssistanceRequest[]
   contestProblems    ContestProblem[]
 }
 
@@ -191,19 +189,6 @@ model ProblemsInPlaylist {
   problem  Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade)
 
   @@unique([playlistId, problemId])
-}
-
-model AssistanceRequest {
-  id        String   @id @default(uuid())
-  userId    String
-  problemId String
-  createdAt DateTime @default(now())
-
-  // RELATIONS
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
-
-  @@index([userId, problemId])
 }
 
 model Contest {

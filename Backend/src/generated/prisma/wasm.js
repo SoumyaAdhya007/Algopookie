@@ -222,13 +222,6 @@ exports.Prisma.ProblemsInPlaylistScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.AssistanceRequestScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  problemId: 'problemId',
-  createdAt: 'createdAt'
-};
-
 exports.Prisma.ContestScalarFieldEnum = {
   id: 'id',
   title: 'title',
@@ -313,7 +306,6 @@ exports.Prisma.ModelName = {
   ProblemSolved: 'ProblemSolved',
   Playlist: 'Playlist',
   ProblemsInPlaylist: 'ProblemsInPlaylist',
-  AssistanceRequest: 'AssistanceRequest',
   Contest: 'Contest',
   ContestProblem: 'ContestProblem',
   ContestRegistration: 'ContestRegistration',
