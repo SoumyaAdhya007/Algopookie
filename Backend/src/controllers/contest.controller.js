@@ -6,7 +6,6 @@ export const adminCreateContest = async (req, res) => {
     const adminId = req.user.id;
     const { title, description, startTime, endTime, problemIds } = req.body;
 
-    // Basic validation
     if (!title || typeof title !== "string") {
       return res.status(400).json({ error: "Contest title is required." });
     }
@@ -26,7 +25,6 @@ export const adminCreateContest = async (req, res) => {
         .json({ error: "problemIds must be string array." });
     }
 
-    // Create contest
     const contest = await db.contest.create({
       data: {
         title,
@@ -46,8 +44,6 @@ export const adminCreateContest = async (req, res) => {
       },
     });
 
-    // Optionally emit a socket event here to notify all clients of a new contest.
-    // e.g. socketServer.emit('contestCreated', { contestId: contest.id, title: contest.title });
     scheduleContestEvents(contest);
 
     return res.status(201).json({
@@ -142,23 +138,19 @@ export const adminUpdateContest = async (req, res) => {
       return res.status(404).json({ error: "Contest not found." });
     }
 
-    // If contest has already started, disallow updates
     if (new Date() >= existing.startTime) {
       return res
         .status(400)
         .json({ error: "Cannot update a contest that has started." });
     }
 
-    // Build data object dynamically
     const data = {};
     if (title) data.title = title;
     if (description !== undefined) data.description = description;
     if (startTime) data.startTime = new Date(startTime);
     if (endTime) data.endTime = new Date(endTime);
 
-    // If problemIds is provided, reset the ContestProblem table
     if (Array.isArray(problemIds)) {
-      // Delete old problem links, then create new ones
       await db.contestProblem.deleteMany({ where: { contestId } });
       data.problems = {
         create: problemIds.map((pid) => ({ problemId: pid })),
@@ -174,9 +166,6 @@ export const adminUpdateContest = async (req, res) => {
         },
       },
     });
-
-    // Optionally emit a socket event: contestUpdated
-    // socketServer.emit('contestUpdated', { contestId: updated.id, title: updated.title });
 
     return res.status(200).json({
       success: true,
@@ -211,11 +200,7 @@ export const adminDeleteContest = async (req, res) => {
         .json({ error: "Cannot delete a contest that has started." });
     }
 
-    // Deleting the contest will cascade‐delete ContestProblem, ContestRegistration, etc.
     await db.contest.delete({ where: { id: contestId } });
-
-    // Optionally emit a socket event: contestDeleted
-    // socketServer.emit('contestDeleted', { contestId });
 
     return res
       .status(200)
@@ -228,21 +213,6 @@ export const adminDeleteContest = async (req, res) => {
 
 export const listActiveContests = async (req, res) => {
   try {
-    const now = new Date();
-    // const contests = await db.contest.findMany({
-    //   where: { endTime: { gt: now } },
-    //   select: {
-    //     id: true,
-    //     title: true,
-    //     description: true,
-    //     startTime: true,
-    //     endTime: true,
-    //     problems: {
-    //       select: { problem: { select: { id: true, title: true } } },
-    //     },
-    //   },
-    //   orderBy: { startTime: "asc" },
-    // });
     const contests = await db.contest.findMany({
       where: {},
       select: {
@@ -291,7 +261,6 @@ export const getContestDetails = async (req, res) => {
       return res.status(404).json({ error: "Contest not found." });
     }
 
-    // If you want to restrict “only registered” users from seeing problems, check:
     const isRegistered = contest.registrations.length > 0;
     if (!isRegistered)
       return res.status(403).json({ error: "Not registered." });
@@ -331,12 +300,11 @@ export const registerForContest = async (req, res) => {
         .json({ error: "Cannot register after contest has ended." });
     }
 
-    // Upsert registration so duplicate registrations are a no-op
     await db.contestRegistration.upsert({
       where: {
         userId_contestId: { userId, contestId },
       },
-      update: {}, // no-change
+      update: {},
       create: { userId, contestId },
     });
 

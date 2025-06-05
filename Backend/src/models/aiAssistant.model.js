@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const AIAssistantChatSchema = new mongoose.Schema({
+  username: { type: String, required: true },
   userId: { type: String, required: true },
   problemId: { type: String, required: true },
   sender: { type: String, enum: ["user", "ai"], required: true },
@@ -11,7 +12,7 @@ const AIAssistantChatSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-export default AIAssistantChatModel = mongoose.model(
+export const AIAssistantChatModel = mongoose.model(
   "AIAssistantChat",
   AIAssistantChatSchema
 );

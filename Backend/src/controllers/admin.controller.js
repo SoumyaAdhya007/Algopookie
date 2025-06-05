@@ -2,7 +2,6 @@ import { db } from "../libs/db.js";
 
 export const adminGetAllUsers = async (req, res) => {
   try {
-    // Fetch all users
     const users = await db.user.findMany({
       select: {
         id: true,
@@ -33,7 +32,6 @@ export const adminGetAllUsers = async (req, res) => {
       submissionCounts.map((row) => [row.userId, row._count.id])
     );
 
-    // Assemble final array
     const result = users.map((u) => ({
       id: u.id,
       name: u.name,
