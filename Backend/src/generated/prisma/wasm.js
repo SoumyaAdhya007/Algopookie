@@ -226,6 +226,7 @@ exports.Prisma.ContestScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  difficulty: 'difficulty',
   startTime: 'startTime',
   endTime: 'endTime',
   createdBy: 'createdBy',
@@ -255,6 +256,15 @@ exports.Prisma.ContestSubmissionScalarFieldEnum = {
   submissionId: 'submissionId',
   createdAt: 'createdAt',
   userId: 'userId'
+};
+
+exports.Prisma.ContestProblemSolvedScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  contestId: 'contestId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -309,7 +319,8 @@ exports.Prisma.ModelName = {
   Contest: 'Contest',
   ContestProblem: 'ContestProblem',
   ContestRegistration: 'ContestRegistration',
-  ContestSubmission: 'ContestSubmission'
+  ContestSubmission: 'ContestSubmission',
+  ContestProblemSolved: 'ContestProblemSolved'
 };
 
 /**
