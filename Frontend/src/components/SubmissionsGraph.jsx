@@ -56,7 +56,6 @@ const SubmissionsGraph = ({ submissions }) => {
           weeklyCounts[label].tle += 1;
           break;
         default:
-          // ignore other statuses
           break;
       }
     });

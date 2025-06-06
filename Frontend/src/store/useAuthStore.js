@@ -3,6 +3,8 @@ import { axiosInstance } from "../libs/axios.js";
 import toast from "react-hot-toast";
 export const useAuthStore = create((set) => ({
   authUser: null,
+  streaks: [],
+  currentStreak: 0,
   isSigninUp: false,
   isLoggingIn: false,
   isCheckingAuth: false,
@@ -46,7 +48,7 @@ export const useAuthStore = create((set) => ({
       toast.success(res.data.message);
     } catch (error) {
       console.error("Error logging in", error);
-      toast.error("Error logging in");
+      toast.error("Error logging in", { position: "top-right" });
     } finally {
       set({ isLoggingIn: false });
     }
@@ -57,10 +59,30 @@ export const useAuthStore = create((set) => ({
       await axiosInstance.post("/auth/logout");
       set({ authUser: null });
 
-      toast.success("Logout successful");
+      toast.success("Logout successful", { position: "top-right" });
     } catch (error) {
       console.error("Error logging out", error);
-      toast.error("Error logging out");
+      toast.error("Error logging out", { position: "top-right" });
+    }
+  },
+  getStreakDetails: async () => {
+    set({ isLoggingIn: true });
+    try {
+      const res = await axiosInstance.get("/streak");
+
+      const { solvedDates, currentStreak } = res.data;
+
+      set({
+        streaks: solvedDates,
+        currentStreak: currentStreak,
+      });
+
+      console.log("streak details", solvedDates, currentStreak);
+    } catch (error) {
+      console.error("Error getting streak details", error);
+      toast.error("Error getting streak details", { position: "top-right" });
+    } finally {
+      set({ isLoggingIn: false });
     }
   },
 }));

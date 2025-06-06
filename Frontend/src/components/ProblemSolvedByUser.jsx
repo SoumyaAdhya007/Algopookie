@@ -70,7 +70,7 @@ const ProblemSolvedByUser = () => {
           <div className="card bg-gray-800 rounded-lg p-2 hover:bg-gray-700 transition-colors duration-300 cursor-pointer">
             {/* bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-colors duration-300 cursor-pointer */}
             <div className="overflow-x-auto">
-              <table className="table table-zebra w-full">
+              <table className="table w-full">
                 <thead>
                   <tr>
                     <th className="text-pink-500">Problem</th>

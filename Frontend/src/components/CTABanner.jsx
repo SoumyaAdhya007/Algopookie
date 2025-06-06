@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CTABanner = () => {
   return (
@@ -34,16 +35,16 @@ const CTABanner = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <a href="/signup">
+          <Link to="/signup">
             <button className="px-10 py-4 bg-white text-gray-900 font-bold text-lg rounded-xl hover:scale-105 transform transition duration-300 shadow-xl">
               Create Free Account
             </button>
-          </a>
-          <a href="/problems">
+          </Link>
+          <Link to="/problems">
             <button className="px-10 py-4 border-2 border-white/30 text-white font-semibold text-lg rounded-xl hover:bg-white/10 hover:border-white/50 transition duration-300">
               Browse Problems
             </button>
-          </a>
+          </Link>
         </div>
 
         {/* Stats */}

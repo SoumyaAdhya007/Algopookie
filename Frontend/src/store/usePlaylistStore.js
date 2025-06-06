@@ -20,11 +20,13 @@ export const usePlaylistStore = create((set, get) => ({
         playlists: [...state.playlists, response.data.playList],
       }));
 
-      toast.success("Playlist created successfully");
+      toast.success("Playlist created successfully", { position: "top-right" });
       return response.data.playList;
     } catch (error) {
       console.error("Error creating playlist:", error);
-      toast.error(error.response?.data?.error || "Failed to create playlist");
+      toast.error(error.response?.data?.error || "Failed to create playlist", {
+        position: "top-right",
+      });
       throw error;
     } finally {
       set({ isLoading: false });
@@ -38,7 +40,7 @@ export const usePlaylistStore = create((set, get) => ({
       set({ playlists: response.data.playlists });
     } catch (error) {
       console.error("Error fetching playlists:", error);
-      toast.error("Failed to fetch playlists");
+      toast.error("Failed to fetch playlists", { position: "top-right" });
     } finally {
       set({ isLoading: false });
     }
@@ -51,7 +53,9 @@ export const usePlaylistStore = create((set, get) => ({
       set({ currentPlaylist: response.data.playList });
     } catch (error) {
       console.error("Error fetching playlist details:", error);
-      toast.error("Failed to fetch playlist details");
+      toast.error("Failed to fetch playlist details", {
+        position: "top-right",
+      });
     } finally {
       set({ isLoading: false });
     }
@@ -72,7 +76,9 @@ export const usePlaylistStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error adding problem to playlist:", error);
-      toast.error("Failed to add problem to playlist");
+      toast.error("Failed to add problem to playlist", {
+        position: "top-right",
+      });
     } finally {
       set({ isLoading: false });
     }
@@ -93,7 +99,9 @@ export const usePlaylistStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error removing problem from playlist:", error);
-      toast.error("Failed to remove problem from playlist");
+      toast.error("Failed to remove problem from playlist", {
+        position: "top-right",
+      });
     } finally {
       set({ isLoading: false });
     }
@@ -108,10 +116,10 @@ export const usePlaylistStore = create((set, get) => ({
         playlists: state.playlists.filter((p) => p.id !== playlistId),
       }));
 
-      toast.success("Playlist deleted successfully");
+      toast.success("Playlist deleted successfully", { position: "top-right" });
     } catch (error) {
       console.error("Error deleting playlist:", error);
-      toast.error("Failed to delete playlist");
+      toast.error("Failed to delete playlist", { position: "top-right" });
     } finally {
       set({ isLoading: false });
     }
