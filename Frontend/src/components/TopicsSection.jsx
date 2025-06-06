@@ -145,11 +145,7 @@ const TopicsSection = () => {
           {topics.map((topic, index) => {
             const slug = topic.title.toLowerCase().replace(/\s+/g, "-");
             return (
-              <a
-                key={index}
-                href={`/topics/${slug}`}
-                className="group relative"
-              >
+              <a key={index} href={`#`} className="group relative">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden relative">
                   {/* Glowing Background */}
                   <div
@@ -253,7 +249,7 @@ const TopicsSection = () => {
 
         {/* View All Topics Button */}
         <div className="text-center mt-16">
-          <a href="/topics" className="group relative inline-block">
+          <a href="/#" className="group relative inline-block">
             <button className="relative px-10 py-4 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 text-white font-bold text-lg rounded-2xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/25">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-700 to-cyan-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <div className="relative flex items-center justify-center">

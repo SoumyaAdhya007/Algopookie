@@ -39,7 +39,6 @@ const Navbar = () => {
           <Link to={"/"} className="group flex items-center space-x-3">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-              <div className="relative bg-gradient-to-r from-pink-500 to-purple-600 p-2 rounded-2xl group-hover:scale-110 transition-transform duration-300"></div>
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-black bg-gradient-to-r from-pink-400 via-purple-500 to-cyan-400 bg-clip-text text-transparent group-hover:animate-pulse">
@@ -53,6 +52,8 @@ const Navbar = () => {
             <div className="hidden md:flex items-center space-x-1">
               {[
                 { name: "Problems", href: "/problems" },
+                { name: "Playlists", href: "/playlists" },
+                { name: "Contests", href: "/contests" },
                 { name: "Leaderboard", href: "/leaderboard" },
                 { name: "Profile", href: "/profile" },
               ].map((item) => (
@@ -176,6 +177,8 @@ const Navbar = () => {
           <div className="py-6 space-y-4 bg-black/50 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
             {[
               { name: "Problems", href: "/problems" },
+              { name: "Playlists", href: "/playlists" },
+              { name: "Contests", href: "/contests" },
               { name: "Leaderboard", href: "/leaderboard" },
               { name: "Profile", href: "/profile" },
             ].map((item) => (

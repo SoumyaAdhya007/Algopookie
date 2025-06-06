@@ -20,13 +20,13 @@ const PlaylistProfile = ({ setIsDrawerOpen }) => {
       <div className="bg-gray-900 rounded-2xl  p-6 h-full">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-white">My Playlists</h2>
-          <button
+          {/* <button
             onClick={() => setIsDrawerOpen(true)}
             className="flex items-center px-3 py-1.5 rounded-lg bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300"
           >
             <Plus className="h-4 w-4 mr-1" />
             Create Playlist
-          </button>
+          </button> */}
         </div>
 
         <div className="space-y-4">

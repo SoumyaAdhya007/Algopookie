@@ -13,6 +13,10 @@ import AddProblem from "./page/AddProblem";
 import ProblemPage from "./page/ProblemPage";
 import Profile from "./page/Profile";
 import ProblemsPage from "./page/ProblemsPage";
+import ContestPage from "./page/ContestsPage";
+import LeaderboardPage from "./page/LeaderboardPage";
+import PlaylistPage from "./page/PlaylistsPage";
+import NotFound from "./page/NotFoundPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -53,45 +57,30 @@ const App = () => {
             path="/profile"
             element={authUser ? <Profile /> : <Navigate to="/" />}
           />
-        </Route>
-        {/* 
-        <Route path="/problems" element={<Layout />}>
           <Route
-            path="/problems"
-            element={authUser ? <ProblemsPage /> : <Navigate to={"/"} />}
+            path="/playlists"
+            element={authUser ? <PlaylistPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/leaderboard"
+            element={authUser ? <LeaderboardPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/contests"
+            element={authUser ? <ContestPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/problem/:id"
+            element={authUser ? <ProblemPage /> : <Navigate to={"/"} />}
           />
         </Route>
-
-        <Route path="/profile" element={<Layout />}>
-          <Route
-            path="/profile"
-            element={authUser ? <Profile /> : <Navigate to="/" />}
-          />
-        </Route>
-
-        <Route path="/login" element={<Layout />}>
-          <Route
-            path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/problems" />}
-          />
-        </Route> */}
-
-        {/* <Route
-          path="/signup"
-          element={!authUser ? <SignUpPage /> : <Navigate to="/problems" />}
-        /> */}
-
-        <Route
-          path="/problem/:id"
-          element={authUser ? <ProblemPage /> : <Navigate to={"/"} />}
-        />
-
         <Route element={<AdminRoute />}>
           <Route
             path="/add-problem"
             element={authUser ? <AddProblem /> : <Navigate to="/" />}
           />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

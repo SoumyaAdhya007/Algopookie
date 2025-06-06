@@ -100,7 +100,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content z-10 menu p-2 shadow bg-gray-800 rounded-box w-52"
           >
             <li>
               <button onClick={() => setFilter("all")}>All Submissions</button>
@@ -136,7 +136,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
       </div>
 
       {filteredSubmissions.length === 0 ? (
-        <div className="card bg-base-100 shadow-xl">
+        <div className="card bg-gray-800 shadow-xl">
           <div className="card-body items-center text-center">
             <h2 className="card-title">No submissions found</h2>
           </div>
@@ -146,7 +146,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
           {filteredSubmissions.map((submission) => (
             <div
               key={submission.id}
-              className="card bg-base-100 shadow-xl overflow-hidden transition-all duration-300"
+              className="card bg-gray-800 shadow-xl overflow-hidden transition-all duration-300"
             >
               <div
                 className="card-body p-0"
@@ -156,7 +156,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
                 {/* Submission Header */}
                 <div
                   key={submission.id}
-                  className="card bg-base-200 shadow-lg hover:shadow-xl transition-shadow rounded-lg"
+                  className="card bg-gray-800 shadow-lg hover:shadow-xl transition-shadow rounded-lg"
                 >
                   <div className="card-body p-4">
                     <div className="flex items-center justify-between">
