@@ -4,7 +4,8 @@ import { scheduleContestEvents } from "../libs/contestScheduler.js";
 export const adminCreateContest = async (req, res) => {
   try {
     const adminId = req.user.id;
-    const { title, description, startTime, endTime, problemIds } = req.body;
+    const { title, description, difficulty, startTime, endTime, problemIds } =
+      req.body;
 
     if (!title || typeof title !== "string") {
       return res.status(400).json({ error: "Contest title is required." });
@@ -29,6 +30,7 @@ export const adminCreateContest = async (req, res) => {
       data: {
         title,
         description: description || null,
+        difficulty,
         startTime: start,
         endTime: end,
         createdBy: adminId,
@@ -214,21 +216,25 @@ export const adminDeleteContest = async (req, res) => {
 export const listActiveContests = async (req, res) => {
   try {
     const contests = await db.contest.findMany({
-      where: {},
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        startTime: true,
-        endTime: true,
+      include: {
+        creator: {
+          select: { id: true, name: true },
+        },
+        registrations: {
+          select: { userId: true },
+        },
         problems: {
           include: {
-            problem: true,
+            problem: true, // The actual problem details
           },
         },
+        contestSubmissions: true, // Submissions made in the contest
       },
-      orderBy: { startTime: "asc" },
+      orderBy: {
+        startTime: "asc",
+      },
     });
+
     return res.status(200).json({
       success: true,
       message: "Contest fetched Successfully",

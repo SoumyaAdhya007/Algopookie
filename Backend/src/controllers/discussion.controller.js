@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import DiscussionModel from "../models/discussion.model.js";
 
 export const registerSocketEvents = (socket, io) => {
@@ -45,32 +46,34 @@ export const getDiscussions = async (req, res) => {
 export const upvoteDiscussion = async (req, res) => {
   try {
     const { discussionId } = req.params;
-    const { discussionUserId } = req.body;
     const userId = req.user.id;
 
-    if (!discussionUserId) {
-      return res.status(400).json({ error: "Missing msgUserId in body" });
+    if (!discussionId || !mongoose.Types.ObjectId.isValid(discussionId)) {
+      return res
+        .status(400)
+        .json({ error: "Invalid or missing discussionId in URL" });
     }
 
-    const discussion = await DiscussionModel.findById({ _id: discussionId });
+    const discussion = await DiscussionModel.findById(discussionId);
     if (!discussion) {
       return res.status(404).json({ error: "Discussion not found" });
     }
-    if (userId === discussion.userId) {
+
+    if (discussion.userId.toString() === userId) {
       return res
         .status(400)
-        .json({ error: "You are not allowed to upvote your own discussion" });
+        .json({ error: "You cannot upvote your own discussion" });
     }
 
     if (discussion.upvotedBy.includes(userId)) {
       return res
         .status(400)
-        .json({ error: "User already upvoted this message" });
+        .json({ error: "You have already upvoted this discussion" });
     }
 
     if (discussion.downvotedBy.includes(userId)) {
       discussion.downvotedBy.pull(userId);
-      discussion.downvotes = Math.max(msg.downvotes - 1, 0);
+      discussion.downvotes = Math.max(discussion.downvotes - 1, 0);
     }
 
     discussion.upvotedBy.push(userId);
@@ -79,7 +82,7 @@ export const upvoteDiscussion = async (req, res) => {
     await discussion.save();
     return res.status(200).json({
       success: true,
-      message: "Discussion upvoted Successfully",
+      message: "Discussion upvoted successfully",
       discussion,
     });
   } catch (err) {
@@ -91,41 +94,43 @@ export const upvoteDiscussion = async (req, res) => {
 export const downvoteDiscussion = async (req, res) => {
   try {
     const { discussionId } = req.params;
-    const { discussionUserId } = req.body;
-    const userId = req.user.id;
+    const userId = req.user.id; 
 
-    if (!discussionUserId) {
-      return res.status(400).json({ error: "User ID is required" });
+    if (!discussionId || !mongoose.Types.ObjectId.isValid(discussionId)) {
+      return res
+        .status(400)
+        .json({ error: "Invalid or missing discussionId in URL" });
     }
 
-    const discussion = await DiscussionModel.findById({ _id: discussionId });
-
+    const discussion = await DiscussionModel.findById(discussionId);
     if (!discussion) {
       return res.status(404).json({ error: "Discussion not found" });
     }
-    if (userId === discussion.userId) {
+
+    if (discussion.userId.toString() === userId) {
       return res
         .status(400)
-        .json({ error: "You are not allowed to downvote your own discussion" });
+        .json({ error: "You cannot downvote your own discussion" });
     }
+
     if (discussion.downvotedBy.includes(userId)) {
       return res
         .status(400)
-        .json({ error: "User already downvoted this discussion" });
+        .json({ error: "You have already downvoted this discussion" });
     }
 
-    if (discussion.upvotedBy.includes(discussionUserId)) {
-      discussion.upvotedBy.pull(discussionUserId);
-      discussion.upvotes = Math.max(msg.upvotes - 1, 0);
+    if (discussion.upvotedBy.includes(userId)) {
+      discussion.upvotedBy.pull(userId);
+      discussion.upvotes = Math.max(discussion.upvotes - 1, 0);
     }
 
-    discussion.downvotedBy.push(discussionUserId);
+    discussion.downvotedBy.push(userId);
     discussion.downvotes += 1;
 
     await discussion.save();
     return res.status(200).json({
       success: true,
-      message: "Discussion downvoted Successfully",
+      message: "Discussion downvoted successfully",
       discussion,
     });
   } catch (err) {

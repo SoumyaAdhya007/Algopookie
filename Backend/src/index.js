@@ -22,7 +22,19 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
-app.set("trust proxy", 1);
+
+const io = new SocketIOServer(
+  server,
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
+
+io.on("connection", (socket) => {
+  console.log("New socket connected:", socket.id);
+  registerSocketEvents(socket, io);
+});
 
 app.use(
   cors({
@@ -30,19 +42,6 @@ app.use(
     credentials: true,
   })
 );
-
-const io = new SocketIOServer(server, {
-  cors: {
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  },
-});
-
-io.on("connection", (socket) => {
-  console.log("New socket connected:", socket.id);
-  registerSocketEvents(socket, io);
-});
-
 app.use(express.json());
 app.use(cookieParser());
 

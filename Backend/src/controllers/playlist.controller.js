@@ -153,13 +153,14 @@ export const createPlaylist = async (req, res) => {
 
 export const addProblemToPlaylist = async (req, res) => {
   try {
+    const userId = userIdSchema.parse(req.user).id;
     const { playlistId } = req.params;
     const { problemIds } = addProblemToPlaylistSchema.parse(req.body);
 
     if (!playlistId) {
       return res.status(400).json({ error: "Playlist ID is required." });
     }
-    
+
     const existing = await db.playlist.findUnique({
       where: { id: playlistId },
       select: { userId: true },

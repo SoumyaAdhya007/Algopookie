@@ -73,6 +73,11 @@ export type ContestRegistration = $Result.DefaultSelection<Prisma.$ContestRegist
  * 
  */
 export type ContestSubmission = $Result.DefaultSelection<Prisma.$ContestSubmissionPayload>
+/**
+ * Model ContestProblemSolved
+ * 
+ */
+export type ContestProblemSolved = $Result.DefaultSelection<Prisma.$ContestProblemSolvedPayload>
 
 /**
  * Enums
@@ -360,6 +365,16 @@ export class PrismaClient<
     * ```
     */
   get contestSubmission(): Prisma.ContestSubmissionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contestProblemSolved`: Exposes CRUD operations for the **ContestProblemSolved** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContestProblemSolveds
+    * const contestProblemSolveds = await prisma.contestProblemSolved.findMany()
+    * ```
+    */
+  get contestProblemSolved(): Prisma.ContestProblemSolvedDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -811,7 +826,8 @@ export namespace Prisma {
     Contest: 'Contest',
     ContestProblem: 'ContestProblem',
     ContestRegistration: 'ContestRegistration',
-    ContestSubmission: 'ContestSubmission'
+    ContestSubmission: 'ContestSubmission',
+    ContestProblemSolved: 'ContestProblemSolved'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -830,7 +846,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "userDailyActivity" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist" | "contest" | "contestProblem" | "contestRegistration" | "contestSubmission"
+      modelProps: "user" | "userDailyActivity" | "problem" | "submission" | "testCaseResult" | "problemSolved" | "playlist" | "problemsInPlaylist" | "contest" | "contestProblem" | "contestRegistration" | "contestSubmission" | "contestProblemSolved"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1722,6 +1738,80 @@ export namespace Prisma {
           }
         }
       }
+      ContestProblemSolved: {
+        payload: Prisma.$ContestProblemSolvedPayload<ExtArgs>
+        fields: Prisma.ContestProblemSolvedFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContestProblemSolvedFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContestProblemSolvedFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          findFirst: {
+            args: Prisma.ContestProblemSolvedFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContestProblemSolvedFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          findMany: {
+            args: Prisma.ContestProblemSolvedFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>[]
+          }
+          create: {
+            args: Prisma.ContestProblemSolvedCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          createMany: {
+            args: Prisma.ContestProblemSolvedCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContestProblemSolvedCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>[]
+          }
+          delete: {
+            args: Prisma.ContestProblemSolvedDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          update: {
+            args: Prisma.ContestProblemSolvedUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContestProblemSolvedDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContestProblemSolvedUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContestProblemSolvedUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContestProblemSolvedUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContestProblemSolvedPayload>
+          }
+          aggregate: {
+            args: Prisma.ContestProblemSolvedAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContestProblemSolved>
+          }
+          groupBy: {
+            args: Prisma.ContestProblemSolvedGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContestProblemSolvedGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContestProblemSolvedCountArgs<ExtArgs>
+            result: $Utils.Optional<ContestProblemSolvedCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1818,6 +1908,7 @@ export namespace Prisma {
     contestProblem?: ContestProblemOmit
     contestRegistration?: ContestRegistrationOmit
     contestSubmission?: ContestSubmissionOmit
+    contestProblemSolved?: ContestProblemSolvedOmit
   }
 
   /* Types for Logging */
@@ -1919,6 +2010,7 @@ export namespace Prisma {
     dailyActivities: number
     contestRegistrations: number
     contestSubmissions: number
+    contestProblemSolved: number
     contestsCreated: number
     contest: number
   }
@@ -1931,6 +2023,7 @@ export namespace Prisma {
     dailyActivities?: boolean | UserCountOutputTypeCountDailyActivitiesArgs
     contestRegistrations?: boolean | UserCountOutputTypeCountContestRegistrationsArgs
     contestSubmissions?: boolean | UserCountOutputTypeCountContestSubmissionsArgs
+    contestProblemSolved?: boolean | UserCountOutputTypeCountContestProblemSolvedArgs
     contestsCreated?: boolean | UserCountOutputTypeCountContestsCreatedArgs
     contest?: boolean | UserCountOutputTypeCountContestArgs
   }
@@ -1998,6 +2091,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountContestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemSolvedWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountContestsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContestWhereInput
   }
@@ -2019,6 +2119,7 @@ export namespace Prisma {
     solvedBy: number
     problemsPlaylists: number
     contestProblems: number
+    contestProblemSolved: number
   }
 
   export type ProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2026,6 +2127,7 @@ export namespace Prisma {
     solvedBy?: boolean | ProblemCountOutputTypeCountSolvedByArgs
     problemsPlaylists?: boolean | ProblemCountOutputTypeCountProblemsPlaylistsArgs
     contestProblems?: boolean | ProblemCountOutputTypeCountContestProblemsArgs
+    contestProblemSolved?: boolean | ProblemCountOutputTypeCountContestProblemSolvedArgs
   }
 
   // Custom InputTypes
@@ -2065,6 +2167,13 @@ export namespace Prisma {
    */
   export type ProblemCountOutputTypeCountContestProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContestProblemWhereInput
+  }
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountContestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemSolvedWhereInput
   }
 
 
@@ -2138,12 +2247,14 @@ export namespace Prisma {
     problems: number
     registrations: number
     contestSubmissions: number
+    contestProblemSolved: number
   }
 
   export type ContestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | ContestCountOutputTypeCountProblemsArgs
     registrations?: boolean | ContestCountOutputTypeCountRegistrationsArgs
     contestSubmissions?: boolean | ContestCountOutputTypeCountContestSubmissionsArgs
+    contestProblemSolved?: boolean | ContestCountOutputTypeCountContestProblemSolvedArgs
   }
 
   // Custom InputTypes
@@ -2176,6 +2287,13 @@ export namespace Prisma {
    */
   export type ContestCountOutputTypeCountContestSubmissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ContestSubmissionWhereInput
+  }
+
+  /**
+   * ContestCountOutputType without action
+   */
+  export type ContestCountOutputTypeCountContestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemSolvedWhereInput
   }
 
 
@@ -2476,6 +2594,7 @@ export namespace Prisma {
     dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
     contestRegistrations?: boolean | User$contestRegistrationsArgs<ExtArgs>
     contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
+    contestProblemSolved?: boolean | User$contestProblemSolvedArgs<ExtArgs>
     contestsCreated?: boolean | User$contestsCreatedArgs<ExtArgs>
     contest?: boolean | User$contestArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2547,6 +2666,7 @@ export namespace Prisma {
     dailyActivities?: boolean | User$dailyActivitiesArgs<ExtArgs>
     contestRegistrations?: boolean | User$contestRegistrationsArgs<ExtArgs>
     contestSubmissions?: boolean | User$contestSubmissionsArgs<ExtArgs>
+    contestProblemSolved?: boolean | User$contestProblemSolvedArgs<ExtArgs>
     contestsCreated?: boolean | User$contestsCreatedArgs<ExtArgs>
     contest?: boolean | User$contestArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -2564,6 +2684,7 @@ export namespace Prisma {
       dailyActivities: Prisma.$UserDailyActivityPayload<ExtArgs>[]
       contestRegistrations: Prisma.$ContestRegistrationPayload<ExtArgs>[]
       contestSubmissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
+      contestProblemSolved: Prisma.$ContestProblemSolvedPayload<ExtArgs>[]
       contestsCreated: Prisma.$ContestPayload<ExtArgs>[]
       contest: Prisma.$ContestPayload<ExtArgs>[]
     }
@@ -2985,6 +3106,7 @@ export namespace Prisma {
     dailyActivities<T extends User$dailyActivitiesArgs<ExtArgs> = {}>(args?: Subset<T, User$dailyActivitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserDailyActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestRegistrations<T extends User$contestRegistrationsArgs<ExtArgs> = {}>(args?: Subset<T, User$contestRegistrationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestRegistrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestSubmissions<T extends User$contestSubmissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$contestSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestProblemSolved<T extends User$contestProblemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, User$contestProblemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestsCreated<T extends User$contestsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$contestsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contest<T extends User$contestArgs<ExtArgs> = {}>(args?: Subset<T, User$contestArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -3585,6 +3707,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * User.contestProblemSolved
+   */
+  export type User$contestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    where?: ContestProblemSolvedWhereInput
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
   }
 
   /**
@@ -4945,6 +5091,7 @@ export namespace Prisma {
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
     contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
+    contestProblemSolved?: boolean | Problem$contestProblemSolvedArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["problem"]>
 
@@ -5014,6 +5161,7 @@ export namespace Prisma {
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
     problemsPlaylists?: boolean | Problem$problemsPlaylistsArgs<ExtArgs>
     contestProblems?: boolean | Problem$contestProblemsArgs<ExtArgs>
+    contestProblemSolved?: boolean | Problem$contestProblemSolvedArgs<ExtArgs>
     _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5031,6 +5179,7 @@ export namespace Prisma {
       solvedBy: Prisma.$ProblemSolvedPayload<ExtArgs>[]
       problemsPlaylists: Prisma.$ProblemsInPlaylistPayload<ExtArgs>[]
       contestProblems: Prisma.$ContestProblemPayload<ExtArgs>[]
+      contestProblemSolved: Prisma.$ContestProblemSolvedPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5448,6 +5597,7 @@ export namespace Prisma {
     solvedBy<T extends Problem$solvedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$solvedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     problemsPlaylists<T extends Problem$problemsPlaylistsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$problemsPlaylistsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemsInPlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestProblems<T extends Problem$contestProblemsArgs<ExtArgs> = {}>(args?: Subset<T, Problem$contestProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestProblemSolved<T extends Problem$contestProblemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, Problem$contestProblemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5982,6 +6132,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContestProblemScalarFieldEnum | ContestProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Problem.contestProblemSolved
+   */
+  export type Problem$contestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    where?: ContestProblemSolvedWhereInput
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
   }
 
   /**
@@ -11691,6 +11865,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    difficulty: $Enums.Difficulty | null
     startTime: Date | null
     endTime: Date | null
     createdBy: string | null
@@ -11703,6 +11878,7 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
+    difficulty: $Enums.Difficulty | null
     startTime: Date | null
     endTime: Date | null
     createdBy: string | null
@@ -11715,6 +11891,7 @@ export namespace Prisma {
     id: number
     title: number
     description: number
+    difficulty: number
     startTime: number
     endTime: number
     createdBy: number
@@ -11729,6 +11906,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    difficulty?: true
     startTime?: true
     endTime?: true
     createdBy?: true
@@ -11741,6 +11919,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    difficulty?: true
     startTime?: true
     endTime?: true
     createdBy?: true
@@ -11753,6 +11932,7 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
+    difficulty?: true
     startTime?: true
     endTime?: true
     createdBy?: true
@@ -11838,6 +12018,7 @@ export namespace Prisma {
     id: string
     title: string
     description: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date
     endTime: Date
     createdBy: string
@@ -11867,6 +12048,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    difficulty?: boolean
     startTime?: boolean
     endTime?: boolean
     createdBy?: boolean
@@ -11877,6 +12059,7 @@ export namespace Prisma {
     problems?: boolean | Contest$problemsArgs<ExtArgs>
     registrations?: boolean | Contest$registrationsArgs<ExtArgs>
     contestSubmissions?: boolean | Contest$contestSubmissionsArgs<ExtArgs>
+    contestProblemSolved?: boolean | Contest$contestProblemSolvedArgs<ExtArgs>
     User?: boolean | Contest$UserArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["contest"]>
@@ -11885,6 +12068,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    difficulty?: boolean
     startTime?: boolean
     endTime?: boolean
     createdBy?: boolean
@@ -11899,6 +12083,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    difficulty?: boolean
     startTime?: boolean
     endTime?: boolean
     createdBy?: boolean
@@ -11913,6 +12098,7 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
+    difficulty?: boolean
     startTime?: boolean
     endTime?: boolean
     createdBy?: boolean
@@ -11921,12 +12107,13 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "startTime" | "endTime" | "createdBy" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["contest"]>
+  export type ContestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficulty" | "startTime" | "endTime" | "createdBy" | "createdAt" | "updatedAt" | "userId", ExtArgs["result"]["contest"]>
   export type ContestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     problems?: boolean | Contest$problemsArgs<ExtArgs>
     registrations?: boolean | Contest$registrationsArgs<ExtArgs>
     contestSubmissions?: boolean | Contest$contestSubmissionsArgs<ExtArgs>
+    contestProblemSolved?: boolean | Contest$contestProblemSolvedArgs<ExtArgs>
     User?: boolean | Contest$UserArgs<ExtArgs>
     _count?: boolean | ContestCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11946,12 +12133,14 @@ export namespace Prisma {
       problems: Prisma.$ContestProblemPayload<ExtArgs>[]
       registrations: Prisma.$ContestRegistrationPayload<ExtArgs>[]
       contestSubmissions: Prisma.$ContestSubmissionPayload<ExtArgs>[]
+      contestProblemSolved: Prisma.$ContestProblemSolvedPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       description: string | null
+      difficulty: $Enums.Difficulty
       startTime: Date
       endTime: Date
       createdBy: string
@@ -12356,6 +12545,7 @@ export namespace Prisma {
     problems<T extends Contest$problemsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$problemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     registrations<T extends Contest$registrationsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$registrationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestRegistrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     contestSubmissions<T extends Contest$contestSubmissionsArgs<ExtArgs> = {}>(args?: Subset<T, Contest$contestSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    contestProblemSolved<T extends Contest$contestProblemSolvedArgs<ExtArgs> = {}>(args?: Subset<T, Contest$contestProblemSolvedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     User<T extends Contest$UserArgs<ExtArgs> = {}>(args?: Subset<T, Contest$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12389,6 +12579,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Contest", 'String'>
     readonly title: FieldRef<"Contest", 'String'>
     readonly description: FieldRef<"Contest", 'String'>
+    readonly difficulty: FieldRef<"Contest", 'Difficulty'>
     readonly startTime: FieldRef<"Contest", 'DateTime'>
     readonly endTime: FieldRef<"Contest", 'DateTime'>
     readonly createdBy: FieldRef<"Contest", 'String'>
@@ -12860,6 +13051,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ContestSubmissionScalarFieldEnum | ContestSubmissionScalarFieldEnum[]
+  }
+
+  /**
+   * Contest.contestProblemSolved
+   */
+  export type Contest$contestProblemSolvedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    where?: ContestProblemSolvedWhereInput
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
   }
 
   /**
@@ -16113,6 +16328,1093 @@ export namespace Prisma {
 
 
   /**
+   * Model ContestProblemSolved
+   */
+
+  export type AggregateContestProblemSolved = {
+    _count: ContestProblemSolvedCountAggregateOutputType | null
+    _min: ContestProblemSolvedMinAggregateOutputType | null
+    _max: ContestProblemSolvedMaxAggregateOutputType | null
+  }
+
+  export type ContestProblemSolvedMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    contestId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestProblemSolvedMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    contestId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ContestProblemSolvedCountAggregateOutputType = {
+    id: number
+    userId: number
+    problemId: number
+    contestId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ContestProblemSolvedMinAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    contestId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestProblemSolvedMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    contestId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ContestProblemSolvedCountAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    contestId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ContestProblemSolvedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestProblemSolved to aggregate.
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblemSolveds to fetch.
+     */
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblemSolveds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblemSolveds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ContestProblemSolveds
+    **/
+    _count?: true | ContestProblemSolvedCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContestProblemSolvedMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContestProblemSolvedMaxAggregateInputType
+  }
+
+  export type GetContestProblemSolvedAggregateType<T extends ContestProblemSolvedAggregateArgs> = {
+        [P in keyof T & keyof AggregateContestProblemSolved]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContestProblemSolved[P]>
+      : GetScalarType<T[P], AggregateContestProblemSolved[P]>
+  }
+
+
+
+
+  export type ContestProblemSolvedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContestProblemSolvedWhereInput
+    orderBy?: ContestProblemSolvedOrderByWithAggregationInput | ContestProblemSolvedOrderByWithAggregationInput[]
+    by: ContestProblemSolvedScalarFieldEnum[] | ContestProblemSolvedScalarFieldEnum
+    having?: ContestProblemSolvedScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContestProblemSolvedCountAggregateInputType | true
+    _min?: ContestProblemSolvedMinAggregateInputType
+    _max?: ContestProblemSolvedMaxAggregateInputType
+  }
+
+  export type ContestProblemSolvedGroupByOutputType = {
+    id: string
+    userId: string
+    problemId: string
+    contestId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ContestProblemSolvedCountAggregateOutputType | null
+    _min: ContestProblemSolvedMinAggregateOutputType | null
+    _max: ContestProblemSolvedMaxAggregateOutputType | null
+  }
+
+  type GetContestProblemSolvedGroupByPayload<T extends ContestProblemSolvedGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContestProblemSolvedGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContestProblemSolvedGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContestProblemSolvedGroupByOutputType[P]>
+            : GetScalarType<T[P], ContestProblemSolvedGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContestProblemSolvedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    contestId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblemSolved"]>
+
+  export type ContestProblemSolvedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    contestId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblemSolved"]>
+
+  export type ContestProblemSolvedSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    contestId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["contestProblemSolved"]>
+
+  export type ContestProblemSolvedSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    contestId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ContestProblemSolvedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "contestId" | "createdAt" | "updatedAt", ExtArgs["result"]["contestProblemSolved"]>
+  export type ContestProblemSolvedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+  export type ContestProblemSolvedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+  export type ContestProblemSolvedIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+    contest?: boolean | ContestDefaultArgs<ExtArgs>
+  }
+
+  export type $ContestProblemSolvedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ContestProblemSolved"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      problem: Prisma.$ProblemPayload<ExtArgs>
+      contest: Prisma.$ContestPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      problemId: string
+      contestId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["contestProblemSolved"]>
+    composites: {}
+  }
+
+  type ContestProblemSolvedGetPayload<S extends boolean | null | undefined | ContestProblemSolvedDefaultArgs> = $Result.GetResult<Prisma.$ContestProblemSolvedPayload, S>
+
+  type ContestProblemSolvedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContestProblemSolvedFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContestProblemSolvedCountAggregateInputType | true
+    }
+
+  export interface ContestProblemSolvedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ContestProblemSolved'], meta: { name: 'ContestProblemSolved' } }
+    /**
+     * Find zero or one ContestProblemSolved that matches the filter.
+     * @param {ContestProblemSolvedFindUniqueArgs} args - Arguments to find a ContestProblemSolved
+     * @example
+     * // Get one ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContestProblemSolvedFindUniqueArgs>(args: SelectSubset<T, ContestProblemSolvedFindUniqueArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ContestProblemSolved that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContestProblemSolvedFindUniqueOrThrowArgs} args - Arguments to find a ContestProblemSolved
+     * @example
+     * // Get one ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContestProblemSolvedFindUniqueOrThrowArgs>(args: SelectSubset<T, ContestProblemSolvedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestProblemSolved that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedFindFirstArgs} args - Arguments to find a ContestProblemSolved
+     * @example
+     * // Get one ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContestProblemSolvedFindFirstArgs>(args?: SelectSubset<T, ContestProblemSolvedFindFirstArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ContestProblemSolved that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedFindFirstOrThrowArgs} args - Arguments to find a ContestProblemSolved
+     * @example
+     * // Get one ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContestProblemSolvedFindFirstOrThrowArgs>(args?: SelectSubset<T, ContestProblemSolvedFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ContestProblemSolveds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ContestProblemSolveds
+     * const contestProblemSolveds = await prisma.contestProblemSolved.findMany()
+     * 
+     * // Get first 10 ContestProblemSolveds
+     * const contestProblemSolveds = await prisma.contestProblemSolved.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const contestProblemSolvedWithIdOnly = await prisma.contestProblemSolved.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContestProblemSolvedFindManyArgs>(args?: SelectSubset<T, ContestProblemSolvedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ContestProblemSolved.
+     * @param {ContestProblemSolvedCreateArgs} args - Arguments to create a ContestProblemSolved.
+     * @example
+     * // Create one ContestProblemSolved
+     * const ContestProblemSolved = await prisma.contestProblemSolved.create({
+     *   data: {
+     *     // ... data to create a ContestProblemSolved
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContestProblemSolvedCreateArgs>(args: SelectSubset<T, ContestProblemSolvedCreateArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ContestProblemSolveds.
+     * @param {ContestProblemSolvedCreateManyArgs} args - Arguments to create many ContestProblemSolveds.
+     * @example
+     * // Create many ContestProblemSolveds
+     * const contestProblemSolved = await prisma.contestProblemSolved.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContestProblemSolvedCreateManyArgs>(args?: SelectSubset<T, ContestProblemSolvedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ContestProblemSolveds and returns the data saved in the database.
+     * @param {ContestProblemSolvedCreateManyAndReturnArgs} args - Arguments to create many ContestProblemSolveds.
+     * @example
+     * // Create many ContestProblemSolveds
+     * const contestProblemSolved = await prisma.contestProblemSolved.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ContestProblemSolveds and only return the `id`
+     * const contestProblemSolvedWithIdOnly = await prisma.contestProblemSolved.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContestProblemSolvedCreateManyAndReturnArgs>(args?: SelectSubset<T, ContestProblemSolvedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ContestProblemSolved.
+     * @param {ContestProblemSolvedDeleteArgs} args - Arguments to delete one ContestProblemSolved.
+     * @example
+     * // Delete one ContestProblemSolved
+     * const ContestProblemSolved = await prisma.contestProblemSolved.delete({
+     *   where: {
+     *     // ... filter to delete one ContestProblemSolved
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContestProblemSolvedDeleteArgs>(args: SelectSubset<T, ContestProblemSolvedDeleteArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ContestProblemSolved.
+     * @param {ContestProblemSolvedUpdateArgs} args - Arguments to update one ContestProblemSolved.
+     * @example
+     * // Update one ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContestProblemSolvedUpdateArgs>(args: SelectSubset<T, ContestProblemSolvedUpdateArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ContestProblemSolveds.
+     * @param {ContestProblemSolvedDeleteManyArgs} args - Arguments to filter ContestProblemSolveds to delete.
+     * @example
+     * // Delete a few ContestProblemSolveds
+     * const { count } = await prisma.contestProblemSolved.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContestProblemSolvedDeleteManyArgs>(args?: SelectSubset<T, ContestProblemSolvedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestProblemSolveds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ContestProblemSolveds
+     * const contestProblemSolved = await prisma.contestProblemSolved.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContestProblemSolvedUpdateManyArgs>(args: SelectSubset<T, ContestProblemSolvedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ContestProblemSolveds and returns the data updated in the database.
+     * @param {ContestProblemSolvedUpdateManyAndReturnArgs} args - Arguments to update many ContestProblemSolveds.
+     * @example
+     * // Update many ContestProblemSolveds
+     * const contestProblemSolved = await prisma.contestProblemSolved.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ContestProblemSolveds and only return the `id`
+     * const contestProblemSolvedWithIdOnly = await prisma.contestProblemSolved.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContestProblemSolvedUpdateManyAndReturnArgs>(args: SelectSubset<T, ContestProblemSolvedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ContestProblemSolved.
+     * @param {ContestProblemSolvedUpsertArgs} args - Arguments to update or create a ContestProblemSolved.
+     * @example
+     * // Update or create a ContestProblemSolved
+     * const contestProblemSolved = await prisma.contestProblemSolved.upsert({
+     *   create: {
+     *     // ... data to create a ContestProblemSolved
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ContestProblemSolved we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContestProblemSolvedUpsertArgs>(args: SelectSubset<T, ContestProblemSolvedUpsertArgs<ExtArgs>>): Prisma__ContestProblemSolvedClient<$Result.GetResult<Prisma.$ContestProblemSolvedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ContestProblemSolveds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedCountArgs} args - Arguments to filter ContestProblemSolveds to count.
+     * @example
+     * // Count the number of ContestProblemSolveds
+     * const count = await prisma.contestProblemSolved.count({
+     *   where: {
+     *     // ... the filter for the ContestProblemSolveds we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContestProblemSolvedCountArgs>(
+      args?: Subset<T, ContestProblemSolvedCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContestProblemSolvedCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ContestProblemSolved.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContestProblemSolvedAggregateArgs>(args: Subset<T, ContestProblemSolvedAggregateArgs>): Prisma.PrismaPromise<GetContestProblemSolvedAggregateType<T>>
+
+    /**
+     * Group by ContestProblemSolved.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContestProblemSolvedGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContestProblemSolvedGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContestProblemSolvedGroupByArgs['orderBy'] }
+        : { orderBy?: ContestProblemSolvedGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContestProblemSolvedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContestProblemSolvedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ContestProblemSolved model
+   */
+  readonly fields: ContestProblemSolvedFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ContestProblemSolved.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContestProblemSolvedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    contest<T extends ContestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ContestDefaultArgs<ExtArgs>>): Prisma__ContestClient<$Result.GetResult<Prisma.$ContestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ContestProblemSolved model
+   */
+  interface ContestProblemSolvedFieldRefs {
+    readonly id: FieldRef<"ContestProblemSolved", 'String'>
+    readonly userId: FieldRef<"ContestProblemSolved", 'String'>
+    readonly problemId: FieldRef<"ContestProblemSolved", 'String'>
+    readonly contestId: FieldRef<"ContestProblemSolved", 'String'>
+    readonly createdAt: FieldRef<"ContestProblemSolved", 'DateTime'>
+    readonly updatedAt: FieldRef<"ContestProblemSolved", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ContestProblemSolved findUnique
+   */
+  export type ContestProblemSolvedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblemSolved to fetch.
+     */
+    where: ContestProblemSolvedWhereUniqueInput
+  }
+
+  /**
+   * ContestProblemSolved findUniqueOrThrow
+   */
+  export type ContestProblemSolvedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblemSolved to fetch.
+     */
+    where: ContestProblemSolvedWhereUniqueInput
+  }
+
+  /**
+   * ContestProblemSolved findFirst
+   */
+  export type ContestProblemSolvedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblemSolved to fetch.
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblemSolveds to fetch.
+     */
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestProblemSolveds.
+     */
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblemSolveds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblemSolveds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestProblemSolveds.
+     */
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblemSolved findFirstOrThrow
+   */
+  export type ContestProblemSolvedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblemSolved to fetch.
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblemSolveds to fetch.
+     */
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ContestProblemSolveds.
+     */
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblemSolveds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblemSolveds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ContestProblemSolveds.
+     */
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblemSolved findMany
+   */
+  export type ContestProblemSolvedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter, which ContestProblemSolveds to fetch.
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ContestProblemSolveds to fetch.
+     */
+    orderBy?: ContestProblemSolvedOrderByWithRelationInput | ContestProblemSolvedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ContestProblemSolveds.
+     */
+    cursor?: ContestProblemSolvedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ContestProblemSolveds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ContestProblemSolveds.
+     */
+    skip?: number
+    distinct?: ContestProblemSolvedScalarFieldEnum | ContestProblemSolvedScalarFieldEnum[]
+  }
+
+  /**
+   * ContestProblemSolved create
+   */
+  export type ContestProblemSolvedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ContestProblemSolved.
+     */
+    data: XOR<ContestProblemSolvedCreateInput, ContestProblemSolvedUncheckedCreateInput>
+  }
+
+  /**
+   * ContestProblemSolved createMany
+   */
+  export type ContestProblemSolvedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ContestProblemSolveds.
+     */
+    data: ContestProblemSolvedCreateManyInput | ContestProblemSolvedCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ContestProblemSolved createManyAndReturn
+   */
+  export type ContestProblemSolvedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * The data used to create many ContestProblemSolveds.
+     */
+    data: ContestProblemSolvedCreateManyInput | ContestProblemSolvedCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestProblemSolved update
+   */
+  export type ContestProblemSolvedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ContestProblemSolved.
+     */
+    data: XOR<ContestProblemSolvedUpdateInput, ContestProblemSolvedUncheckedUpdateInput>
+    /**
+     * Choose, which ContestProblemSolved to update.
+     */
+    where: ContestProblemSolvedWhereUniqueInput
+  }
+
+  /**
+   * ContestProblemSolved updateMany
+   */
+  export type ContestProblemSolvedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ContestProblemSolveds.
+     */
+    data: XOR<ContestProblemSolvedUpdateManyMutationInput, ContestProblemSolvedUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestProblemSolveds to update
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * Limit how many ContestProblemSolveds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestProblemSolved updateManyAndReturn
+   */
+  export type ContestProblemSolvedUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * The data used to update ContestProblemSolveds.
+     */
+    data: XOR<ContestProblemSolvedUpdateManyMutationInput, ContestProblemSolvedUncheckedUpdateManyInput>
+    /**
+     * Filter which ContestProblemSolveds to update
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * Limit how many ContestProblemSolveds to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ContestProblemSolved upsert
+   */
+  export type ContestProblemSolvedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ContestProblemSolved to update in case it exists.
+     */
+    where: ContestProblemSolvedWhereUniqueInput
+    /**
+     * In case the ContestProblemSolved found by the `where` argument doesn't exist, create a new ContestProblemSolved with this data.
+     */
+    create: XOR<ContestProblemSolvedCreateInput, ContestProblemSolvedUncheckedCreateInput>
+    /**
+     * In case the ContestProblemSolved was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContestProblemSolvedUpdateInput, ContestProblemSolvedUncheckedUpdateInput>
+  }
+
+  /**
+   * ContestProblemSolved delete
+   */
+  export type ContestProblemSolvedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+    /**
+     * Filter which ContestProblemSolved to delete.
+     */
+    where: ContestProblemSolvedWhereUniqueInput
+  }
+
+  /**
+   * ContestProblemSolved deleteMany
+   */
+  export type ContestProblemSolvedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ContestProblemSolveds to delete
+     */
+    where?: ContestProblemSolvedWhereInput
+    /**
+     * Limit how many ContestProblemSolveds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ContestProblemSolved without action
+   */
+  export type ContestProblemSolvedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ContestProblemSolved
+     */
+    select?: ContestProblemSolvedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ContestProblemSolved
+     */
+    omit?: ContestProblemSolvedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ContestProblemSolvedInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -16259,6 +17561,7 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
+    difficulty: 'difficulty',
     startTime: 'startTime',
     endTime: 'endTime',
     createdBy: 'createdBy',
@@ -16300,6 +17603,18 @@ export namespace Prisma {
   };
 
   export type ContestSubmissionScalarFieldEnum = (typeof ContestSubmissionScalarFieldEnum)[keyof typeof ContestSubmissionScalarFieldEnum]
+
+
+  export const ContestProblemSolvedScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    problemId: 'problemId',
+    contestId: 'contestId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ContestProblemSolvedScalarFieldEnum = (typeof ContestProblemSolvedScalarFieldEnum)[keyof typeof ContestProblemSolvedScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -16496,6 +17811,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityListRelationFilter
     contestRegistrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
     contestsCreated?: ContestListRelationFilter
     contest?: ContestListRelationFilter
   }
@@ -16524,6 +17840,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityOrderByRelationAggregateInput
     contestRegistrations?: ContestRegistrationOrderByRelationAggregateInput
     contestSubmissions?: ContestSubmissionOrderByRelationAggregateInput
+    contestProblemSolved?: ContestProblemSolvedOrderByRelationAggregateInput
     contestsCreated?: ContestOrderByRelationAggregateInput
     contest?: ContestOrderByRelationAggregateInput
   }
@@ -16555,6 +17872,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityListRelationFilter
     contestRegistrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
     contestsCreated?: ContestListRelationFilter
     contest?: ContestListRelationFilter
   }, "id" | "email">
@@ -16686,6 +18004,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
     contestProblems?: ContestProblemListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
   }
 
   export type ProblemOrderByWithRelationInput = {
@@ -16710,6 +18029,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedOrderByRelationAggregateInput
     problemsPlaylists?: ProblemsInPlaylistOrderByRelationAggregateInput
     contestProblems?: ContestProblemOrderByRelationAggregateInput
+    contestProblemSolved?: ContestProblemSolvedOrderByRelationAggregateInput
   }
 
   export type ProblemWhereUniqueInput = Prisma.AtLeast<{
@@ -16737,6 +18057,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedListRelationFilter
     problemsPlaylists?: ProblemsInPlaylistListRelationFilter
     contestProblems?: ContestProblemListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
   }, "id">
 
   export type ProblemOrderByWithAggregationInput = {
@@ -17183,6 +18504,7 @@ export namespace Prisma {
     id?: StringFilter<"Contest"> | string
     title?: StringFilter<"Contest"> | string
     description?: StringNullableFilter<"Contest"> | string | null
+    difficulty?: EnumDifficultyFilter<"Contest"> | $Enums.Difficulty
     startTime?: DateTimeFilter<"Contest"> | Date | string
     endTime?: DateTimeFilter<"Contest"> | Date | string
     createdBy?: StringFilter<"Contest"> | string
@@ -17193,6 +18515,7 @@ export namespace Prisma {
     problems?: ContestProblemListRelationFilter
     registrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
@@ -17200,6 +18523,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    difficulty?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
     createdBy?: SortOrder
@@ -17210,6 +18534,7 @@ export namespace Prisma {
     problems?: ContestProblemOrderByRelationAggregateInput
     registrations?: ContestRegistrationOrderByRelationAggregateInput
     contestSubmissions?: ContestSubmissionOrderByRelationAggregateInput
+    contestProblemSolved?: ContestProblemSolvedOrderByRelationAggregateInput
     User?: UserOrderByWithRelationInput
   }
 
@@ -17220,6 +18545,7 @@ export namespace Prisma {
     NOT?: ContestWhereInput | ContestWhereInput[]
     title?: StringFilter<"Contest"> | string
     description?: StringNullableFilter<"Contest"> | string | null
+    difficulty?: EnumDifficultyFilter<"Contest"> | $Enums.Difficulty
     startTime?: DateTimeFilter<"Contest"> | Date | string
     endTime?: DateTimeFilter<"Contest"> | Date | string
     createdBy?: StringFilter<"Contest"> | string
@@ -17230,6 +18556,7 @@ export namespace Prisma {
     problems?: ContestProblemListRelationFilter
     registrations?: ContestRegistrationListRelationFilter
     contestSubmissions?: ContestSubmissionListRelationFilter
+    contestProblemSolved?: ContestProblemSolvedListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
@@ -17237,6 +18564,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
+    difficulty?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
     createdBy?: SortOrder
@@ -17255,6 +18583,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Contest"> | string
     title?: StringWithAggregatesFilter<"Contest"> | string
     description?: StringNullableWithAggregatesFilter<"Contest"> | string | null
+    difficulty?: EnumDifficultyWithAggregatesFilter<"Contest"> | $Enums.Difficulty
     startTime?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
     endTime?: DateTimeWithAggregatesFilter<"Contest"> | Date | string
     createdBy?: StringWithAggregatesFilter<"Contest"> | string
@@ -17437,6 +18766,73 @@ export namespace Prisma {
     userId?: StringNullableWithAggregatesFilter<"ContestSubmission"> | string | null
   }
 
+  export type ContestProblemSolvedWhereInput = {
+    AND?: ContestProblemSolvedWhereInput | ContestProblemSolvedWhereInput[]
+    OR?: ContestProblemSolvedWhereInput[]
+    NOT?: ContestProblemSolvedWhereInput | ContestProblemSolvedWhereInput[]
+    id?: StringFilter<"ContestProblemSolved"> | string
+    userId?: StringFilter<"ContestProblemSolved"> | string
+    problemId?: StringFilter<"ContestProblemSolved"> | string
+    contestId?: StringFilter<"ContestProblemSolved"> | string
+    createdAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+  }
+
+  export type ContestProblemSolvedOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    contestId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    problem?: ProblemOrderByWithRelationInput
+    contest?: ContestOrderByWithRelationInput
+  }
+
+  export type ContestProblemSolvedWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_problemId_contestId?: ContestProblemSolvedUserIdProblemIdContestIdCompoundUniqueInput
+    AND?: ContestProblemSolvedWhereInput | ContestProblemSolvedWhereInput[]
+    OR?: ContestProblemSolvedWhereInput[]
+    NOT?: ContestProblemSolvedWhereInput | ContestProblemSolvedWhereInput[]
+    userId?: StringFilter<"ContestProblemSolved"> | string
+    problemId?: StringFilter<"ContestProblemSolved"> | string
+    contestId?: StringFilter<"ContestProblemSolved"> | string
+    createdAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+    contest?: XOR<ContestScalarRelationFilter, ContestWhereInput>
+  }, "id" | "userId_problemId_contestId">
+
+  export type ContestProblemSolvedOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    contestId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ContestProblemSolvedCountOrderByAggregateInput
+    _max?: ContestProblemSolvedMaxOrderByAggregateInput
+    _min?: ContestProblemSolvedMinOrderByAggregateInput
+  }
+
+  export type ContestProblemSolvedScalarWhereWithAggregatesInput = {
+    AND?: ContestProblemSolvedScalarWhereWithAggregatesInput | ContestProblemSolvedScalarWhereWithAggregatesInput[]
+    OR?: ContestProblemSolvedScalarWhereWithAggregatesInput[]
+    NOT?: ContestProblemSolvedScalarWhereWithAggregatesInput | ContestProblemSolvedScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ContestProblemSolved"> | string
+    userId?: StringWithAggregatesFilter<"ContestProblemSolved"> | string
+    problemId?: StringWithAggregatesFilter<"ContestProblemSolved"> | string
+    contestId?: StringWithAggregatesFilter<"ContestProblemSolved"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ContestProblemSolved"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ContestProblemSolved"> | Date | string
+  }
+
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -17461,6 +18857,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -17489,6 +18886,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -17517,6 +18915,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -17545,6 +18944,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -17682,6 +19082,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateInput = {
@@ -17705,6 +19106,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUpdateInput = {
@@ -17728,6 +19130,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateInput = {
@@ -17751,6 +19154,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemCreateManyInput = {
@@ -18230,6 +19634,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -18238,6 +19643,7 @@ export namespace Prisma {
     problems?: ContestProblemCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
     User?: UserCreateNestedOneWithoutContestInput
   }
 
@@ -18245,6 +19651,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -18254,12 +19661,14 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18268,6 +19677,7 @@ export namespace Prisma {
     problems?: ContestProblemUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
     User?: UserUpdateOneWithoutContestNestedInput
   }
 
@@ -18275,6 +19685,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -18284,12 +19695,14 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ContestCreateManyInput = {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -18302,6 +19715,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18312,6 +19726,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -18474,6 +19889,66 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type ContestProblemSolvedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestProblemSolvedInput
+    problem: ProblemCreateNestedOneWithoutContestProblemSolvedInput
+    contest: ContestCreateNestedOneWithoutContestProblemSolvedInput
+  }
+
+  export type ContestProblemSolvedUncheckedCreateInput = {
+    id?: string
+    userId: string
+    problemId: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+    contest?: ContestUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemSolvedCreateManyInput = {
+    id?: string
+    userId: string
+    problemId: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -18598,6 +20073,12 @@ export namespace Prisma {
     none?: ContestSubmissionWhereInput
   }
 
+  export type ContestProblemSolvedListRelationFilter = {
+    every?: ContestProblemSolvedWhereInput
+    some?: ContestProblemSolvedWhereInput
+    none?: ContestProblemSolvedWhereInput
+  }
+
   export type ContestListRelationFilter = {
     every?: ContestWhereInput
     some?: ContestWhereInput
@@ -18634,6 +20115,10 @@ export namespace Prisma {
   }
 
   export type ContestSubmissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ContestProblemSolvedOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19224,6 +20709,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    difficulty?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
     createdBy?: SortOrder
@@ -19236,6 +20722,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    difficulty?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
     createdBy?: SortOrder
@@ -19248,6 +20735,7 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
+    difficulty?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
     createdBy?: SortOrder
@@ -19340,6 +20828,39 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type ContestProblemSolvedUserIdProblemIdContestIdCompoundUniqueInput = {
+    userId: string
+    problemId: string
+    contestId: string
+  }
+
+  export type ContestProblemSolvedCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    contestId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestProblemSolvedMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    contestId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ContestProblemSolvedMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    contestId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ProblemCreateNestedManyWithoutUserInput = {
     create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
@@ -19387,6 +20908,13 @@ export namespace Prisma {
     connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
     createMany?: ContestSubmissionCreateManyUserInputEnvelope
     connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestProblemSolvedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput> | ContestProblemSolvedCreateWithoutUserInput[] | ContestProblemSolvedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutUserInput | ContestProblemSolvedCreateOrConnectWithoutUserInput[]
+    createMany?: ContestProblemSolvedCreateManyUserInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
   }
 
   export type ContestCreateNestedManyWithoutCreatorInput = {
@@ -19450,6 +20978,13 @@ export namespace Prisma {
     connectOrCreate?: ContestSubmissionCreateOrConnectWithoutUserInput | ContestSubmissionCreateOrConnectWithoutUserInput[]
     createMany?: ContestSubmissionCreateManyUserInputEnvelope
     connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput> | ContestProblemSolvedCreateWithoutUserInput[] | ContestProblemSolvedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutUserInput | ContestProblemSolvedCreateOrConnectWithoutUserInput[]
+    createMany?: ContestProblemSolvedCreateManyUserInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
   }
 
   export type ContestUncheckedCreateNestedManyWithoutCreatorInput = {
@@ -19600,6 +21135,20 @@ export namespace Prisma {
     deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
   }
 
+  export type ContestProblemSolvedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput> | ContestProblemSolvedCreateWithoutUserInput[] | ContestProblemSolvedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutUserInput | ContestProblemSolvedCreateOrConnectWithoutUserInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutUserInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestProblemSolvedCreateManyUserInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutUserInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutUserInput | ContestProblemSolvedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+  }
+
   export type ContestUpdateManyWithoutCreatorNestedInput = {
     create?: XOR<ContestCreateWithoutCreatorInput, ContestUncheckedCreateWithoutCreatorInput> | ContestCreateWithoutCreatorInput[] | ContestUncheckedCreateWithoutCreatorInput[]
     connectOrCreate?: ContestCreateOrConnectWithoutCreatorInput | ContestCreateOrConnectWithoutCreatorInput[]
@@ -19726,6 +21275,20 @@ export namespace Prisma {
     deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
   }
 
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput> | ContestProblemSolvedCreateWithoutUserInput[] | ContestProblemSolvedUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutUserInput | ContestProblemSolvedCreateOrConnectWithoutUserInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutUserInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ContestProblemSolvedCreateManyUserInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutUserInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutUserInput | ContestProblemSolvedUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+  }
+
   export type ContestUncheckedUpdateManyWithoutCreatorNestedInput = {
     create?: XOR<ContestCreateWithoutCreatorInput, ContestUncheckedCreateWithoutCreatorInput> | ContestCreateWithoutCreatorInput[] | ContestUncheckedCreateWithoutCreatorInput[]
     connectOrCreate?: ContestCreateOrConnectWithoutCreatorInput | ContestCreateOrConnectWithoutCreatorInput[]
@@ -19810,6 +21373,13 @@ export namespace Prisma {
     connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
   }
 
+  export type ContestProblemSolvedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput> | ContestProblemSolvedCreateWithoutProblemInput[] | ContestProblemSolvedUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutProblemInput | ContestProblemSolvedCreateOrConnectWithoutProblemInput[]
+    createMany?: ContestProblemSolvedCreateManyProblemInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+  }
+
   export type SubmissionUncheckedCreateNestedManyWithoutProblemInput = {
     create?: XOR<SubmissionCreateWithoutProblemInput, SubmissionUncheckedCreateWithoutProblemInput> | SubmissionCreateWithoutProblemInput[] | SubmissionUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutProblemInput | SubmissionCreateOrConnectWithoutProblemInput[]
@@ -19836,6 +21406,13 @@ export namespace Prisma {
     connectOrCreate?: ContestProblemCreateOrConnectWithoutProblemInput | ContestProblemCreateOrConnectWithoutProblemInput[]
     createMany?: ContestProblemCreateManyProblemInputEnvelope
     connect?: ContestProblemWhereUniqueInput | ContestProblemWhereUniqueInput[]
+  }
+
+  export type ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput> | ContestProblemSolvedCreateWithoutProblemInput[] | ContestProblemSolvedUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutProblemInput | ContestProblemSolvedCreateOrConnectWithoutProblemInput[]
+    createMany?: ContestProblemSolvedCreateManyProblemInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
   }
 
   export type EnumDifficultyFieldUpdateOperationsInput = {
@@ -19916,6 +21493,20 @@ export namespace Prisma {
     deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
   }
 
+  export type ContestProblemSolvedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput> | ContestProblemSolvedCreateWithoutProblemInput[] | ContestProblemSolvedUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutProblemInput | ContestProblemSolvedCreateOrConnectWithoutProblemInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutProblemInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: ContestProblemSolvedCreateManyProblemInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutProblemInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutProblemInput | ContestProblemSolvedUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+  }
+
   export type SubmissionUncheckedUpdateManyWithoutProblemNestedInput = {
     create?: XOR<SubmissionCreateWithoutProblemInput, SubmissionUncheckedCreateWithoutProblemInput> | SubmissionCreateWithoutProblemInput[] | SubmissionUncheckedCreateWithoutProblemInput[]
     connectOrCreate?: SubmissionCreateOrConnectWithoutProblemInput | SubmissionCreateOrConnectWithoutProblemInput[]
@@ -19970,6 +21561,20 @@ export namespace Prisma {
     update?: ContestProblemUpdateWithWhereUniqueWithoutProblemInput | ContestProblemUpdateWithWhereUniqueWithoutProblemInput[]
     updateMany?: ContestProblemUpdateManyWithWhereWithoutProblemInput | ContestProblemUpdateManyWithWhereWithoutProblemInput[]
     deleteMany?: ContestProblemScalarWhereInput | ContestProblemScalarWhereInput[]
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput> | ContestProblemSolvedCreateWithoutProblemInput[] | ContestProblemSolvedUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutProblemInput | ContestProblemSolvedCreateOrConnectWithoutProblemInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutProblemInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: ContestProblemSolvedCreateManyProblemInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutProblemInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutProblemInput | ContestProblemSolvedUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSubmissionInput = {
@@ -20227,6 +21832,13 @@ export namespace Prisma {
     connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
   }
 
+  export type ContestProblemSolvedCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput> | ContestProblemSolvedCreateWithoutContestInput[] | ContestProblemSolvedUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutContestInput | ContestProblemSolvedCreateOrConnectWithoutContestInput[]
+    createMany?: ContestProblemSolvedCreateManyContestInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutContestInput = {
     create?: XOR<UserCreateWithoutContestInput, UserUncheckedCreateWithoutContestInput>
     connectOrCreate?: UserCreateOrConnectWithoutContestInput
@@ -20252,6 +21864,13 @@ export namespace Prisma {
     connectOrCreate?: ContestSubmissionCreateOrConnectWithoutContestInput | ContestSubmissionCreateOrConnectWithoutContestInput[]
     createMany?: ContestSubmissionCreateManyContestInputEnvelope
     connect?: ContestSubmissionWhereUniqueInput | ContestSubmissionWhereUniqueInput[]
+  }
+
+  export type ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput> | ContestProblemSolvedCreateWithoutContestInput[] | ContestProblemSolvedUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutContestInput | ContestProblemSolvedCreateOrConnectWithoutContestInput[]
+    createMany?: ContestProblemSolvedCreateManyContestInputEnvelope
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutContestsCreatedNestedInput = {
@@ -20304,6 +21923,20 @@ export namespace Prisma {
     deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
   }
 
+  export type ContestProblemSolvedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput> | ContestProblemSolvedCreateWithoutContestInput[] | ContestProblemSolvedUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutContestInput | ContestProblemSolvedCreateOrConnectWithoutContestInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutContestInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestProblemSolvedCreateManyContestInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutContestInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutContestInput | ContestProblemSolvedUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+  }
+
   export type UserUpdateOneWithoutContestNestedInput = {
     create?: XOR<UserCreateWithoutContestInput, UserUncheckedCreateWithoutContestInput>
     connectOrCreate?: UserCreateOrConnectWithoutContestInput
@@ -20354,6 +21987,20 @@ export namespace Prisma {
     update?: ContestSubmissionUpdateWithWhereUniqueWithoutContestInput | ContestSubmissionUpdateWithWhereUniqueWithoutContestInput[]
     updateMany?: ContestSubmissionUpdateManyWithWhereWithoutContestInput | ContestSubmissionUpdateManyWithWhereWithoutContestInput[]
     deleteMany?: ContestSubmissionScalarWhereInput | ContestSubmissionScalarWhereInput[]
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput = {
+    create?: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput> | ContestProblemSolvedCreateWithoutContestInput[] | ContestProblemSolvedUncheckedCreateWithoutContestInput[]
+    connectOrCreate?: ContestProblemSolvedCreateOrConnectWithoutContestInput | ContestProblemSolvedCreateOrConnectWithoutContestInput[]
+    upsert?: ContestProblemSolvedUpsertWithWhereUniqueWithoutContestInput | ContestProblemSolvedUpsertWithWhereUniqueWithoutContestInput[]
+    createMany?: ContestProblemSolvedCreateManyContestInputEnvelope
+    set?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    disconnect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    delete?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    connect?: ContestProblemSolvedWhereUniqueInput | ContestProblemSolvedWhereUniqueInput[]
+    update?: ContestProblemSolvedUpdateWithWhereUniqueWithoutContestInput | ContestProblemSolvedUpdateWithWhereUniqueWithoutContestInput[]
+    updateMany?: ContestProblemSolvedUpdateManyWithWhereWithoutContestInput | ContestProblemSolvedUpdateManyWithWhereWithoutContestInput[]
+    deleteMany?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
   }
 
   export type ContestCreateNestedOneWithoutProblemsInput = {
@@ -20454,6 +22101,48 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContestSubmissionsInput, UserUpdateWithoutContestSubmissionsInput>, UserUncheckedUpdateWithoutContestSubmissionsInput>
+  }
+
+  export type UserCreateNestedOneWithoutContestProblemSolvedInput = {
+    create?: XOR<UserCreateWithoutContestProblemSolvedInput, UserUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestProblemSolvedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProblemCreateNestedOneWithoutContestProblemSolvedInput = {
+    create?: XOR<ProblemCreateWithoutContestProblemSolvedInput, ProblemUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutContestProblemSolvedInput
+    connect?: ProblemWhereUniqueInput
+  }
+
+  export type ContestCreateNestedOneWithoutContestProblemSolvedInput = {
+    create?: XOR<ContestCreateWithoutContestProblemSolvedInput, ContestUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutContestProblemSolvedInput
+    connect?: ContestWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutContestProblemSolvedNestedInput = {
+    create?: XOR<UserCreateWithoutContestProblemSolvedInput, UserUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutContestProblemSolvedInput
+    upsert?: UserUpsertWithoutContestProblemSolvedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContestProblemSolvedInput, UserUpdateWithoutContestProblemSolvedInput>, UserUncheckedUpdateWithoutContestProblemSolvedInput>
+  }
+
+  export type ProblemUpdateOneRequiredWithoutContestProblemSolvedNestedInput = {
+    create?: XOR<ProblemCreateWithoutContestProblemSolvedInput, ProblemUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutContestProblemSolvedInput
+    upsert?: ProblemUpsertWithoutContestProblemSolvedInput
+    connect?: ProblemWhereUniqueInput
+    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutContestProblemSolvedInput, ProblemUpdateWithoutContestProblemSolvedInput>, ProblemUncheckedUpdateWithoutContestProblemSolvedInput>
+  }
+
+  export type ContestUpdateOneRequiredWithoutContestProblemSolvedNestedInput = {
+    create?: XOR<ContestCreateWithoutContestProblemSolvedInput, ContestUncheckedCreateWithoutContestProblemSolvedInput>
+    connectOrCreate?: ContestCreateOrConnectWithoutContestProblemSolvedInput
+    upsert?: ContestUpsertWithoutContestProblemSolvedInput
+    connect?: ContestWhereUniqueInput
+    update?: XOR<XOR<ContestUpdateToOneWithWhereWithoutContestProblemSolvedInput, ContestUpdateWithoutContestProblemSolvedInput>, ContestUncheckedUpdateWithoutContestProblemSolvedInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20724,6 +22413,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutUserInput = {
@@ -20746,6 +22436,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutUserInput = {
@@ -20928,10 +22619,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestProblemSolvedCreateWithoutUserInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutContestProblemSolvedInput
+    contest: ContestCreateNestedOneWithoutContestProblemSolvedInput
+  }
+
+  export type ContestProblemSolvedUncheckedCreateWithoutUserInput = {
+    id?: string
+    problemId: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedCreateOrConnectWithoutUserInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    create: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestProblemSolvedCreateManyUserInputEnvelope = {
+    data: ContestProblemSolvedCreateManyUserInput | ContestProblemSolvedCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ContestCreateWithoutCreatorInput = {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -20939,6 +22657,7 @@ export namespace Prisma {
     problems?: ContestProblemCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
     User?: UserCreateNestedOneWithoutContestInput
   }
 
@@ -20946,6 +22665,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -20954,6 +22674,7 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestCreateOrConnectWithoutCreatorInput = {
@@ -20970,6 +22691,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -20978,12 +22700,14 @@ export namespace Prisma {
     problems?: ContestProblemCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
   }
 
   export type ContestUncheckedCreateWithoutUserInput = {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -20992,6 +22716,7 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestCreateOrConnectWithoutUserInput = {
@@ -21214,6 +22939,34 @@ export namespace Prisma {
     userId?: StringNullableFilter<"ContestSubmission"> | string | null
   }
 
+  export type ContestProblemSolvedUpsertWithWhereUniqueWithoutUserInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    update: XOR<ContestProblemSolvedUpdateWithoutUserInput, ContestProblemSolvedUncheckedUpdateWithoutUserInput>
+    create: XOR<ContestProblemSolvedCreateWithoutUserInput, ContestProblemSolvedUncheckedCreateWithoutUserInput>
+  }
+
+  export type ContestProblemSolvedUpdateWithWhereUniqueWithoutUserInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    data: XOR<ContestProblemSolvedUpdateWithoutUserInput, ContestProblemSolvedUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ContestProblemSolvedUpdateManyWithWhereWithoutUserInput = {
+    where: ContestProblemSolvedScalarWhereInput
+    data: XOR<ContestProblemSolvedUpdateManyMutationInput, ContestProblemSolvedUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ContestProblemSolvedScalarWhereInput = {
+    AND?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+    OR?: ContestProblemSolvedScalarWhereInput[]
+    NOT?: ContestProblemSolvedScalarWhereInput | ContestProblemSolvedScalarWhereInput[]
+    id?: StringFilter<"ContestProblemSolved"> | string
+    userId?: StringFilter<"ContestProblemSolved"> | string
+    problemId?: StringFilter<"ContestProblemSolved"> | string
+    contestId?: StringFilter<"ContestProblemSolved"> | string
+    createdAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+    updatedAt?: DateTimeFilter<"ContestProblemSolved"> | Date | string
+  }
+
   export type ContestUpsertWithWhereUniqueWithoutCreatorInput = {
     where: ContestWhereUniqueInput
     update: XOR<ContestUpdateWithoutCreatorInput, ContestUncheckedUpdateWithoutCreatorInput>
@@ -21237,6 +22990,7 @@ export namespace Prisma {
     id?: StringFilter<"Contest"> | string
     title?: StringFilter<"Contest"> | string
     description?: StringNullableFilter<"Contest"> | string | null
+    difficulty?: EnumDifficultyFilter<"Contest"> | $Enums.Difficulty
     startTime?: DateTimeFilter<"Contest"> | Date | string
     endTime?: DateTimeFilter<"Contest"> | Date | string
     createdBy?: StringFilter<"Contest"> | string
@@ -21284,6 +23038,7 @@ export namespace Prisma {
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -21311,6 +23066,7 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -21354,6 +23110,7 @@ export namespace Prisma {
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -21381,6 +23138,7 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -21408,6 +23166,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -21435,6 +23194,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -21562,6 +23322,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestProblemSolvedCreateWithoutProblemInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestProblemSolvedInput
+    contest: ContestCreateNestedOneWithoutContestProblemSolvedInput
+  }
+
+  export type ContestProblemSolvedUncheckedCreateWithoutProblemInput = {
+    id?: string
+    userId: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedCreateOrConnectWithoutProblemInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    create: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput>
+  }
+
+  export type ContestProblemSolvedCreateManyProblemInputEnvelope = {
+    data: ContestProblemSolvedCreateManyProblemInput | ContestProblemSolvedCreateManyProblemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProblemsInput = {
     update: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
     create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
@@ -21596,6 +23382,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -21623,6 +23410,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -21713,6 +23501,22 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ContestProblem"> | Date | string
   }
 
+  export type ContestProblemSolvedUpsertWithWhereUniqueWithoutProblemInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    update: XOR<ContestProblemSolvedUpdateWithoutProblemInput, ContestProblemSolvedUncheckedUpdateWithoutProblemInput>
+    create: XOR<ContestProblemSolvedCreateWithoutProblemInput, ContestProblemSolvedUncheckedCreateWithoutProblemInput>
+  }
+
+  export type ContestProblemSolvedUpdateWithWhereUniqueWithoutProblemInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    data: XOR<ContestProblemSolvedUpdateWithoutProblemInput, ContestProblemSolvedUncheckedUpdateWithoutProblemInput>
+  }
+
+  export type ContestProblemSolvedUpdateManyWithWhereWithoutProblemInput = {
+    where: ContestProblemSolvedScalarWhereInput
+    data: XOR<ContestProblemSolvedUpdateManyMutationInput, ContestProblemSolvedUncheckedUpdateManyWithoutProblemInput>
+  }
+
   export type UserCreateWithoutSubmissionInput = {
     id?: string
     name?: string | null
@@ -21736,6 +23540,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -21763,6 +23568,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -21792,6 +23598,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSubmissionInput = {
@@ -21814,6 +23621,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSubmissionInput = {
@@ -21914,6 +23722,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -21941,6 +23750,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -21976,6 +23786,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSubmissionInput = {
@@ -21998,6 +23809,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type TestCaseResultUpsertWithWhereUniqueWithoutSubmissionInput = {
@@ -22171,6 +23983,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -22198,6 +24011,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -22227,6 +24041,7 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutSolvedByInput = {
@@ -22249,6 +24064,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutSolvedByInput = {
@@ -22290,6 +24106,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -22317,6 +24134,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -22352,6 +24170,7 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutSolvedByInput = {
@@ -22374,6 +24193,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemsInPlaylistCreateWithoutPlaylistInput = {
@@ -22423,6 +24243,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -22450,6 +24271,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -22509,6 +24331,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -22536,6 +24359,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -22585,6 +24409,7 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutProblemsPlaylistsInput = {
@@ -22607,6 +24432,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutProblemsPlaylistsInput = {
@@ -22676,6 +24502,7 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutProblemsPlaylistsInput = {
@@ -22698,6 +24525,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserCreateWithoutContestsCreatedInput = {
@@ -22724,6 +24552,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
 
@@ -22751,6 +24580,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -22829,6 +24659,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ContestProblemSolvedCreateWithoutContestInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutContestProblemSolvedInput
+    problem: ProblemCreateNestedOneWithoutContestProblemSolvedInput
+  }
+
+  export type ContestProblemSolvedUncheckedCreateWithoutContestInput = {
+    id?: string
+    userId: string
+    problemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedCreateOrConnectWithoutContestInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    create: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestProblemSolvedCreateManyContestInputEnvelope = {
+    data: ContestProblemSolvedCreateManyContestInput | ContestProblemSolvedCreateManyContestInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserCreateWithoutContestInput = {
     id?: string
     name?: string | null
@@ -22853,6 +24709,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
   }
 
@@ -22880,6 +24737,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
   }
 
@@ -22923,6 +24781,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
 
@@ -22950,6 +24809,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -23001,6 +24861,22 @@ export namespace Prisma {
     data: XOR<ContestSubmissionUpdateManyMutationInput, ContestSubmissionUncheckedUpdateManyWithoutContestInput>
   }
 
+  export type ContestProblemSolvedUpsertWithWhereUniqueWithoutContestInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    update: XOR<ContestProblemSolvedUpdateWithoutContestInput, ContestProblemSolvedUncheckedUpdateWithoutContestInput>
+    create: XOR<ContestProblemSolvedCreateWithoutContestInput, ContestProblemSolvedUncheckedCreateWithoutContestInput>
+  }
+
+  export type ContestProblemSolvedUpdateWithWhereUniqueWithoutContestInput = {
+    where: ContestProblemSolvedWhereUniqueInput
+    data: XOR<ContestProblemSolvedUpdateWithoutContestInput, ContestProblemSolvedUncheckedUpdateWithoutContestInput>
+  }
+
+  export type ContestProblemSolvedUpdateManyWithWhereWithoutContestInput = {
+    where: ContestProblemSolvedScalarWhereInput
+    data: XOR<ContestProblemSolvedUpdateManyMutationInput, ContestProblemSolvedUncheckedUpdateManyWithoutContestInput>
+  }
+
   export type UserUpsertWithoutContestInput = {
     update: XOR<UserUpdateWithoutContestInput, UserUncheckedUpdateWithoutContestInput>
     create: XOR<UserCreateWithoutContestInput, UserUncheckedCreateWithoutContestInput>
@@ -23036,6 +24912,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
   }
 
@@ -23063,6 +24940,7 @@ export namespace Prisma {
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
@@ -23070,6 +24948,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -23077,6 +24956,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutContestsCreatedInput
     registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
     User?: UserCreateNestedOneWithoutContestInput
   }
 
@@ -23084,6 +24964,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -23092,6 +24973,7 @@ export namespace Prisma {
     userId?: string | null
     registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestCreateOrConnectWithoutProblemsInput = {
@@ -23119,6 +25001,7 @@ export namespace Prisma {
     submission?: SubmissionCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemUncheckedCreateWithoutContestProblemsInput = {
@@ -23141,6 +25024,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
     solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
   }
 
   export type ProblemCreateOrConnectWithoutContestProblemsInput = {
@@ -23163,6 +25047,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23170,6 +25055,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutContestsCreatedNestedInput
     registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
     User?: UserUpdateOneWithoutContestNestedInput
   }
 
@@ -23177,6 +25063,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -23185,6 +25072,7 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ProblemUpsertWithoutContestProblemsInput = {
@@ -23218,6 +25106,7 @@ export namespace Prisma {
     submission?: SubmissionUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutContestProblemsInput = {
@@ -23240,6 +25129,7 @@ export namespace Prisma {
     submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type UserCreateWithoutContestRegistrationsInput = {
@@ -23265,6 +25155,7 @@ export namespace Prisma {
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -23292,6 +25183,7 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -23305,6 +25197,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -23312,6 +25205,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutContestsCreatedInput
     problems?: ContestProblemCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
     User?: UserCreateNestedOneWithoutContestInput
   }
 
@@ -23319,6 +25213,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -23327,6 +25222,7 @@ export namespace Prisma {
     userId?: string | null
     problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
     contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestCreateOrConnectWithoutRegistrationsInput = {
@@ -23368,6 +25264,7 @@ export namespace Prisma {
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -23395,6 +25292,7 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -23414,6 +25312,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23421,6 +25320,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutContestsCreatedNestedInput
     problems?: ContestProblemUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
     User?: UserUpdateOneWithoutContestNestedInput
   }
 
@@ -23428,6 +25328,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -23436,12 +25337,14 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ContestCreateWithoutContestSubmissionsInput = {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -23449,6 +25352,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutContestsCreatedInput
     problems?: ContestProblemCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutContestInput
     User?: UserCreateNestedOneWithoutContestInput
   }
 
@@ -23456,6 +25360,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -23464,6 +25369,7 @@ export namespace Prisma {
     userId?: string | null
     problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
     registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutContestInput
   }
 
   export type ContestCreateOrConnectWithoutContestSubmissionsInput = {
@@ -23535,6 +25441,7 @@ export namespace Prisma {
     playlists?: PlaylistCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
     contest?: ContestCreateNestedManyWithoutUserInput
   }
@@ -23562,6 +25469,7 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
     dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
     contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedCreateNestedManyWithoutUserInput
     contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
     contest?: ContestUncheckedCreateNestedManyWithoutUserInput
   }
@@ -23586,6 +25494,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23593,6 +25502,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutContestsCreatedNestedInput
     problems?: ContestProblemUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
     User?: UserUpdateOneWithoutContestNestedInput
   }
 
@@ -23600,6 +25510,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -23608,6 +25519,7 @@ export namespace Prisma {
     userId?: NullableStringFieldUpdateOperationsInput | string | null
     problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type SubmissionUpsertWithoutContestSubmissionInput = {
@@ -23691,6 +25603,7 @@ export namespace Prisma {
     playlists?: PlaylistUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
     contest?: ContestUpdateManyWithoutUserNestedInput
   }
@@ -23718,8 +25631,325 @@ export namespace Prisma {
     playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
     dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
     contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
     contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
     contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isBlocked?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    submission?: SubmissionCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityCreateNestedManyWithoutUserInput
+    contestRegistrations?: ContestRegistrationCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutUserInput
+    contestsCreated?: ContestCreateNestedManyWithoutCreatorInput
+    contest?: ContestCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    isBlocked?: boolean
+    isEmailVerified?: boolean
+    emailVerificationToken?: string | null
+    emailVerificationExpires?: Date | string | null
+    plan?: $Enums.PlanType
+    subscriptionExpires?: Date | string | null
+    lastActivityDate?: Date | string | null
+    currentStreak?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    submission?: SubmissionUncheckedCreateNestedManyWithoutUserInput
+    problemSolved?: ProblemSolvedUncheckedCreateNestedManyWithoutUserInput
+    playlists?: PlaylistUncheckedCreateNestedManyWithoutUserInput
+    dailyActivities?: UserDailyActivityUncheckedCreateNestedManyWithoutUserInput
+    contestRegistrations?: ContestRegistrationUncheckedCreateNestedManyWithoutUserInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutUserInput
+    contestsCreated?: ContestUncheckedCreateNestedManyWithoutCreatorInput
+    contest?: ContestUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutContestProblemSolvedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutContestProblemSolvedInput, UserUncheckedCreateWithoutContestProblemSolvedInput>
+  }
+
+  export type ProblemCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: string | null
+    editorials?: string | null
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProblemsInput
+    submission?: SubmissionCreateNestedManyWithoutProblemInput
+    solvedBy?: ProblemSolvedCreateNestedManyWithoutProblemInput
+    problemsPlaylists?: ProblemsInPlaylistCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    title: string
+    description: string
+    difficulty: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    companies?: ProblemCreatecompaniesInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints: string
+    hints?: string | null
+    editorials?: string | null
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    submission?: SubmissionUncheckedCreateNestedManyWithoutProblemInput
+    solvedBy?: ProblemSolvedUncheckedCreateNestedManyWithoutProblemInput
+    problemsPlaylists?: ProblemsInPlaylistUncheckedCreateNestedManyWithoutProblemInput
+    contestProblems?: ContestProblemUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemCreateOrConnectWithoutContestProblemSolvedInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutContestProblemSolvedInput, ProblemUncheckedCreateWithoutContestProblemSolvedInput>
+  }
+
+  export type ContestCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    title: string
+    description?: string | null
+    difficulty: $Enums.Difficulty
+    startTime: Date | string
+    endTime: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    creator: UserCreateNestedOneWithoutContestsCreatedInput
+    problems?: ContestProblemCreateNestedManyWithoutContestInput
+    registrations?: ContestRegistrationCreateNestedManyWithoutContestInput
+    contestSubmissions?: ContestSubmissionCreateNestedManyWithoutContestInput
+    User?: UserCreateNestedOneWithoutContestInput
+  }
+
+  export type ContestUncheckedCreateWithoutContestProblemSolvedInput = {
+    id?: string
+    title: string
+    description?: string | null
+    difficulty: $Enums.Difficulty
+    startTime: Date | string
+    endTime: Date | string
+    createdBy: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId?: string | null
+    problems?: ContestProblemUncheckedCreateNestedManyWithoutContestInput
+    registrations?: ContestRegistrationUncheckedCreateNestedManyWithoutContestInput
+    contestSubmissions?: ContestSubmissionUncheckedCreateNestedManyWithoutContestInput
+  }
+
+  export type ContestCreateOrConnectWithoutContestProblemSolvedInput = {
+    where: ContestWhereUniqueInput
+    create: XOR<ContestCreateWithoutContestProblemSolvedInput, ContestUncheckedCreateWithoutContestProblemSolvedInput>
+  }
+
+  export type UserUpsertWithoutContestProblemSolvedInput = {
+    update: XOR<UserUpdateWithoutContestProblemSolvedInput, UserUncheckedUpdateWithoutContestProblemSolvedInput>
+    create: XOR<UserCreateWithoutContestProblemSolvedInput, UserUncheckedCreateWithoutContestProblemSolvedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutContestProblemSolvedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutContestProblemSolvedInput, UserUncheckedUpdateWithoutContestProblemSolvedInput>
+  }
+
+  export type UserUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUpdateManyWithoutUserNestedInput
+    contestRegistrations?: ContestRegistrationUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutUserNestedInput
+    contestsCreated?: ContestUpdateManyWithoutCreatorNestedInput
+    contest?: ContestUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    isBlocked?: BoolFieldUpdateOperationsInput | boolean
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    emailVerificationToken?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerificationExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    plan?: EnumPlanTypeFieldUpdateOperationsInput | $Enums.PlanType
+    subscriptionExpires?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastActivityDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    currentStreak?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    submission?: SubmissionUncheckedUpdateManyWithoutUserNestedInput
+    problemSolved?: ProblemSolvedUncheckedUpdateManyWithoutUserNestedInput
+    playlists?: PlaylistUncheckedUpdateManyWithoutUserNestedInput
+    dailyActivities?: UserDailyActivityUncheckedUpdateManyWithoutUserNestedInput
+    contestRegistrations?: ContestRegistrationUncheckedUpdateManyWithoutUserNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    contestsCreated?: ContestUncheckedUpdateManyWithoutCreatorNestedInput
+    contest?: ContestUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProblemUpsertWithoutContestProblemSolvedInput = {
+    update: XOR<ProblemUpdateWithoutContestProblemSolvedInput, ProblemUncheckedUpdateWithoutContestProblemSolvedInput>
+    create: XOR<ProblemCreateWithoutContestProblemSolvedInput, ProblemUncheckedCreateWithoutContestProblemSolvedInput>
+    where?: ProblemWhereInput
+  }
+
+  export type ProblemUpdateToOneWithWhereWithoutContestProblemSolvedInput = {
+    where?: ProblemWhereInput
+    data: XOR<ProblemUpdateWithoutContestProblemSolvedInput, ProblemUncheckedUpdateWithoutContestProblemSolvedInput>
+  }
+
+  export type ProblemUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: NullableStringFieldUpdateOperationsInput | string | null
+    editorials?: NullableStringFieldUpdateOperationsInput | string | null
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+    submission?: SubmissionUpdateManyWithoutProblemNestedInput
+    solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
+    problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    companies?: ProblemUpdatecompaniesInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: StringFieldUpdateOperationsInput | string
+    hints?: NullableStringFieldUpdateOperationsInput | string | null
+    editorials?: NullableStringFieldUpdateOperationsInput | string | null
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    submission?: SubmissionUncheckedUpdateManyWithoutProblemNestedInput
+    solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
+    problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ContestUpsertWithoutContestProblemSolvedInput = {
+    update: XOR<ContestUpdateWithoutContestProblemSolvedInput, ContestUncheckedUpdateWithoutContestProblemSolvedInput>
+    create: XOR<ContestCreateWithoutContestProblemSolvedInput, ContestUncheckedCreateWithoutContestProblemSolvedInput>
+    where?: ContestWhereInput
+  }
+
+  export type ContestUpdateToOneWithWhereWithoutContestProblemSolvedInput = {
+    where?: ContestWhereInput
+    data: XOR<ContestUpdateWithoutContestProblemSolvedInput, ContestUncheckedUpdateWithoutContestProblemSolvedInput>
+  }
+
+  export type ContestUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creator?: UserUpdateOneRequiredWithoutContestsCreatedNestedInput
+    problems?: ContestProblemUpdateManyWithoutContestNestedInput
+    registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
+    contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    User?: UserUpdateOneWithoutContestNestedInput
+  }
+
+  export type ContestUncheckedUpdateWithoutContestProblemSolvedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
+    registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
+    contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ProblemCreateManyUserInput = {
@@ -23792,10 +26022,19 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ContestProblemSolvedCreateManyUserInput = {
+    id?: string
+    problemId: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ContestCreateManyCreatorInput = {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdAt?: Date | string
@@ -23807,6 +26046,7 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
+    difficulty: $Enums.Difficulty
     startTime: Date | string
     endTime: Date | string
     createdBy: string
@@ -23834,6 +26074,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateWithoutUserInput = {
@@ -23856,6 +26097,7 @@ export namespace Prisma {
     solvedBy?: ProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
     problemsPlaylists?: ProblemsInPlaylistUncheckedUpdateManyWithoutProblemNestedInput
     contestProblems?: ContestProblemUncheckedUpdateManyWithoutProblemNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutProblemNestedInput
   }
 
   export type ProblemUncheckedUpdateManyWithoutUserInput = {
@@ -24038,10 +26280,35 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContestProblemSolvedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+    contest?: ContestUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ContestUpdateWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24049,6 +26316,7 @@ export namespace Prisma {
     problems?: ContestProblemUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
     User?: UserUpdateOneWithoutContestNestedInput
   }
 
@@ -24056,6 +26324,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24064,12 +26333,14 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ContestUncheckedUpdateManyWithoutCreatorInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24081,6 +26352,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24089,12 +26361,14 @@ export namespace Prisma {
     problems?: ContestProblemUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUpdateManyWithoutContestNestedInput
   }
 
   export type ContestUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -24103,12 +26377,14 @@ export namespace Prisma {
     problems?: ContestProblemUncheckedUpdateManyWithoutContestNestedInput
     registrations?: ContestRegistrationUncheckedUpdateManyWithoutContestNestedInput
     contestSubmissions?: ContestSubmissionUncheckedUpdateManyWithoutContestNestedInput
+    contestProblemSolved?: ContestProblemSolvedUncheckedUpdateManyWithoutContestNestedInput
   }
 
   export type ContestUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    difficulty?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: StringFieldUpdateOperationsInput | string
@@ -24148,6 +26424,14 @@ export namespace Prisma {
 
   export type ContestProblemCreateManyProblemInput = {
     id?: string
+    contestId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ContestProblemSolvedCreateManyProblemInput = {
+    id?: string
+    userId: string
     contestId: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24268,6 +26552,30 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ContestProblemSolvedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+    contest?: ContestUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    contestId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type TestCaseResultCreateManySubmissionInput = {
     id?: string
     testCase: number
@@ -24376,6 +26684,14 @@ export namespace Prisma {
     userId?: string | null
   }
 
+  export type ContestProblemSolvedCreateManyContestInput = {
+    id?: string
+    userId: string
+    problemId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ContestProblemUpdateWithoutContestInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24434,6 +26750,30 @@ export namespace Prisma {
     submissionId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ContestProblemSolvedUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutContestProblemSolvedNestedInput
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ContestProblemSolvedUncheckedUpdateManyWithoutContestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

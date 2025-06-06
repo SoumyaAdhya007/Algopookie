@@ -56,7 +56,8 @@ model User {
   dailyActivities      UserDailyActivity[]
   contestRegistrations ContestRegistration[]
   contestSubmissions   ContestSubmission[]
-  contestsCreated      Contest[]             @relation("ContestCreator")
+  contestProblemSolved ContestProblemSolved[]
+  contestsCreated      Contest[]              @relation("ContestCreator")
   contest              Contest[]
 }
 
@@ -95,10 +96,11 @@ model Problem {
   // RELATION
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  submission        Submission[]
-  solvedBy          ProblemSolved[]
-  problemsPlaylists ProblemsInPlaylist[]
-  contestProblems   ContestProblem[]
+  submission           Submission[]
+  solvedBy             ProblemSolved[]
+  problemsPlaylists    ProblemsInPlaylist[]
+  contestProblems      ContestProblem[]
+  contestProblemSolved ContestProblemSolved[]
 }
 
 model Submission {
@@ -192,23 +194,25 @@ model ProblemsInPlaylist {
 }
 
 model Contest {
-  id          String   @id @default(uuid())
+  id          String     @id @default(uuid())
   title       String
   description String?
+  difficulty  Difficulty
   startTime   DateTime
   endTime     DateTime
   createdBy   String // userId of the admin who created it
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
   // RELATIONS
   creator User @relation("ContestCreator", fields: [createdBy], references: [id], onDelete: Cascade)
 
-  problems           ContestProblem[]
-  registrations      ContestRegistration[]
-  contestSubmissions ContestSubmission[]
-  User               User?                 @relation(fields: [userId], references: [id])
-  userId             String?
+  problems             ContestProblem[]
+  registrations        ContestRegistration[]
+  contestSubmissions   ContestSubmission[]
+  contestProblemSolved ContestProblemSolved[]
+  User                 User?                  @relation(fields: [userId], references: [id])
+  userId               String?
 }
 
 model ContestProblem {
@@ -251,4 +255,20 @@ model ContestSubmission {
   userId     String?
 
   @@index([contestId])
+}
+
+model ContestProblemSolved {
+  id        String   @id @default(uuid())
+  userId    String
+  problemId String
+  contestId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // RELATIONS
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+  contest Contest @relation(fields: [contestId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, problemId, contestId])
 }
