@@ -20,16 +20,26 @@ import { registerSocketEvents } from "./controllers/discussion.controller.js";
 
 dotenv.config();
 
+const allowedOrigins = [
+  "https://algopookie.live",
+  "https://www.algopookie.live",
+  "http://localhost:5173",
+];
 const app = express();
 const server = http.createServer(app);
 
-const io = new SocketIOServer(
-  server,
-  cors({
-    origin: process.env.FRONTEND_URL,
+const io = new SocketIOServer(server, {
+  cors: {
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-  })
-);
+  },
+});
 
 io.on("connection", (socket) => {
   console.log("New socket connected:", socket.id);
@@ -38,7 +48,7 @@ io.on("connection", (socket) => {
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
