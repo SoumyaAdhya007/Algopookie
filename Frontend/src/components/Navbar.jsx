@@ -54,7 +54,6 @@ const Navbar = () => {
                 { name: "Problems", href: "/problems" },
                 { name: "Playlists", href: "/playlists" },
                 { name: "Leaderboard", href: "/leaderboard" },
-                { name: "Profile", href: "/profile" },
               ].map((item) => (
                 <Link key={item.name} to={item.href}>
                   <div className="group relative px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/10">
@@ -67,6 +66,18 @@ const Navbar = () => {
                   </div>
                 </Link>
               ))}
+              {authUser?.role === "ADMIN" ? (
+                <Link to="/dashboard">
+                  <div className="group relative px-4 py-2 rounded-xl transition-all duration-300 hover:bg-white/10">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-white font-semibold group-hover:text-white transition-colors duration-300">
+                        Dashboard
+                      </span>
+                    </div>
+                    <div className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 group-hover:w-full group-hover:left-0 transition-all duration-300 rounded-full" />
+                  </div>
+                </Link>
+              ) : null}
             </div>
           ) : null}
 
@@ -175,23 +186,48 @@ const Navbar = () => {
         >
           <div className="py-6 space-y-4 bg-black/50 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
             {authUser ? (
-              [
-                { name: "Problems", href: "/problems" },
-                { name: "Playlists", href: "/playlists" },
-                { name: "Leaderboard", href: "/leaderboard" },
-                { name: "Profile", href: "/profile" },
-              ].map((item) => (
-                <Link key={item.name} to={item.href}>
-                  <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
-                    <span className="text-xl group-hover:scale-110 transition-transform duration-300">
-                      {item.icon}
-                    </span>
-                    <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
-                      {item.name}
-                    </span>
-                  </div>
-                </Link>
-              ))
+              <>
+                {[
+                  { name: "Problems", href: "/problems" },
+                  { name: "Playlists", href: "/playlists" },
+                  { name: "Leaderboard", href: "/leaderboard" },
+                  { name: "Profile", href: "/profile" },
+                ].map((item) => (
+                  <Link key={item.name} to={item.href}>
+                    <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
+                      <span className="text-xl group-hover:scale-110 transition-transform duration-300">
+                        {item.icon}
+                      </span>
+                      <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
+                        {item.name}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+                {authUser?.role === "ADMIN" ? (
+                  <Link to="/add-problem">
+                    <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
+                      <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
+                        Add Problem
+                      </span>
+                    </div>
+                  </Link>
+                ) : null}
+                {authUser?.role === "ADMIN" ? (
+                  <Link to="/dashboard">
+                    <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
+                      <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
+                        Dashboard
+                      </span>
+                    </div>
+                  </Link>
+                ) : null}
+
+                <LogoutButton className="hover:bg-primary hover:text-white">
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </LogoutButton>
+              </>
             ) : (
               <div className="px-6 pt-4 space-y-3">
                 <Link to="/login">

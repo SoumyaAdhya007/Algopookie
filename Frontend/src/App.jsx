@@ -18,6 +18,7 @@ import LeaderboardPage from "./page/LeaderboardPage";
 import PlaylistPage from "./page/PlaylistsPage";
 import NotFound from "./page/NotFoundPage";
 import UpdateProblemPage from "./page/UpdateProblemPage";
+import DashboardPage from "./page/DashboardPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -77,16 +78,19 @@ const App = () => {
         </Route>
         <Route element={<AdminRoute />}>
           <Route
+            path="/dashboard"
+            element={authUser ? <DashboardPage /> : <Navigate to="/" />}
+          />
+          <Route
             path="/add-problem"
             element={authUser ? <AddProblem /> : <Navigate to="/" />}
           />
-        </Route>
-        <Route element={<AdminRoute />}>
           <Route
             path="/update-problem/:id"
             element={authUser ? <UpdateProblemPage /> : <Navigate to="/" />}
           />
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
