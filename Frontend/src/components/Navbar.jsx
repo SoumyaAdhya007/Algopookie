@@ -53,7 +53,6 @@ const Navbar = () => {
               {[
                 { name: "Problems", href: "/problems" },
                 { name: "Playlists", href: "/playlists" },
-                { name: "Contests", href: "/contests" },
                 { name: "Leaderboard", href: "/leaderboard" },
                 { name: "Profile", href: "/profile" },
               ].map((item) => (
@@ -107,7 +106,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/add-problem"
-                        className="hover:bg-primary hover:text-white text-base font-semibold"
+                        className="hover:bg-white/10 hover:text-white text-base font-semibold"
                       >
                         <Code className="w-4 h-4 mr-1" />
                         Add Problem
@@ -175,40 +174,41 @@ const Navbar = () => {
           }`}
         >
           <div className="py-6 space-y-4 bg-black/50 backdrop-blur-xl rounded-2xl mt-4 border border-white/10">
-            {[
-              { name: "Problems", href: "/problems" },
-              { name: "Playlists", href: "/playlists" },
-              { name: "Contests", href: "/contests" },
-              { name: "Leaderboard", href: "/leaderboard" },
-              { name: "Profile", href: "/profile" },
-            ].map((item) => (
-              <Link key={item.name} to={item.href}>
-                <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
-                  <span className="text-xl group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
-                  </span>
-                  <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
-                    {item.name}
-                  </span>
-                </div>
-              </Link>
-            ))}
-
-            <div className="px-6 pt-4 space-y-3">
-              <Link to="/login">
-                <button className="w-full py-3 text-white/80 font-medium rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:bg-white/5">
-                  Login
-                </button>
-              </Link>
-              <Link to="/signup">
-                <button className="w-full py-3 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Sparkles className="w-4 h-4" />
-                    <span>Sign Up</span>
+            {authUser ? (
+              [
+                { name: "Problems", href: "/problems" },
+                { name: "Playlists", href: "/playlists" },
+                { name: "Leaderboard", href: "/leaderboard" },
+                { name: "Profile", href: "/profile" },
+              ].map((item) => (
+                <Link key={item.name} to={item.href}>
+                  <div className="group flex items-center space-x-3 px-6 py-3 hover:bg-white/10 transition-all duration-300">
+                    <span className="text-xl group-hover:scale-110 transition-transform duration-300">
+                      {item.icon}
+                    </span>
+                    <span className="text-white/80 font-medium group-hover:text-white transition-colors duration-300">
+                      {item.name}
+                    </span>
                   </div>
-                </button>
-              </Link>
-            </div>
+                </Link>
+              ))
+            ) : (
+              <div className="px-6 pt-4 space-y-3">
+                <Link to="/login">
+                  <button className="w-full py-3 text-white/80 font-medium rounded-xl border border-white/20 hover:border-white/40 transition-all duration-300 hover:bg-white/5">
+                    Login
+                  </button>
+                </Link>
+                <Link to="/signup">
+                  <button className="w-full py-3 bg-gradient-to-r from-pink-500 via-purple-600 to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105">
+                    <div className="flex items-center justify-center space-x-2">
+                      <Sparkles className="w-4 h-4" />
+                      <span>Sign Up</span>
+                    </div>
+                  </button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
