@@ -17,6 +17,7 @@ import ContestPage from "./page/ContestsPage";
 import LeaderboardPage from "./page/LeaderboardPage";
 import PlaylistPage from "./page/PlaylistsPage";
 import NotFound from "./page/NotFoundPage";
+import UpdateProblemPage from "./page/UpdateProblemPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -78,6 +79,12 @@ const App = () => {
           <Route
             path="/add-problem"
             element={authUser ? <AddProblem /> : <Navigate to="/" />}
+          />
+        </Route>
+        <Route element={<AdminRoute />}>
+          <Route
+            path="/update-problem/:id"
+            element={authUser ? <UpdateProblemPage /> : <Navigate to="/" />}
           />
         </Route>
         <Route path="*" element={<NotFound />} />

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useProblemStore } from "../store/useProblemStore";
-import { Loader } from "lucide-react";
 import ProblemTable from "../components/ProblemTable";
+import ProblemsLoading from "../components/ProblemsLoading";
 const ProblemsPage = () => {
   const { getAllProblems, problems, isProblemsLoading } = useProblemStore();
   useEffect(() => {
@@ -9,11 +9,7 @@ const ProblemsPage = () => {
   }, [getAllProblems]);
 
   if (isProblemsLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
-      </div>
-    );
+    return <ProblemsLoading />;
   }
 
   return (
@@ -23,9 +19,11 @@ const ProblemsPage = () => {
           <ProblemTable problems={problems} />
         </h1>
       ) : (
-        <p className="mt-10 text-center text-lg font-semibold text-gray-500 dark:text-gray-400 z-10 border border-primary px-4 py-2 rounded-md border-dashed">
-          No problems found
-        </p>
+        <div className="w-[50%] pt-50 m-auto">
+          <p className="mt-10 text-center text-lg font-semibold text-gray-500 dark:text-gray-400 z-10 border border-primary px-4 py-2 rounded-md border-dashed">
+            No problems found
+          </p>
+        </div>
       )}
     </section>
   );

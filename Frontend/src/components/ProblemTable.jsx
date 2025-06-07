@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import {
@@ -18,40 +18,51 @@ import { useActions } from "../store/useAction";
 import AddToPlaylistModal from "./AddToPlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import { usePlaylistStore } from "../store/usePlaylistStore";
+import toast from "react-hot-toast";
 
 const ProblemsTable = ({ problems }) => {
   const { authUser } = useAuthStore();
   const { onDeleteProblem } = useActions();
   const { createPlaylist } = usePlaylistStore();
+  const [localProblems, setLocalProblems] = useState(problems);
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState("ALL");
   const [selectedTag, setSelectedTag] = useState("ALL");
+  const [selectedCompany, setSelectedCompany] = useState("ALL");
   const [currentPage, setCurrentPage] = useState(1);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
     useState(false);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
 
+  useEffect(() => {
+    setLocalProblems(problems);
+  }, [problems]);
+
   // Extract all unique tags from problems
   const allTags = useMemo(() => {
-    if (!Array.isArray(problems)) return [];
+    if (!Array.isArray(localProblems)) return [];
     const tagsSet = new Set();
-    problems.forEach((p) => p.tags?.forEach((t) => tagsSet.add(t)));
+    (localProblems || []).forEach((p) =>
+      p.tags?.forEach((t) => tagsSet.add(t))
+    );
     return Array.from(tagsSet);
-  }, [problems]);
+  }, [localProblems]);
   const allCompanies = useMemo(() => {
-    if (!Array.isArray(problems)) return [];
+    if (!Array.isArray(localProblems)) return [];
     const companiesSet = new Set();
-    problems.forEach((p) => p.companies?.forEach((t) => companiesSet.add(t)));
+    (localProblems || []).forEach((p) =>
+      p.companies?.forEach((t) => companiesSet.add(t))
+    );
     return Array.from(companiesSet);
-  }, [problems]);
+  }, [localProblems]);
 
   // Define allowed difficulties
   const difficulties = ["EASY", "MEDIUM", "HARD"];
 
   // Filter problems based on search, difficulty, and tags
   const filteredProblems = useMemo(() => {
-    return (problems || [])
+    return (localProblems || [])
       .filter((problem) =>
         problem.title.toLowerCase().includes(search.toLowerCase())
       )
@@ -60,8 +71,13 @@ const ProblemsTable = ({ problems }) => {
       )
       .filter((problem) =>
         selectedTag === "ALL" ? true : problem.tags?.includes(selectedTag)
+      )
+      .filter((problem) =>
+        selectedCompany === "ALL"
+          ? true
+          : problem.companies?.includes(selectedCompany)
       );
-  }, [problems, search, difficulty, selectedTag]);
+  }, [localProblems, search, difficulty, selectedTag, selectedCompany]);
 
   // Pagination logic
   const itemsPerPage = 5;
@@ -73,8 +89,14 @@ const ProblemsTable = ({ problems }) => {
     );
   }, [filteredProblems, currentPage]);
 
-  const handleDelete = (id) => {
-    onDeleteProblem(id);
+  const handleDelete = async (tags, id) => {
+    if (tags?.includes("Demo")) {
+      return toast.error("Demo problems can’t be deleted.", {
+        position: "top-center",
+      });
+    }
+    await onDeleteProblem(id);
+    setLocalProblems((prev) => prev.filter((p) => p.id !== id));
   };
 
   const handleCreatePlaylist = async (data) => {
@@ -217,8 +239,8 @@ const ProblemsTable = ({ problems }) => {
           </div>
           <div className="relative">
             <select
-              value={selectedTag}
-              onChange={(e) => setSelectedTag(e.target.value)}
+              value={selectedCompany}
+              onChange={(e) => setSelectedCompany(e.target.value)}
               className="
               appearance-none
               px-4 pr-10 py-2
@@ -352,17 +374,18 @@ const ProblemsTable = ({ problems }) => {
                         {authUser?.role === "ADMIN" && (
                           <>
                             <button
-                              onClick={() => handleDelete(problem.id)}
+                              onClick={() =>
+                                handleDelete(problem.tags, problem.id)
+                              }
                               className="btn btn-sm btn-error btn-outline"
                             >
                               <Trash2 className="h-4 w-4" />
                             </button>
-                            <button
-                              disabled
-                              className="btn btn-sm btn-warning btn-outline"
-                            >
-                              <Edit className="h-4 w-4" />
-                            </button>
+                            <Link to={`/update-problem/${problem.id}`}>
+                              <button className="btn btn-sm btn-warning btn-outline">
+                                <Edit className="h-4 w-4" />
+                              </button>
+                            </Link>
                           </>
                         )}
                         <button
