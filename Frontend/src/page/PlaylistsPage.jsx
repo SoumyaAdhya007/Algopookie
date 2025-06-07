@@ -14,11 +14,14 @@ import {
 import Navbar from "../components/Navbar";
 import { usePlaylistStore } from "../store/usePlaylistStore";
 import PlaylistLoading from "../components/PlaylistsLoading";
+import CreatePlaylistModal from "../components/CreatePlaylistModal";
 
 const PlaylistPage = () => {
   const [expandedPlaylists, setExpandedPlaylists] = useState([]);
   const [copiedPlaylistId, setCopiedPlaylistId] = useState(null);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const { isLoading, getAllPlaylists, playlists } = usePlaylistStore();
+  const { createPlaylist } = usePlaylistStore();
 
   useEffect(() => {
     getAllPlaylists();
@@ -45,6 +48,9 @@ const PlaylistPage = () => {
     }
   };
 
+  const handleCreatePlaylist = async (data) => {
+    await createPlaylist(data);
+  };
   const handleShare = async (playlist) => {
     const shareUrl = `${window.location.origin}/playlist/${playlist.id}`;
 
@@ -111,7 +117,7 @@ const PlaylistPage = () => {
           </div>
 
           <div className="space-y-6">
-            {playlists.map((playlist) => (
+            {(playlists || []).map((playlist) => (
               <div
                 key={playlist.id}
                 className="bg-gradient-to-br from-purple-900/80 via-purple-800/60 to-indigo-900/80 backdrop-blur-sm rounded-2xl border border-purple-500/30 overflow-hidden hover:border-purple-400/50 transition-all duration-300 shadow-xl"
@@ -121,7 +127,7 @@ const PlaylistPage = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <h2 className="text-2xl font-bold text-white">
-                          {playlist.name}
+                          {playlist?.name}
                         </h2>
                         <div className="flex items-center gap-2">
                           {playlist.isPublic ? (
@@ -236,7 +242,10 @@ const PlaylistPage = () => {
 
           {playlists.length === 0 && (
             <div className="text-center py-16">
-              <div className="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6">
+              <div
+                className="w-24 h-24 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6"
+                onClick={() => setIsCreateModalOpen(true)}
+              >
                 <Plus className="h-12 w-12 text-gray-600" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-2">
@@ -249,6 +258,12 @@ const PlaylistPage = () => {
           )}
         </div>
       </div>
+      {/* Modals */}
+      <CreatePlaylistModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmit={handleCreatePlaylist}
+      />
     </div>
   );
 };
