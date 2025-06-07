@@ -336,7 +336,9 @@ const ProblemPage = () => {
                   </button>
                 </div>
 
-                <div className="p-6">{renderTabContent()}</div>
+                <div className="p-6 max-h-[90vh] overflow-y-auto scroll-smooth custom-scrollbar">
+                  {renderTabContent()}
+                </div>
               </div>
             </div>
 
