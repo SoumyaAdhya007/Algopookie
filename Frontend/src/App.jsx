@@ -20,6 +20,9 @@ import NotFound from "./page/NotFoundPage";
 import UpdateProblemPage from "./page/UpdateProblemPage";
 import DashboardPage from "./page/DashboardPage";
 import PlaylistDetailPage from "./page/PlaylistDetailsPage";
+import CreateContest from "./page/CreateContest";
+import ContestDetailPage from "./page/ContestPage";
+import ContestProblemPage from "./page/ContestProblemPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -74,6 +77,14 @@ const App = () => {
             element={authUser ? <ContestPage /> : <Navigate to="/" />}
           />
           <Route
+            path="/contest/:id"
+            element={authUser ? <ContestDetailPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/contest/:contestId/:problemId"
+            element={authUser ? <ContestProblemPage /> : <Navigate to="/" />}
+          />
+          <Route
             path="/problem/:id"
             element={authUser ? <ProblemPage /> : <Navigate to={"/"} />}
           />
@@ -86,6 +97,10 @@ const App = () => {
           <Route
             path="/add-problem"
             element={authUser ? <AddProblem /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/create-contest"
+            element={authUser ? <CreateContest /> : <Navigate to="/" />}
           />
           <Route
             path="/update-problem/:id"

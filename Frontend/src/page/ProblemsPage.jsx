@@ -3,16 +3,14 @@ import { useProblemStore } from "../store/useProblemStore";
 import ProblemTable from "../components/ProblemTable";
 import ProblemsLoading from "../components/ProblemsLoading";
 const ProblemsPage = () => {
-  const { getAllProblems, problems, isProblemsLoading } = useProblemStore();
+  const { isProblemsLoading, getAllProblems, problems } = useProblemStore();
   useEffect(() => {
     getAllProblems();
   }, [getAllProblems]);
 
-  if (isProblemsLoading) {
-    return <ProblemsLoading />;
-  }
-
-  return (
+  return isProblemsLoading ? (
+    <ProblemsLoading />
+  ) : (
     <section className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black">
       {problems.length > 0 ? (
         <h1>

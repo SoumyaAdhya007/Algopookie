@@ -326,7 +326,7 @@ export const registerForContest = async (req, res) => {
 export const submitContestProblem = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { contestId, submissionId } = req.body;
+    const { contestId, problemId, submissionId } = req.body;
 
     const contest = await db.contest.findUnique({
       where: { id: contestId },
@@ -348,10 +348,25 @@ export const submitContestProblem = async (req, res) => {
       data: {
         userId,
         contestId,
+        problemId,
         submissionId,
       },
     });
-
+    await db.contestProblemSolved.upsert({
+      where: {
+        userId_problemId_contestId: {
+          userId,
+          problemId,
+          contestId,
+        },
+      },
+      update: {},
+      create: {
+        userId,
+        problemId,
+        contestId,
+      },
+    });
     return res.status(201).json({
       success: true,
       message: "Submission received for contest.",
@@ -359,6 +374,78 @@ export const submitContestProblem = async (req, res) => {
     });
   } catch (error) {
     console.error("Error in submitContestProblem:", error);
+    return res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+export const getContestProblemSubmissions = async (req, res) => {
+  try {
+    const { contestId, problemId } = req.params;
+    const userId = req.user.id;
+
+    const submissions = await db.contestSubmission.findMany({
+      where: {
+        userId,
+        contestId,
+        problemId,
+      },
+      include: {
+        submission: true,
+        User: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return res.status(200).json({ success: true, submissions });
+  } catch (error) {
+    console.error("Error in getContestProblemSubmissions:", error);
+    return res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+export const getContestProblemSolvedUser = async (req, res) => {
+  try {
+    const { contestId } = req.params;
+    const userId = req.user.id;
+
+    const problemSolved = await db.contestProblemSolved.findMany({
+      where: {
+        userId,
+        contestId,
+      },
+    });
+
+    return res.status(200).json({ success: true, problemSolved });
+  } catch (error) {
+    console.error("Error in getContestProblemSolvedUsers:", error);
+    return res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+export const getContestSummaryStats = async (req, res) => {
+  const { contestId } = req.params;
+  try {
+    const totalProblems = await db.contest
+      .findUnique({ where: { id: contestId } })
+      .problems()
+      .then((list) => list.length);
+
+    const totalSubmissions = await db.contestSubmission.count({
+      where: { contestId },
+    });
+
+    const totalSolved = await db.contestProblemSolved.count({
+      where: { contestId },
+    });
+
+    return res.status(200).json({
+      success: true,
+      summary: { totalProblems, totalSubmissions, totalSolved },
+    });
+  } catch (error) {
+    console.error("Error in getContestSummaryStats:", error);
     return res.status(500).json({ error: "Internal server error." });
   }
 };

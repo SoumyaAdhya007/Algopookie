@@ -5,10 +5,12 @@ import { Calendar, Clock, Users, Trophy, CheckCircle } from "lucide-react";
 import Navbar from "../components/Navbar";
 import ContestsLoading from "./ContestsLoading";
 import { useAuthStore } from "../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const ContestList = () => {
   const socket = useContext(SocketContext);
   const { authUser } = useAuthStore();
+  const navigate = useNavigate();
   const {
     isLoading,
     contests,
@@ -93,12 +95,26 @@ const ContestList = () => {
   };
 
   const handleRegister = (contestId) => {
-    setRegisteredContests((prev) => [...prev, contestId]);
+    const updatedContests = contests.map((contest) => {
+      if (contest.id === contestId) {
+        return {
+          ...contest,
+          registrations: [
+            ...contest.registrations,
+            { userId: authUser.id, username: authUser.username },
+          ],
+        };
+      }
+      return contest;
+    });
+
+    useContestStore.setState({ contests: updatedContests });
+
     registerContest(contestId);
   };
 
   const navigateToContest = (contestId) => {
-    window.location.href = `/contest/${contestId}`;
+    navigate(`/contest/${contestId}`);
   };
 
   if (isLoading || !Array.isArray(contests)) {
@@ -193,10 +209,6 @@ const ContestList = () => {
                       <span>
                         {contest.problems.length.toLocaleString()} problems
                       </span>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-400">
-                      <Trophy className="h-4 w-4" />
-                      <span className="truncate">{contest.prize || "—"}</span>
                     </div>
                   </div>
 

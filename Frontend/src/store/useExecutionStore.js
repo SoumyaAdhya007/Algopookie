@@ -55,6 +55,7 @@ export const useExecutionStore = create((set) => ({
       set({ submission: res.data.submission });
 
       toast.success(res.data.message, { position: "top-right" });
+      return res.data.submission;
     } catch (error) {
       console.error("Error submitting code", error);
       toast.error("Error submitting code", { position: "top-right" });

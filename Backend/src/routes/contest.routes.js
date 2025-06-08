@@ -7,6 +7,9 @@ import {
   adminGetContestById,
   adminUpdateContest,
   getContestDetails,
+  getContestProblemSolvedUser,
+  getContestProblemSubmissions,
+  getContestSummaryStats,
   listActiveContests,
   registerForContest,
   submitContestProblem,
@@ -21,12 +24,7 @@ ContestRouter.post(
   adminCreateContest
 );
 
-ContestRouter.get(
-  "/admin",
-  authMiddleware,
-  checkAdmin,
-  adminGetAllContests
-);
+ContestRouter.get("/admin", authMiddleware, checkAdmin, adminGetAllContests);
 
 ContestRouter.get(
   "/admin/:contestId",
@@ -56,5 +54,17 @@ ContestRouter.get("/:contestId", authMiddleware, getContestDetails);
 ContestRouter.post("/:contestId/register", authMiddleware, registerForContest);
 
 ContestRouter.post("/:contestId/submit", authMiddleware, submitContestProblem);
+
+ContestRouter.get(
+  "/:contestId/:problemId/submission",
+  authMiddleware,
+  getContestProblemSubmissions
+);
+ContestRouter.get(
+  "/:contestId/solved",
+  authMiddleware,
+  getContestProblemSolvedUser
+);
+ContestRouter.get("/:contestId/summary-stats", getContestSummaryStats);
 
 export default ContestRouter;

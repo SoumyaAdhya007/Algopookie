@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { User, Code, LogOut } from "lucide-react";
+import { User, Code, LogOut, Medal } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import LogoutButton from "./LogoutButton";
@@ -53,6 +53,7 @@ const Navbar = () => {
               {[
                 { name: "Problems", href: "/problems" },
                 { name: "Playlists", href: "/playlists" },
+                { name: "Contests", href: "/contests" },
                 { name: "Leaderboard", href: "/leaderboard" },
               ].map((item) => (
                 <Link key={item.name} to={item.href}>
@@ -114,15 +115,26 @@ const Navbar = () => {
                     </Link>
                   </li>
                   {authUser?.role === "ADMIN" && (
-                    <li>
-                      <Link
-                        to="/add-problem"
-                        className="hover:bg-white/10 hover:text-white text-base font-semibold"
-                      >
-                        <Code className="w-4 h-4 mr-1" />
-                        Add Problem
-                      </Link>
-                    </li>
+                    <>
+                      <li>
+                        <Link
+                          to="/add-problem"
+                          className="hover:bg-white/10 hover:text-white text-base font-semibold"
+                        >
+                          <Code className="w-4 h-4 mr-1" />
+                          Add Problem
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/create-contest"
+                          className="hover:bg-white/10 hover:text-white text-base font-semibold"
+                        >
+                          <Medal className="w-4 h-4 mr-1" />
+                          Create Contest
+                        </Link>
+                      </li>
+                    </>
                   )}
                   <li>
                     <LogoutButton className="hover:bg-primary hover:text-white">
