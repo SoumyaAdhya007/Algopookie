@@ -400,7 +400,7 @@ const ProblemsTable = ({ problems }) => {
                         )}
                         <button
                           onClick={() => handleAddToPlaylist(problem.id)}
-                          className="btn btn-sm btn-outline border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white flex items-center gap-1"
+                          className="btn btn-sm btn-outline border-indigo-500 text-indigo-400 hover:bg-indigo-500 hover:text-white flex items-center gap-1 mr-5"
                         >
                           <BookmarkPlus className="h-4 w-4" />
                           <span className="hidden sm:inline">

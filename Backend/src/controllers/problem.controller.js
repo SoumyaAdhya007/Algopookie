@@ -109,6 +109,9 @@ export const getAllProblems = async (req, res) => {
           },
         },
       },
+      orderBy: {
+        createdAt: "asc", // oldest first
+      },
     });
 
     if (!problems) {

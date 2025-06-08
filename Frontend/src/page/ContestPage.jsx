@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { useContestStore } from "../store/useContestStore";
 import { useAuthStore } from "../store/useAuthStore";
+import ContestLoading from "../components/ContestLoading";
 const ContestDetailPage = () => {
   const { id } = useParams();
   const { authUser } = useAuthStore();
@@ -58,20 +59,10 @@ const ContestDetailPage = () => {
     return "bg-gray-500/20 text-gray-400 border-gray-500/30";
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Loading...
-      </div>
-    );
+  if (isLoading || currentContest === null) {
+    return <ContestLoading />;
   }
-  if (currentContest === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Contest Not Found
-      </div>
-    );
-  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black">
       <Navbar />

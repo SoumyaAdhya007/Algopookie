@@ -1,18 +1,30 @@
 import { z } from "zod";
 
 const exampleEntrySchema = z.object({
-  input: z.string().min(1, { message: "Example input is required" }),
-  output: z.string().min(1, { message: "Example output is required" }),
+  input: z.string().min(1, { message: "Example input is required" }).optional(),
+  output: z
+    .string()
+    .min(1, { message: "Example output is required" })
+    .optional(),
   explanation: z
     .string()
-    .min(1, { message: "Example explanation is required" }),
+    .min(1, { message: "Example explanation is required" })
+    .optional(),
 });
 
+// Examples now optional; if provided must have at least one and entries valid
 const examplesSchema = z
   .record(exampleEntrySchema)
-  .refine((obj) => Object.keys(obj).length > 0, {
-    message: "At least one example is required",
-  });
+  .optional()
+  .refine(
+    (obj) => {
+      if (obj === undefined) return true;
+      return Object.keys(obj).length > 0;
+    },
+    {
+      message: "At least one example is required if examples are provided",
+    }
+  );
 
 const testCaseSchema = z.object({
   input: z.string().min(1, { message: "Testcase input is required" }),
