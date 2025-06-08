@@ -116,7 +116,7 @@ export const login = async (req, res) => {
         name: user.name,
         role: user.role,
         image: user.image,
-        plan: newUser.plan,
+        plan: user.plan,
       },
     });
   } catch (error) {
