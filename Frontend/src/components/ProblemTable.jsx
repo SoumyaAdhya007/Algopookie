@@ -19,9 +19,12 @@ import AddToPlaylistModal from "./AddToPlaylist";
 import CreatePlaylistModal from "./CreatePlaylistModal";
 import { usePlaylistStore } from "../store/usePlaylistStore";
 import toast from "react-hot-toast";
+import PlaylistCarousel from "./PublicPlaylistCarousel";
 
 const ProblemsTable = ({ problems }) => {
   const { authUser } = useAuthStore();
+  const { isLoading, publicPlaylists, getAllPublicPlaylists } =
+    usePlaylistStore();
   const { onDeleteProblem } = useActions();
   const { createPlaylist } = usePlaylistStore();
   const [localProblems, setLocalProblems] = useState(problems);
@@ -34,10 +37,20 @@ const ProblemsTable = ({ problems }) => {
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
     useState(false);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
+  // useEffect(() => {
+  //   // Simulate API call
+  //   const fetchPlaylists = async () => {
+  //     await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate network delay
+  //     getAllPublicPlaylists(mockPlaylists);
+  //     setLoading(false);
+  //   };
 
+  //   fetchPlaylists();
+  // }, []);
   useEffect(() => {
+    getAllPublicPlaylists();
     setLocalProblems(problems);
-  }, [problems]);
+  }, [problems, getAllPublicPlaylists]);
 
   // Extract all unique tags from problems
   const allTags = useMemo(() => {
@@ -121,6 +134,13 @@ const ProblemsTable = ({ problems }) => {
   };
   return (
     <div className="w-full max-w-6xl mx-auto pt-25">
+      {publicPlaylists.length > 0 && (
+        <PlaylistCarousel
+          loading={isLoading}
+          publicPlaylists={publicPlaylists}
+        />
+      )}
+
       {/* Header with Create Playlist Button */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold">Problems</h2>

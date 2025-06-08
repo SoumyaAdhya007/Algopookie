@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export const usePlaylistStore = create((set, get) => ({
   playlists: [],
+  publicPlaylists: [],
   currentPlaylist: null,
   isLoading: false,
   error: null,
@@ -45,12 +46,24 @@ export const usePlaylistStore = create((set, get) => ({
       set({ isLoading: false });
     }
   },
+  getAllPublicPlaylists: async () => {
+    try {
+      set({ isLoading: true });
+      const response = await axiosInstance.get("/playlist/public");
+      set({ publicPlaylists: response.data.playlists });
+    } catch (error) {
+      console.error("Error fetching playlists:", error);
+      toast.error("Failed to fetch playlists", { position: "top-right" });
+    } finally {
+      set({ isLoading: false });
+    }
+  },
 
   getPlaylistDetails: async (playlistId) => {
     try {
       set({ isLoading: true });
       const response = await axiosInstance.get(`/playlist/${playlistId}`);
-      set({ currentPlaylist: response.data.playList });
+      set({ currentPlaylist: response.data.playlist });
     } catch (error) {
       console.error("Error fetching playlist details:", error);
       toast.error("Failed to fetch playlist details", {

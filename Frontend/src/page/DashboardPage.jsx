@@ -8,54 +8,10 @@ import {
   Shield,
   Mail,
   Calendar,
-  MoreVertical,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { useDashboard } from "../store/useDashboardStore";
 import DashboardLoading from "../components/DashboardLoading";
-
-const stats = {
-  totalUsers: 12847,
-  freeUsers: 10234,
-  paidUsers: 2613,
-  adminUsers: 8,
-  blockedUsers: 23,
-  activeToday: 3421,
-};
-
-const sampleUsers = [
-  {
-    id: 1,
-    name: "Alex Chen",
-    email: "alex.chen@email.com",
-    role: "user",
-    subscription: "paid",
-    joinDate: "2024-01-15",
-    isBlocked: false,
-    lastActive: "2024-06-15T10:30:00Z",
-  },
-  {
-    id: 2,
-    name: "Sarah Johnson",
-    email: "sarah.j@email.com",
-    role: "admin",
-    subscription: "paid",
-    joinDate: "2023-11-20",
-    isBlocked: false,
-    lastActive: "2024-06-15T09:15:00Z",
-  },
-  // ...other hardcoded users...
-  ...Array.from({ length: 15 }, (_, i) => ({
-    id: i + 6,
-    name: `User ${i + 6}`,
-    email: `user${i + 6}@email.com`,
-    role: "user",
-    subscription: Math.random() > 0.7 ? "paid" : "free",
-    joinDate: "2024-05-01",
-    isBlocked: Math.random() > 0.9,
-    lastActive: "2024-06-15T12:00:00Z",
-  })),
-];
 
 const DashboardPage = () => {
   const [currentPage, setCurrentPage] = useState(1);

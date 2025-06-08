@@ -19,6 +19,7 @@ import PlaylistPage from "./page/PlaylistsPage";
 import NotFound from "./page/NotFoundPage";
 import UpdateProblemPage from "./page/UpdateProblemPage";
 import DashboardPage from "./page/DashboardPage";
+import PlaylistDetailPage from "./page/PlaylistDetailsPage";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -63,6 +64,7 @@ const App = () => {
             path="/playlists"
             element={authUser ? <PlaylistPage /> : <Navigate to="/" />}
           />
+          <Route path="/playlist/:id" element={<PlaylistDetailPage />} />
           <Route
             path="/leaderboard"
             element={authUser ? <LeaderboardPage /> : <Navigate to="/" />}

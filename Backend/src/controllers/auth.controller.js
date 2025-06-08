@@ -56,6 +56,7 @@ export const register = async (req, res) => {
         name: newUser.name,
         role: newUser.role,
         image: newUser.image,
+        plan: newUser.plan,
       },
     });
   } catch (error) {
@@ -115,6 +116,7 @@ export const login = async (req, res) => {
         name: user.name,
         role: user.role,
         image: user.image,
+        plan: newUser.plan,
       },
     });
   } catch (error) {
