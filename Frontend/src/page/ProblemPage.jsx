@@ -256,40 +256,8 @@ const ProblemPage = () => {
                 <span className="text-base-content/30">•</span>
                 <Users className="w-4 h-4" />
                 <span>{submissionCount} Submissions</span>
-                <span className="text-base-content/30">•</span>
-                <ThumbsUp className="w-4 h-4" />
-                <span>95% Success Rate</span>
               </div>
             </div>
-          </div>
-          <div className="flex-none gap-4">
-            <button
-              className={`btn btn-ghost btn-circle ${
-                isBookmarked ? "text-primary" : ""
-              }`}
-              onClick={() => setIsBookmarked(!isBookmarked)}
-            >
-              <Bookmark className="w-5 h-5" />
-            </button>
-            <button className="btn btn-ghost btn-circle">
-              <Share2 className="w-5 h-5" />
-            </button>
-
-            <select
-              className="select select-bordered select-primary w-40"
-              value={selectedLanguage || ""}
-              onChange={handleLanguageChange}
-            >
-              {Object.keys(problem.codeSnippets || {}).length === 0 ? (
-                <option value="">No snippets</option>
-              ) : (
-                Object.keys(problem.codeSnippets).map((lang) => (
-                  <option key={lang} value={lang}>
-                    {lang.charAt(0).toUpperCase() + lang.slice(1)}
-                  </option>
-                ))
-              )}
-            </select>
           </div>
         </nav>
 

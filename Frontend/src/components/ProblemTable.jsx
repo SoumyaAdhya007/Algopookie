@@ -37,16 +37,6 @@ const ProblemsTable = ({ problems }) => {
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
     useState(false);
   const [selectedProblemId, setSelectedProblemId] = useState(null);
-  // useEffect(() => {
-  //   // Simulate API call
-  //   const fetchPlaylists = async () => {
-  //     await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate network delay
-  //     getAllPublicPlaylists(mockPlaylists);
-  //     setLoading(false);
-  //   };
-
-  //   fetchPlaylists();
-  // }, []);
   useEffect(() => {
     getAllPublicPlaylists();
     setLocalProblems(problems);

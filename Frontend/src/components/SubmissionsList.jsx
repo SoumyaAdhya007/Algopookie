@@ -91,7 +91,7 @@ const SubmissionsList = ({ submissions, isLoading }) => {
   });
 
   return (
-    <div className="space-y-4 max-h-[90vh] overflow-y-auto scroll-smooth custom-scrollbar">
+    <div className="space-y-4">
       <div className="flex flex-col justify-between items-center sm:flex-row w-full md:w-auto">
         <div className="dropdown dropdown-start">
           <div tabIndex={0} role="button" className="btn btn-outline gap-2">
@@ -177,16 +177,16 @@ const SubmissionsList = ({ submissions, isLoading }) => {
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
                           <span>
-                            {calculateAverageMemory(submission.memory).toFixed(
-                              3
-                            )}{" "}
+                            {calculateAverageTime(submission.memory).toFixed(3)}{" "}
                             s
                           </span>
                         </div>
                         <div className="flex items-center gap-1">
                           <Memory className="w-4 h-4" />
                           <span>
-                            {calculateAverageTime(submission.time).toFixed(0)}{" "}
+                            {calculateAverageMemory(submission.memory).toFixed(
+                              0
+                            )}
                             KB
                           </span>
                         </div>

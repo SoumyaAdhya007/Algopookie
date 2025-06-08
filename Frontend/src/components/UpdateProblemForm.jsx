@@ -86,6 +86,9 @@ const UpdateProblemForm = () => {
       difficulty: "EASY",
       tags: [""],
       companies: [""],
+      constraints: "",
+      hints: "",
+      editorial: "",
       testcases: [{ input: "", output: "" }],
       examples: {
         JAVASCRIPT: { input: "", output: "", explanation: "" },
@@ -102,9 +105,6 @@ const UpdateProblemForm = () => {
         PYTHON: "# Add your reference solution here",
         JAVA: "// Add your reference solution here",
       },
-      constraints: "",
-      hints: "",
-      editorial: "",
     },
   });
 
