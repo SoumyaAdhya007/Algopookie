@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { usePlaylistStore } from "../store/usePlaylistStore";
 import { Plus, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const PlaylistProfile = ({ setIsDrawerOpen }) => {
   const { getAllPlaylists, playlists } = usePlaylistStore();
@@ -46,10 +47,12 @@ const PlaylistProfile = ({ setIsDrawerOpen }) => {
                     {playlist.problems.length} problems
                   </span>
                 </div>
-                <div className="flex items-center mt-2 text-sm text-pink-500">
-                  <span>View playlist</span>
-                  <ArrowRight className="h-3 w-3 ml-1" />
-                </div>
+                <Link to={"/playlists"}>
+                  <div className="flex items-center mt-2 text-sm text-pink-500">
+                    <span>View playlist</span>
+                    <ArrowRight className="h-3 w-3 ml-1" />
+                  </div>
+                </Link>
               </div>
             ))
           )}
