@@ -19,6 +19,9 @@ export const executeCodeSchema = z.object({
         .min(1, { message: "Each expected output must be a nonempty string" })
     )
     .nonempty({ message: "At least one output is required" }),
+  problemId: z
+    .string()
+    .min(1, { message: "problemId must be a nonempty string" }),
 });
 export const submitCodeSchema = z.object({
   source_code: z
