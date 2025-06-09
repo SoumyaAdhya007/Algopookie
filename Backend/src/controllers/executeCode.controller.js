@@ -13,8 +13,29 @@ import { formatZodError } from "../validators/formatZodError.js";
 
 export const executeCode = async (req, res) => {
   try {
-    const { source_code, language_id, stdin, expected_outputs } =
+    const { source_code, language_id, stdin, expected_outputs, problemId } =
       executeCodeSchema.parse(req.body);
+    const userId = userIdSchema.parse(req.user).id;
+
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    const submissionsCount = await db.submission.findMany({
+      where: {
+        userId,
+        problemId,
+      },
+    });
+
+    if (submissionsCount.length >= 3 && user.plan === "FREE") {
+      return res.status(429).json({
+        error:
+          "You've hit your 3 submission limit. Run and submit are disabled on the free plan.",
+      });
+    }
 
     const submissions = stdin.map((input) => ({
       source_code,
@@ -99,6 +120,26 @@ export const submitCode = async (req, res) => {
     const { source_code, language_id, stdin, expected_outputs, problemId } =
       submitCodeSchema.parse(req.body);
     const userId = userIdSchema.parse(req.user).id;
+
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    const submissionsCount = await db.submission.findMany({
+      where: {
+        userId,
+        problemId,
+      },
+    });
+
+    if (submissionsCount.length >= 3 && user.plan === "FREE") {
+      return res.status(429).json({
+        error:
+          "You've hit your 3 submission limit. Run and submit are disabled on the free plan.",
+      });
+    }
 
     const submissions = stdin.map((input) => ({
       source_code,

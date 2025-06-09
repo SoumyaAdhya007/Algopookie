@@ -29,7 +29,7 @@ export const useExecutionStore = create((set) => ({
       toast.success(res.data.message, { position: "top-right" });
     } catch (error) {
       console.error("Error executing code", error);
-      toast.error("Error executing code", { position: "top-right" });
+      toast.error(error.response.data.error, { position: "top-center" });
     } finally {
       set({ isCodeExecuting: false });
     }
@@ -58,7 +58,7 @@ export const useExecutionStore = create((set) => ({
       return res.data.submission;
     } catch (error) {
       console.error("Error submitting code", error);
-      toast.error("Error submitting code", { position: "top-right" });
+      toast.error(error.response.data.error, { position: "top-center" });
     } finally {
       set({ isCodeSubmitting: false });
     }
