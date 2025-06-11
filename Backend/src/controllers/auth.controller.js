@@ -96,6 +96,13 @@ export const login = async (req, res) => {
       });
     }
 
+    if (user.isBlocked) {
+      return res.status(403).json({
+        error:
+          "Access denied: You have been blocked by the admin. Please contact admin.",
+      });
+    }
+
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
