@@ -10,7 +10,7 @@ const CreatePlaylistModal = ({ isOpen, onClose, onSubmit }) => {
   } = useForm();
 
   const handleFormSubmit = async (data) => {
-    data.isPublic = Boolean(data.isPublic);
+    data.isPublic = data.isPublic === "true";
     await onSubmit(data);
     reset();
     onClose();

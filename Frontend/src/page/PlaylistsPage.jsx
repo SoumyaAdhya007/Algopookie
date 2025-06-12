@@ -130,7 +130,7 @@ const PlaylistPage = () => {
                           {playlist?.name}
                         </h2>
                         <div className="flex items-center gap-2">
-                          {playlist.isPublic ? (
+                          {playlist?.isPublic ? (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-500/20 text-green-400 border border-green-500/40 rounded-lg text-sm font-medium">
                               <Globe className="h-3.5 w-3.5" />
                               Public
