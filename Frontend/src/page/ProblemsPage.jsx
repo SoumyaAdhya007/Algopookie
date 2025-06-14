@@ -8,9 +8,11 @@ const ProblemsPage = () => {
     getAllProblems();
   }, [getAllProblems]);
 
-  return isProblemsLoading ? (
-    <ProblemsLoading />
-  ) : (
+  if (isProblemsLoading) {
+    return <ProblemsLoading />;
+  }
+
+  return (
     <section className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black">
       {problems.length > 0 ? (
         <h1>
