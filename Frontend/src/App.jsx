@@ -31,13 +31,14 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
-  if (isCheckingAuth && !authUser) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader className="size-10 animate-spin" />
-      </div>
-    );
-  }
+  // if (isCheckingAuth && !authUser) {
+  //   return (
+  //     <div className="flex items-center justify-center h-screen">
+  //       <Loader className="size-10 animate-spin" />
+  //     </div>
+  //   );
+  // }
+
   return (
     <div>
       <Toaster />
